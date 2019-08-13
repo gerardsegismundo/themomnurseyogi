@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 
+// Routes
+require('./config/routes')(app)
+require('./config/db')()
+
 // Serve static asssets in production
 const path = require('path')
 if (process.env.NODE_ENV === 'production') {
