@@ -1,12 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import Home from './components/pages/Home'
+import HeaderSocial from './components/layouts/HeaderSocial'
 import Navbar from './components/layouts/Navbar'
-import './sass/main.scss'
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className='container-fluid mt-3'>
+      <HeaderSocial />
       <Navbar />
       <Router>
         <Switch>
