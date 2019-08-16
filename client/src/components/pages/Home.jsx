@@ -1,12 +1,18 @@
 import React from 'react'
 
+import Article from '../layouts/HomeArticle'
+import Aside from '../layouts/HomeAside'
+
 const Home = () => {
   return (
     <div className='home-page'>
-      {/* <center>
-        <h1>MERN STACK STARTER</h1>
-        <h4>with Redux & Sass</h4>
-      </center> */}
+      <figure className='cover-image ' />
+      <div className='container'>
+        <div className='row'>
+          <Article />
+          <Aside />
+        </div>
+      </div>
     </div>
   )
 }

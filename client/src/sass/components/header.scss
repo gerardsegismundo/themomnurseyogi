@@ -1,4 +1,35 @@
 header {
   section.social-links {
+    & > a {
+      margin-right: 3vw;
+    }
+  }
+
+  section.header-fieldset {
+    button:first-of-type {
+      margin-left: 0.5vw;
+    }
+
+    .search-box {
+      margin-right: 3vw;
+      width: 40%;
+    }
+  }
+
+  main {
+    margin-top: 10rem;
+    h1 {
+      font-family: $google-font;
+      font-size: 9rem;
+      // letter-spacing: 0.1rem;
+    }
+
+    h4 {
+      font-size: 1.7rem;
+      margin-top: 2rem;
+      transform: translateX(16rem);
+      letter-spacing: 0.5rem;
+      color: rgba($elegant-color, 0.4);
+    }
   }
 }

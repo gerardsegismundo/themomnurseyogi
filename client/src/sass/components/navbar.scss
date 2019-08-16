@@ -1,2 +1,10 @@
-.navbar {
+.nav-lg {
+  max-width: 60rem !important;
+  margin-top: 3rem;
+  margin-bottom: 6rem;
+
+  a {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 }
