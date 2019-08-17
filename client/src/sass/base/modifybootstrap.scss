@@ -1,0 +1,48 @@
+input.form-control {
+  border-radius: 0.1rem;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: rgba(34, 34, 34, 0.2);
+  box-shadow: 0 0 0 0.1rem rgba(34, 34, 34, 0.2);
+}
+
+.btn {
+  border-radius: 0.1rem;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #212121;
+  border-color: #212121;
+}
+
+.btn-primary:hover {
+  color: #212121;
+  background-color: #fff;
+  border-color: #212121;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(46, 46, 46, 0.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: $elegant-color-dark;
+  border-color: $elegant-color-dark;
+}
+
+.btn-xl {
+  padding: 0.85rem 6rem;
+  font-size: 1.65rem;
+  line-height: 1.5;
+}
+
+button:focus {
+  outline: 5px auto $elegant-color-dark;
+}

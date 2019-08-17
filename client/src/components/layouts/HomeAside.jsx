@@ -1,5 +1,7 @@
 import React from 'react'
 import profileImage from '../../assets/profile.jpg'
+import HomeAsideOtherPost from './HomeAsideOtherPost'
+import Ads from '../common/Ads'
 
 const HomeAside = () => {
   return (
@@ -26,6 +28,12 @@ const HomeAside = () => {
           </p>
         </div>
       </center>
+
+      <HomeAsideOtherPost />
+      <HomeAsideOtherPost />
+      <HomeAsideOtherPost />
+      <HomeAsideOtherPost />
+      <Ads />
     </aside>
   )
 }

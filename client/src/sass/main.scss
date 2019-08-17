@@ -9,3 +9,13 @@
 @import 'pages/home';
 
 @import 'base/base';
+@import 'base/modifybootstrap.scss';
+
+// for development only
+.boblack {
+  border: 1px solid black;
+}
+
+body {
+  background-color: rgba(46, 46, 46, 0.5);
+}
