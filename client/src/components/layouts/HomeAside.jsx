@@ -1,6 +1,6 @@
 import React from 'react'
 import profileImage from '../../assets/profile.jpg'
-import HomeAsideOtherPost from './HomeAsideOtherPost'
+import HomeAsideOtherPost from '../common/HomeAsideOtherPost'
 import Ads from '../common/Ads'
 
 const HomeAside = () => {

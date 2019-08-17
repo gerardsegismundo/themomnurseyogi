@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
@@ -8,10 +8,18 @@ import Contact from './components/pages/Contact'
 
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
-import BottomPosts from './components/layouts/BottomPosts'
-import BottomImages from './components/layouts/BottomImages'
+import Footer from './components/layouts/Footer'
 
-const App = () => {
+import { connect } from 'react-redux'
+import { getPosts } from './_actions/postActions'
+
+const App = ({ getPosts, posts }) => {
+  useEffect(() => {
+    getPosts()
+
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <div className='container-fluid mt-3'>
       <Router>
@@ -23,11 +31,16 @@ const App = () => {
           <Route exact path='/about' component={About} />
           <Route exact path='/contact' component={Contact} />
         </Switch>
-        <BottomPosts />
-        <BottomImages />
+        <Footer />
       </Router>
     </div>
   )
 }
+const mapStateToProps = props => ({
+  posts: props.posts
+})
 
-export default App
+export default connect(
+  mapStateToProps,
+  { getPosts }
+)(App)

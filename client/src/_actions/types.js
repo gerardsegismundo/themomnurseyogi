@@ -1,1 +1,1 @@
-export const SAMPLE_TYPE = 'SAMPLE_TYPE'
+export const GET_POSTS = 'GET_POSTS'
