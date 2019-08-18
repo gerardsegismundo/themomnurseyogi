@@ -1,6 +1,6 @@
-# React/Redux Express MongoDB Starter Pack
+# themomnurseyogi
 
-> Create a full stack MERN app with React/Redux, Express & MongoDB. Run your client and server with a single command
+> A full stack blog MERN app with admin dashboard.
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ npm run client
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 
-### Authors
+### Author
 
 Gerard Martin R. Segismundo
 

@@ -1,25 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
 import Blogs from './components/pages/Blogs'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
+import Post from './components/pages/Post'
 
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
 
-import { connect } from 'react-redux'
-import { getPosts } from './_actions/postActions'
-
-const App = ({ getPosts, posts }) => {
-  useEffect(() => {
-    getPosts()
-
-    // eslint-disable-next-line
-  }, [])
-
+const App = () => {
   return (
     <div className='container-fluid mt-3'>
       <Router>
@@ -30,17 +22,12 @@ const App = ({ getPosts, posts }) => {
           <Route exact path='/blogs' component={Blogs} />
           <Route exact path='/about' component={About} />
           <Route exact path='/contact' component={Contact} />
+          <Route exact path='/post/:id' component={Post} />
         </Switch>
         <Footer />
       </Router>
     </div>
   )
 }
-const mapStateToProps = props => ({
-  posts: props.posts
-})
 
-export default connect(
-  mapStateToProps,
-  { getPosts }
-)(App)
+export default App

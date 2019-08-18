@@ -1,14 +1,21 @@
-import { GET_POSTS } from './types'
+import { GET_POSTS, GET_POST } from './types'
 import axios from 'axios'
 
-// Get all posts from server
-export const getPosts = () => async dispatch => {
-  const res = await axios.get('api/posts')
-
-  // console.log(res.data)
-
+export const getPost = id => async dispatch => {
   dispatch({
-    type: GET_POSTS,
-    payload: res.data
+    type: GET_POST,
+    payload: id
   })
+}
+
+export const getPosts = () => async dispatch => {
+  try {
+    const res = await axios.get('api/posts')
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }

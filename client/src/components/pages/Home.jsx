@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Article from '../layouts/HomeArticle'
 import Aside from '../layouts/HomeAside'
 
-const Home = () => {
+import { connect } from 'react-redux'
+import { getPosts } from '../../_actions/postActions'
+
+const Home = ({ getPosts }) => {
+  useEffect(() => {
+    getPosts()
+
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <div className='home-page'>
       <figure className='cover-image ' />
@@ -17,4 +26,7 @@ const Home = () => {
   )
 }
 
-export default Home
+export default connect(
+  null,
+  { getPosts }
+)(Home)

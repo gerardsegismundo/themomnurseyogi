@@ -1,7 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Post = props => {
-  const { title, imgURL, hashtags, date, body } = props
+  const { title, imgURL, hashtags, date, body, _id } = props
+
+  const postLink = `/post/${title
+    .split(' ')
+    .join('-')
+    .toLowerCase()}-${_id}`
 
   const formatDate = date => {
     const options = {
@@ -34,7 +40,9 @@ const Post = props => {
       <p className='post__body'>{body.slice(0, 200) + '...'}</p>
 
       <div className='post__footer d-flex align-content-center align-self-center justify-content-end'>
-        <button className='btn-primary btn-xl'>Read more</button>
+        <Link to={postLink} className='btn-primary btn-xl'>
+          Read more
+        </Link>
         <h2 className='post__footer--comments'>2 comments</h2>
       </div>
     </div>

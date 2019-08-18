@@ -1,9 +1,11 @@
 import React from 'react'
 import profileImage from '../../assets/profile.jpg'
-import HomeAsideOtherPost from '../common/HomeAsideOtherPost'
+import OtherPost from '../common/HomeAside-OtherPost'
 import Ads from '../common/Ads'
 
-const HomeAside = () => {
+import { connect } from 'react-redux'
+
+const HomeAside = ({ randomPostsA }) => {
   return (
     <aside className='col-sm-12 col-lg-4 d-flex-row order-2'>
       <center>
@@ -29,13 +31,17 @@ const HomeAside = () => {
         </div>
       </center>
 
-      <HomeAsideOtherPost />
-      <HomeAsideOtherPost />
-      <HomeAsideOtherPost />
-      <HomeAsideOtherPost />
+      <OtherPost />
+      <OtherPost />
+      <OtherPost />
+      <OtherPost />
       <Ads />
     </aside>
   )
 }
 
-export default HomeAside
+const mapStateToProps = ({ posts }) => ({
+  randomPostsA: posts.randomPostsA
+})
+
+export default connect(mapStateToProps)(HomeAside)
