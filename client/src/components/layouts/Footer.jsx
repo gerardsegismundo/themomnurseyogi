@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className='footer bg-dark py-5 py-md-4'>
-      <p class='mx-5 row'>
+      <p className='mx-5 row'>
         <span className='footer__copyright col d-flex justify-content-center justify-content-md-start'>
           Copyright &copy; 2019 Themomnurseyogi. All rights reserved.
         </span>

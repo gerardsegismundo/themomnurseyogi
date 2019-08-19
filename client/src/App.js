@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
@@ -13,7 +13,7 @@ import Footer from './components/layouts/Footer'
 
 const App = () => {
   return (
-    <div className='mt-3'>
+    <Fragment>
       <Router>
         <Header />
         <Navbar />
@@ -26,7 +26,7 @@ const App = () => {
         </Switch>
         <Footer />
       </Router>
-    </div>
+    </Fragment>
   )
 }
 

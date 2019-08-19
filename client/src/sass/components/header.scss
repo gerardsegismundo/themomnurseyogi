@@ -17,20 +17,31 @@
   }
 
   &__main {
-    margin-top: 10rem;
+    margin-top: 6rem;
+
+    @include respond(md) {
+      margin-top: 10rem;
+    }
 
     h1 {
       font-family: $google-font;
-      font-size: 9rem;
+      font-size: 7rem;
       // letter-spacing: 0.1rem;
+      @include respond(sm) {
+        font-size: 9rem;
+      }
     }
 
     h4 {
       font-size: 1.7rem;
       margin-top: 2rem;
-      transform: translateX(16rem);
+
       letter-spacing: 0.5rem;
       color: rgba($elegant-color, 0.4);
+
+      @include respond(md) {
+        transform: translateX(16rem);
+      }
     }
   }
 }

@@ -11,6 +11,15 @@
 
 // small nav
 .nav {
+  z-index: 9999;
+  width: 100%;
+
+  background-color: rgba(255, 255, 255, 0.95);
+
+  &.b-shadow {
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  }
+
   &__checkbox {
     display: none;
   }
@@ -22,7 +31,7 @@
   // ICON
   &__icon {
     position: relative;
-    margin-top: 3.5rem;
+    margin: 2rem 0;
 
     &,
     &::before,
@@ -70,5 +79,54 @@
   &__checkbox:checked + &__btn &__icon::after {
     top: 0;
     transform: rotate(-135deg);
+  }
+
+  &__links {
+    display: none;
+    z-index: 9999;
+    opacity: 0;
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    margin: 4.2rem auto 0 auto;
+    padding-top: 1.5rem;
+
+    transition: all 0.2s;
+
+    height: 0rem;
+    max-width: 30rem;
+
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 11px 9px rgba(33, 33, 33, 0.2);
+
+    @include respond(sm) {
+      width: 70vw;
+    }
+
+    a {
+      font-weight: 500;
+      line-height: 4rem;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+  }
+
+  &__checkbox:checked ~ &__links {
+    height: auto;
+    opacity: 1;
+    display: inline-grid;
+  }
+
+  &__social-links {
+    padding-bottom: 1rem;
+    max-width: 20rem;
+    justify-self: center;
+    a {
+      margin: 0 1.5rem;
+    }
   }
 }
