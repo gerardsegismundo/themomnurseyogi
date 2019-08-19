@@ -1,0 +1,32 @@
+.footer {
+  &__copyright,
+  &__links {
+    color: #b8b8b8;
+    font-weight: 600;
+  }
+
+  &__copyright {
+    text-align: center;
+
+    @include respond(md) {
+      text-align: left;
+    }
+  }
+
+  &__links {
+    a {
+      color: #b8b8b8;
+
+      @include respond(md) {
+        &:not(:first-of-type) {
+          margin-left: 2rem;
+        }
+      }
+
+      &:hover {
+        color: white;
+        transition: color 0.3s;
+      }
+    }
+  }
+}

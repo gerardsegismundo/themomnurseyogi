@@ -13,7 +13,7 @@ import Footer from './components/layouts/Footer'
 
 const App = () => {
   return (
-    <div className='container-fluid mt-3'>
+    <div className='mt-3'>
       <Router>
         <Header />
         <Navbar />

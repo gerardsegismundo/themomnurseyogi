@@ -1,11 +1,11 @@
-header {
-  section.social-links {
+.header {
+  &__social-links {
     & > a {
       margin-right: 3vw;
     }
   }
 
-  section.header-fieldset {
+  &__fieldset {
     button:first-of-type {
       margin-left: 0.5vw;
     }
@@ -16,8 +16,9 @@ header {
     }
   }
 
-  main {
+  &__main {
     margin-top: 10rem;
+
     h1 {
       font-family: $google-font;
       font-size: 9rem;

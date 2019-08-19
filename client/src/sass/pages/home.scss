@@ -1,3 +1,143 @@
 .home-page {
-  font-size: $default-font-size;
+  margin: 0 4vw;
+
+  .cover-image {
+    background-image: url('../../assets/cover.jpg');
+    background-size: cover;
+    position: relative;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 75rem;
+  }
+
+  article {
+    .recent-posts {
+      margin: 3rem 0 4rem 0;
+      font-family: $google-font;
+      font-size: 5rem;
+      text-align-last: center;
+    }
+
+    .post {
+      margin-top: 6rem;
+      margin-bottom: 10rem;
+
+      &__date,
+      &__hash-tags {
+        color: $light-font;
+        font-weight: 600;
+      }
+
+      &__date {
+        text-transform: uppercase;
+      }
+
+      &__title {
+        font-size: 3.5rem;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      &__hash-tags {
+        li {
+          margin: 0 1rem;
+        }
+      }
+
+      img {
+        margin-top: 3rem;
+        max-width: 100%;
+      }
+
+      &__body {
+        margin-top: 1rem;
+        line-height: 3rem;
+        color: $light-font;
+        font-weight: 600;
+      }
+
+      &__footer {
+        margin-top: 3rem;
+
+        &--comments {
+          color: $light-font;
+          font-weight: 600;
+          margin-left: 3rem;
+          transform: translateY(1.1rem);
+        }
+      }
+    }
+  }
+
+  aside {
+    .profile-image {
+      height: 30rem;
+      width: 30rem;
+
+      border-radius: 50%;
+      transform: translateY(-20rem);
+
+      box-shadow: 0px -9px 37px rgb(255, 255, 255);
+      border: 5px solid rgba(255, 255, 255, 0.1);
+
+      margin-bottom: -18rem;
+    }
+
+    .subscribe-text {
+      &--primary {
+        font-family: $google-font;
+        font-size: 5rem;
+      }
+      &--secondary {
+        color: $light-font;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        letter-spacing: 0.5;
+      }
+    }
+
+    .about {
+      margin-top: 10rem;
+      margin-bottom: 3rem;
+      &__name {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
+      &__name {
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+
+        line-height: 4rem;
+      }
+
+      &__content {
+        color: $light-font;
+        font-weight: 600;
+        line-height: 3rem;
+      }
+    }
+
+    .other-posts {
+      margin-top: 4rem;
+      &__img {
+        margin-bottom: 3rem;
+        height: 27rem;
+        width: 27rem;
+      }
+
+      &__date {
+        font-weight: 600;
+        color: $light-font;
+      }
+
+      &__hashtags {
+        margin-top: 1rem;
+        font-weight: 600;
+        color: $light-font;
+        li {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
 }

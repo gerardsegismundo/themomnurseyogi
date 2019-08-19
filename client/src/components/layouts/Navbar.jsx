@@ -18,10 +18,10 @@ const Navbar = () => {
       </nav>
 
       <nav className='nav d-flex d-md-none mb-5'>
-        <input type='checkbox' class='nav__checkbox' id='nav__toggle' />
+        <input type='checkbox' className='nav__checkbox' id='nav__toggle' />
 
-        <label for='nav__toggle' class='nav__btn mx-auto'>
-          <span class='nav__icon' />
+        <label htmlFor='nav__toggle' className='nav__btn mx-auto'>
+          <span className='nav__icon' />
         </label>
 
         <div className='nav__links'>{/* <NavLinks /> */}</div>
