@@ -1,4 +1,7 @@
 .header {
+  @include respond(md) {
+    margin-top: 1rem;
+  }
   &__social-links {
     & > a {
       margin-right: 3vw;
@@ -6,13 +9,21 @@
   }
 
   &__fieldset {
-    button:first-of-type {
-      margin-left: 0.5vw;
-    }
+    .search-input {
+      height: initial;
+      transition: all 0.3s;
 
-    .search-box {
-      margin-right: 3vw;
-      width: 40%;
+      opacity: 0;
+      width: 0;
+
+      &__is-active {
+        opacity: 1;
+        width: 20rem;
+        padding-left: 1rem;
+        padding-right: 3rem;
+        border: none !important;
+        transition: all 0.3s;
+      }
     }
   }
 
@@ -20,7 +31,7 @@
     margin-top: 6rem;
 
     @include respond(md) {
-      margin-top: 10rem;
+      margin-top: 7rem;
     }
 
     h1 {

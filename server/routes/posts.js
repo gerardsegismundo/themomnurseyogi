@@ -3,8 +3,11 @@ const router = express.Router()
 
 const { Post } = require('../models/Post')
 
-router.get('/', async (req, res) => {
-  const posts = await Post.find({}).sort({ date: 'desc' })
+router.get('/recent', async (req, res) => {
+  const posts = await Post.find({})
+    .sort({ date: 'desc' })
+    .limit(3)
+
   if (!posts) return res.status(400).send('Failed loading posts.')
 
   res.json(posts)

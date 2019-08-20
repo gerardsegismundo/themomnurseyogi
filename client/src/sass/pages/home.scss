@@ -51,9 +51,16 @@
         }
       }
 
-      img {
+      &__img {
+        max-height: 45rem;
         margin-top: 3rem;
         max-width: 100%;
+        @include respond(sm) {
+          max-height: 55rem;
+        }
+        @include respond(md) {
+          max-height: initial;
+        }
       }
 
       &__body {

@@ -1,13 +1,13 @@
 import React from 'react'
 import SocialLinks from '../common/SocialLinks'
-import FieldSet from '../common/HeaderFieldSet'
+import FieldSet from '../common/Header-FieldSet'
 
 const Header = () => {
   const classes =
     'header__social-links col-lg-2 col-md-3 col-sm-4 col-xs-2 d-none d-md-flex justify-content-start mx-2'
 
   return (
-    <header className='header px-xl-5 px-lg-4 px-md-3 mt-md-3'>
+    <header className='header px-xl-5 px-lg-4 px-md-3'>
       <div className='row'>
         <SocialLinks classes={classes} />
         <FieldSet />

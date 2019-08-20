@@ -35,7 +35,11 @@ const Post = props => {
         )}
       </div>
 
-      <img className='post__img mb-5' src={imgURL} alt={title + 'image'} />
+      <img
+        className='post__img mb-5 d-flex mx-auto'
+        src={imgURL}
+        alt={title + 'image'}
+      />
 
       <p className='post__body'>{body.slice(0, 200) + '...'}</p>
 

@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleScroll = () => {
-    window.pageYOffset >= 242 ? setIsFixed(true) : setIsFixed(false)
+    window.pageYOffset >= 185 ? setIsFixed(true) : setIsFixed(false)
   }
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Navbar = () => {
     </Fragment>
   )
 
-  let classes = 'nav d-flex d-md-none mb-5 mt-5'
+  let classes = 'nav d-flex d-md-none mb-4 mt-4'
   let burgerNavClasses = isFixed ? classes + ' sticky-top b-shadow' : classes
 
   return (

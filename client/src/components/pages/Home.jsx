@@ -4,11 +4,11 @@ import Article from '../layouts/HomeArticle'
 import Aside from '../layouts/HomeAside'
 
 import { connect } from 'react-redux'
-import { getPosts } from '../../_actions/postActions'
+import { getRecentPosts } from '../../_actions/postActions'
 
-const Home = ({ getPosts }) => {
+const Home = ({ getRecentPosts }) => {
   useEffect(() => {
-    getPosts()
+    getRecentPosts()
 
     // eslint-disable-next-line
   }, [])
@@ -28,5 +28,5 @@ const Home = ({ getPosts }) => {
 
 export default connect(
   null,
-  { getPosts }
+  { getRecentPosts }
 )(Home)

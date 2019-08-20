@@ -38,7 +38,7 @@ const SocialLinks = ({ classes }) => {
   return !classes ? (
     <Fragment>{links}</Fragment>
   ) : (
-    <span className={classes}>{links}</span>
+    <span className={`${classes} align-items-center`}>{links}</span>
   )
 }
 
