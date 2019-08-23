@@ -13,7 +13,6 @@ router.get('/recent', async (req, res) => {
   res.json(posts)
 })
 
-// HACK FOR PROXY ERROR
 router.get('/:id', async (req, res) => {
   const post = await Post.find({ _id: req.params.id })
   if (!post) return res.status(400).send('Failed loading post.')

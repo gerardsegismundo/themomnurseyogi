@@ -1,0 +1,21 @@
+.cover-image {
+  background-image: url('../../assets/cover.jpg');
+  background-size: cover;
+  position: relative;
+  background-position: top;
+  background-repeat: no-repeat;
+
+  height: 45rem;
+  @include respond(sm) {
+    height: 45rem;
+  }
+  @include respond(md) {
+    height: 50rem;
+  }
+  @include respond(lg) {
+    height: 55rem;
+  }
+  @include respond(xl) {
+    height: 60rem;
+  }
+}

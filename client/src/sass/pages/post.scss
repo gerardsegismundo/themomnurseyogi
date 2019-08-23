@@ -1,0 +1,46 @@
+.post {
+  overflow: hidden;
+  &__story,
+  &__date,
+  &__title {
+    text-align: center;
+  }
+
+  &__story {
+    margin: 3rem 0 4rem 0;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 5rem;
+  }
+
+  &__date {
+    margin: 2rem 0;
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__hashtags {
+    display: flex;
+    justify-content: center;
+
+    li {
+      margin: 1rem 2vw;
+    }
+  }
+
+  &__img {
+    display: flex;
+    margin: auto;
+    max-width: 60vw;
+  }
+
+  &__body {
+    margin: 5rem 0;
+    max-width: 60vw;
+    text-align: left;
+    line-height: 3.5rem;
+
+    color: rgba($elegant-color, 0.8);
+  }
+}

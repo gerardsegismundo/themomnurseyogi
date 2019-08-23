@@ -9,7 +9,8 @@
 textarea,
 select,
 input,
-button {
+button,
+button:active {
   outline: none;
 }
 
@@ -55,6 +56,14 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.text-grey {
+  color: rgba(46, 46, 46, 0.4);
+}
+
+.fw-600 {
+  font-weight: 600;
 }
 
 .opacity-0 {

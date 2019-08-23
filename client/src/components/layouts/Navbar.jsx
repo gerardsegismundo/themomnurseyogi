@@ -5,10 +5,12 @@ import SocialLinks from '../common/SocialLinks'
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false)
+  const [isFixed_md, setIsFixed_md] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   const handleScroll = () => {
     window.pageYOffset >= 185 ? setIsFixed(true) : setIsFixed(false)
+    window.pageYOffset >= 312 ? setIsFixed_md(true) : setIsFixed_md(false)
   }
 
   useEffect(() => {
@@ -37,16 +39,21 @@ const Navbar = () => {
     </Fragment>
   )
 
-  let classes = 'nav d-flex d-md-none mb-4 mt-4'
-  let burgerNavClasses = isFixed ? classes + ' sticky-top b-shadow' : classes
+  let classes = `nav d-flex d-md-none mb-4 mt-4${
+    isFixed ? ' sticky-top b-shadow' : ''
+  }`
+
+  let classes_md = `nav-md d-none d-md-flex justify-content-around${
+    isFixed_md ? ' sticky-top py-3 b-shadow' : ''
+  }`
 
   return (
     <Fragment>
-      <nav className='nav-md d-none d-md-flex justify-content-between container'>
+      <nav className={classes_md}>
         <NavLinks />
       </nav>
 
-      <nav className={burgerNavClasses}>
+      <nav className={classes}>
         <input
           type='checkbox'
           checked={isOpen}

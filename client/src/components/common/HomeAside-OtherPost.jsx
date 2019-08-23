@@ -1,29 +1,34 @@
 import React from 'react'
-import profileImage from '../../assets/profile.jpg'
 
-const HomeAsideOtherPost = () => {
+import { Link } from 'react-router-dom'
+import { getPostLink, renderHashtags, formatDate } from '../../helpers'
+
+const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => {
   return (
-    <section className='other-posts d-none d-lg-flex justify-content-center'>
-      <div className=''>
+    <section className={`other-posts${classes ? ' ' + classes : ''}`}>
+      <div className='d-block'>
         <img
-          src={profileImage}
+          src={imgURL}
           className='other-posts__img img-fluid '
           alt='profile'
         />
+        <p className='other-posts__date'>{formatDate(date)}</p>
 
-        <p className='other-posts__date'>JANUARY 30, 2018</p>
-        <a href='#!' className='other-posts__title'>
-          My Fall Story
-        </a>
+        {title && _id && (
+          <Link
+            to={getPostLink(title, _id)}
+            className='other-posts__title fw-600 mt-5'
+          >
+            {title}
+          </Link>
+        )}
+
         <ul className='other-posts__hashtags d-flex justify-content-start'>
-          <li>#winter</li>
-          <li>#love</li>
-          <li>#moments</li>
-          <li>#february</li>
+          {renderHashtags(hashtags, title)}
         </ul>
       </div>
     </section>
   )
 }
 
-export default HomeAsideOtherPost
+export default OtherPosts

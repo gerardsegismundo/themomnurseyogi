@@ -1,21 +1,14 @@
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
 
+@import 'base/base';
+@import 'base/modifybootstrap.scss';
+
+@import 'pages/home';
+@import 'pages/post';
+
 @import 'components/navbar';
 @import 'components/header';
 @import 'components/footer';
 
-@import 'pages/home';
-
-@import 'base/base';
-@import 'base/modifybootstrap.scss';
-
-// for development only
-/* .boblack {
-  border: 1px solid black;
-}
-
-body {
-  background-color: rgba(46, 46, 46, 0.5);
-}
- */
+@import 'components/subscribe';

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const HomeArticle = ({ recentPosts }) => {
   return (
-    <article className='col-sm-12 col-lg-8 order-3 order-lg-1'>
+    <article className='col-sm-12 col-lg-8 col-xl-7 order-3 order-lg-1 mr-xl-5'>
       <h3 className='recent-posts'> # Recent posts </h3>
 
       {recentPosts &&
@@ -15,7 +15,7 @@ const HomeArticle = ({ recentPosts }) => {
 }
 
 const mapStateToProps = state => ({
-  recentPosts: state.posts.posts
+  recentPosts: state.posts.recentPosts
 })
 
 export default connect(mapStateToProps)(HomeArticle)

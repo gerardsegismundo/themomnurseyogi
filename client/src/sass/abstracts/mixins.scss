@@ -13,6 +13,14 @@
       @content;
     }
   }
+
+  @if $breakpoint == md-lg {
+    // Medium-Large devices (882px and up)
+    @media (min-width: 882px) {
+      @content;
+    }
+  }
+
   @if $breakpoint == lg {
     // Large devices (desktops, 992px and up)
     @media only screen and (min-width: 112.5em) {

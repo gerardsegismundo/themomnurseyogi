@@ -7,8 +7,8 @@ const Header = () => {
     'header__social-links col-lg-2 col-md-3 col-sm-4 col-xs-2 d-none d-md-flex justify-content-start mx-2'
 
   return (
-    <header className='header px-xl-5 px-lg-4 px-md-3'>
-      <div className='row'>
+    <header className='header container-fluid'>
+      <div className='row mt-md-4 px-xl-5 px-lg-4 px-md-3 mx-xl-5 mx-lg-4'>
         <SocialLinks classes={classes} />
         <FieldSet />
       </div>

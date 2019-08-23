@@ -1,47 +1,54 @@
-import React from 'react'
-import profileImage from '../../assets/profile.jpg'
+import React, { useEffect } from 'react'
+
+import Subscribe from '../common/Subscribe'
 import OtherPost from '../common/HomeAside-OtherPost'
 import Ads from '../common/Ads'
 
 import { connect } from 'react-redux'
+import { getRandomPostsA } from '../../_actions/postActions'
 
-const HomeAside = ({ randomPostsA }) => {
+const HomeAside = ({ getRandomPostsA, randomPostsA }) => {
+  useEffect(() => {
+    getRandomPostsA()
+
+    // eslint-disable-next-line
+  }, [])
+
   return (
-    <aside className='col-sm-12 col-lg-4 d-flex-row order-2'>
+    <aside className='col-sm-12 col-lg-4 d-flex-row order-2 ml-xl-5'>
       <center>
-        <img
-          src={profileImage}
-          className='profile-image img-fluid'
-          alt='profile'
-        />
-
-        <hgroup className='subscribe-text'>
-          <h4 className='subscribe-text--primary'>Subscribe</h4>
-          <h5 className='subscribe-text--secondary'>to my Blog</h5>
-        </hgroup>
-
-        <div className='about'>
-          <h2 className='about__name'>I'm Maydee Segismundo</h2>
-          <p className='about__content'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            dolorem sit fugit, quia, reprehenderit natus maiores officia qui
-            consequuntur provident, nobis soluta quod. Dolor ea amet ipsum?
-            Corrupti, sunt? Nemo!
-          </p>
-        </div>
+        <Subscribe />
       </center>
 
-      <OtherPost />
-      <OtherPost />
-      <OtherPost />
-      <OtherPost />
+      <div className='about'>
+        <h2 className='about__name'>I'm Maydee Segismundo</h2>
+        <p className='about__content'>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dolorem
+          sit fugit, quia, reprehenderit natus maiores officia qui consequuntur
+          provident, nobis soluta quod. Dolor ea amet ipsum? Corrupti, sunt?
+          Nemo!
+        </p>
+      </div>
+
+      {randomPostsA &&
+        randomPostsA.map(props => (
+          <OtherPost
+            key={props._id}
+            classes='d-none d-lg-flex justify-content-center'
+            {...props}
+          />
+        ))}
+
       <Ads />
     </aside>
   )
 }
 
-const mapStateToProps = ({ posts }) => ({
-  randomPostsA: posts.randomPostsA
+const mapStateToProps = state => ({
+  randomPostsA: state.posts.posts
 })
 
-export default connect(mapStateToProps)(HomeAside)
+export default connect(
+  mapStateToProps,
+  { getRandomPostsA }
+)(HomeAside)

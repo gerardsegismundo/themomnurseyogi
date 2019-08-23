@@ -3,12 +3,12 @@ import SocialLinks from '../common/SocialLinks'
 
 const Footer = () => {
   const classes =
-    'footer__links col-12 col-md-6 d-flex justify-content-around justify-content-md-end align-items-center mt-4 mt-md-0'
+    'footer__links col-12 col-md-6 d-flex order-1 order-md-3 justify-content-around justify-content-md-end align-items-center mb-4 mb-md-0'
 
   return (
-    <footer className='footer bg-dark py-5 py-md-4'>
+    <footer className='footer bg-dark py-4 py-md-3 py-lg-4'>
       <p className='mx-5 row'>
-        <span className='footer__copyright col d-flex justify-content-center justify-content-md-start'>
+        <span className='footer__copyright col order-2 d-flex justify-content-center justify-content-md-start'>
           Copyright &copy; 2019 Themomnurseyogi. All rights reserved.
         </span>
         <span />

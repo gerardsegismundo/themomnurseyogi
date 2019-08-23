@@ -9,7 +9,6 @@ import { getRecentPosts } from '../../_actions/postActions'
 const Home = ({ getRecentPosts }) => {
   useEffect(() => {
     getRecentPosts()
-
     // eslint-disable-next-line
   }, [])
 

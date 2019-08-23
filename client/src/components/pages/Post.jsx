@@ -1,33 +1,49 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getPost } from '../../_actions/postActions'
+import { getPost, getPostDb } from '../../_actions/postActions'
 
-const Post = ({ location, getPost, post }) => {
+import { renderHashtags, formatDate } from '../../helpers'
+
+const Post = ({ location, getPost, getPostDb, post, posts }) => {
   const postId = location.pathname
     .split('/')[2]
     .split('-')
     .slice(-1)[0]
 
   useEffect(() => {
-    getPost(postId)
+    posts ? getPost(postId) : getPostDb(postId)
 
     // eslint-disable-next-line
   }, [])
 
-  const notFound = 'page Error'
+  if (!post) return <div className='container'>loading.....</div>
+
+  const { imgURL, date, hashtags, title, body } = post
 
   return (
-    <div>
-      <h1>{post ? post.title : notFound}</h1>
+    <div className='post container'>
+      <h3 className='post__story'># Story</h3>
+      <p className='post__date text-grey fw-600'>{formatDate(date)}</p>
+      <h1 className='post__title'>{title}</h1>
+      <ul className='post__hashtags text-grey fw-600'>
+        {renderHashtags(hashtags, title)}
+      </ul>
+      <img src={imgURL} alt={title} className='post__img' />
+      <center>
+        <p className='post__body fw-600 d-flex align-self-center align-content-center'>
+          <span>{body}</span>
+        </p>
+      </center>
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  post: state.posts.post
+  post: state.posts.post,
+  posts: state.posts.posts
 })
 
 export default connect(
   mapStateToProps,
-  { getPost }
+  { getPost, getPostDb }
 )(Post)
