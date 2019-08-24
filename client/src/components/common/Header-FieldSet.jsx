@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import PostItem from '../common/Header-FieldSet-PostItem'
@@ -23,14 +23,9 @@ const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
     onClearSearch()
   }
 
-  useEffect(() => {
-    console.log('ISSUE ON SEARCH RESULT FROM REDUX')
-  }, [searchResult])
-
-  // @issue displays null on first input
+  // @issue Displays null on first input. (thoughts: framework issue)
   const onChange = async () => {
     const text = searchInput.current.value
-    if (text.length <= 0) return
     searchPost(text)
   }
 
@@ -57,10 +52,7 @@ const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
         />
 
         {searchResult && searchResult.length > 0 && (
-          <div
-            className='search-post__results ml-5 trigger-search'
-            onClick={onClearSearch()}
-          >
+          <div className='search-post__results ml-5 trigger-search'>
             <div className='search-post__results--arrow trigger-search' />
 
             <ul className='search-post__results--lists trigger-search'>

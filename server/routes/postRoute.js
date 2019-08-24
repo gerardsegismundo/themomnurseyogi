@@ -30,7 +30,8 @@ router.post('/search-post', async (req, res) => {
   const { text } = req.body
 
   // Search validation
-  if (text == undefined || typeof text !== 'string') return res.end()
+  if (text.length === 0 || text == undefined || typeof text !== 'string')
+    return res.end()
 
   // Get all posts from db
   const postTitles = await Post.find({}).select('title')
