@@ -1,14 +1,23 @@
 import React, { useState, useRef } from 'react'
-import { connect } from 'react-redux'
 
 import PostItem from '../common/Header-FieldSet-PostItem'
+
+import { connect } from 'react-redux'
 import { searchPost, clearSearch } from '../../_actions/postActions'
+import { useOutsideClick } from '../../helpers'
 
 const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
-  const [searchbarIsActive, setSearchbarIsActive] = useState(false)
+  const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
+
+  const clickOut = useRef()
+
+  // Close search bar on click outside.
+  useOutsideClick(clickOut, () => {
+    searchbarIsActive && setSearchbarIsAcive(false)
+    clearSearch()
+  })
 
   const searchInput = useRef()
-
   const onClearSearch = () => {
     searchInput.current.blur()
     searchInput.current.value = ''
@@ -16,14 +25,13 @@ const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
   }
 
   const onClickSearch = () => {
-    setSearchbarIsActive(!searchbarIsActive)
+    setSearchbarIsAcive(!searchbarIsActive)
     document.activeElement.blur()
 
     if (!searchbarIsActive) return searchInput.current.focus()
     onClearSearch()
   }
 
-  // @issue Displays null on first input. (thoughts: framework issue)
   const onChange = async () => {
     const text = searchInput.current.value
     searchPost(text)
@@ -35,34 +43,31 @@ const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
 
   return (
     <section className='header__fieldset col d-none d-md-flex flex justify-content-end'>
-      <div className='search-post d-flex-row trigger-search'>
-        <button
-          className='btn btn-lg btn-txt btn--search trigger-search'
-          onClick={onClickSearch}
-        >
-          <i className='fa fa-search trigger-search' aria-hidden='true' />
-        </button>
+      <div className='search-post d-flex-row'>
+        <div ref={clickOut}>
+          <button
+            className='btn btn-lg btn-txt btn--search'
+            onClick={onClickSearch}
+          >
+            <i className='fa fa-search' aria-hidden='true' />
+          </button>
 
-        <input
-          type='search'
-          className={`${searchInputClass} trigger-search`}
-          placeholder='Search blog'
-          onChange={onChange}
-          ref={searchInput}
-        />
+          <input
+            type='search'
+            className={searchInputClass}
+            placeholder='Search blog'
+            onChange={onChange}
+            ref={searchInput}
+          />
+        </div>
 
         {searchResult && searchResult.length > 0 && (
-          <div className='search-post__results ml-5 trigger-search'>
-            <div className='search-post__results--arrow trigger-search' />
+          <div className='search-post__results ml-5'>
+            <div className='search-post__results--arrow' />
 
-            <ul className='search-post__results--lists trigger-search'>
+            <ul className='search-post__results--lists' onClick={onClearSearch}>
               {searchResult.map(({ _id, title }) => (
-                <PostItem
-                  key={_id}
-                  title={title}
-                  id={_id}
-                  classNames='trigger-search'
-                />
+                <PostItem key={_id} title={title} id={_id} />
               ))}
             </ul>
           </div>
@@ -77,8 +82,8 @@ const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  searchResult: state.posts.searchResult
+const mapStateToProps = ({ posts: { searchResult } }) => ({
+  searchResult
 })
 
 export default connect(

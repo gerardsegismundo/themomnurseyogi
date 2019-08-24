@@ -22,6 +22,15 @@ a {
   }
 }
 
+hr {
+  opacity: 0.6;
+  margin: 0 8vw;
+
+  &.wide {
+    margin: 0;
+  }
+}
+
 li {
   list-style-type: none;
 }

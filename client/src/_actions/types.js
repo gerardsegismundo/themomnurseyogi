@@ -11,3 +11,5 @@ export const GET_RECENT_POSTS = 'GET_RECENT_POSTS'
 
 // UI
 export const CLOSE_BURGER = 'CLOSE_BURGER'
+export const TOGGLE_SEARCH = 'TOGGLE_SEARCH'
+export const CLOSE_SEARCH = 'CLOSE_SEARCH'

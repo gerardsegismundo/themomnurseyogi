@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 const HomeArticle = ({ recentPosts }) => {
   return (
     <article className='col-sm-12 col-lg-8 col-xl-7 order-3 order-lg-1 mr-xl-5'>
+      <hr className='d-block my-5 d-lg-none wide' />
       <h3 className='recent-posts'> # Recent posts </h3>
 
       {recentPosts &&

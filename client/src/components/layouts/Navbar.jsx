@@ -1,42 +1,49 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
 import SocialLinks from '../common/SocialLinks'
+import { useOutsideClick } from '../../helpers'
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false)
   const [isFixed_md, setIsFixed_md] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [navIsOpen, setNavIsOpen] = useState(false)
 
-  const handleScroll = () => {
-    window.pageYOffset >= 185 ? setIsFixed(true) : setIsFixed(false)
-    window.pageYOffset >= 312 ? setIsFixed_md(true) : setIsFixed_md(false)
-  }
-
+  // Makes small nav stick on top on scroll
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      window.pageYOffset >= 185 ? setIsFixed(true) : setIsFixed(false)
+      window.pageYOffset >= 312 ? setIsFixed_md(true) : setIsFixed_md(false)
+    }
 
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
     // eslint-disable-next-line
   }, [])
 
+  const clickOut = useRef()
+  // Close small nav on outside click close
+  useOutsideClick(clickOut, () => {
+    navIsOpen && setNavIsOpen(false)
+  })
+
   const NavLinks = () => (
-    <Fragment>
-      <Link to='/' onClick={e => setIsOpen(false)}>
+    <>
+      <Link to='/' onClick={e => setNavIsOpen(false)}>
         home
       </Link>
-      <NavLink to='/blogs' onClick={e => setIsOpen(false)}>
+      <NavLink to='/blogs' onClick={e => setNavIsOpen(false)}>
         blogs
       </NavLink>
-      <NavLink to='/about' onClick={e => setIsOpen(false)}>
+      <NavLink to='/about' onClick={e => setNavIsOpen(false)}>
         about
       </NavLink>
-      <NavLink to='/contact' onClick={e => setIsOpen(false)}>
+      <NavLink to='/contact' onClick={e => setNavIsOpen(false)}>
         contact
       </NavLink>
 
       <SocialLinks classes='nav__social-links d-flex d-md-none' />
-    </Fragment>
+    </>
   )
 
   let classes = `nav d-flex d-md-none mb-4 mt-4${
@@ -48,16 +55,16 @@ const Navbar = () => {
   }`
 
   return (
-    <Fragment>
+    <>
       <nav className={classes_md}>
         <NavLinks />
       </nav>
 
-      <nav className={classes}>
+      <nav className={classes} ref={clickOut}>
         <input
           type='checkbox'
-          checked={isOpen}
-          onChange={e => setIsOpen(!isOpen)}
+          checked={navIsOpen}
+          onChange={e => setNavIsOpen(!navIsOpen)}
           className='nav__checkbox'
           id='nav__toggle'
         />
@@ -70,7 +77,7 @@ const Navbar = () => {
           <NavLinks />
         </div>
       </nav>
-    </Fragment>
+    </>
   )
 }
 

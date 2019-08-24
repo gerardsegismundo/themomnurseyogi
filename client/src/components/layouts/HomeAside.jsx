@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
-
+import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
 import OtherPost from '../common/HomeAside-OtherPost'
-import Ads from '../common/Ads'
-
 import { connect } from 'react-redux'
 import { getRandomPostsA } from '../../_actions/postActions'
 
@@ -20,7 +18,7 @@ const HomeAside = ({ getRandomPostsA, randomPostsA }) => {
         <Subscribe />
       </center>
 
-      <div className='about'>
+      <div className='about d-none d-lg-block'>
         <h2 className='about__name'>I'm Maydee Segismundo</h2>
         <p className='about__content'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dolorem
@@ -39,7 +37,11 @@ const HomeAside = ({ getRandomPostsA, randomPostsA }) => {
           />
         ))}
 
-      <Ads />
+      <img
+        className='mx-auto my-5 d-none d-lg-flex'
+        src={adsImage}
+        alt='Advertisement'
+      />
     </aside>
   )
 }

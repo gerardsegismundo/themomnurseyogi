@@ -4,7 +4,6 @@ import {
   GET_RECENT_POSTS,
   GET_POST,
   GET_POSTS,
-  // eslint-disable-next-line
   SEARCH_POST,
   GET_POST_DB,
   GET_RANDOM_POSTS_A,
@@ -20,16 +19,12 @@ export const getPost = id => dispatch => {
 }
 
 export const getPostDb = id => async dispatch => {
-  try {
-    const res = await axios.get(`/api/posts/${id}`)
+  const res = await axios.get(`/api/posts/${id}`)
 
-    dispatch({
-      type: GET_POST_DB,
-      payload: res.data[0]
-    })
-  } catch (err) {
-    console.log(err)
-  }
+  dispatch({
+    type: GET_POST_DB,
+    payload: res.data[0]
+  })
 }
 
 export const getRandomPostsA = () => async dispatch => {
@@ -45,47 +40,31 @@ export const getRandomPostsB = () => async dispatch => {
 }
 
 export const getPosts = () => async dispatch => {
-  try {
-    const res = await axios.get(`/api/posts/recent`)
-    dispatch({
-      type: GET_POSTS,
-      payload: res.data
-    })
-  } catch (err) {
-    console.log(err)
-  }
+  const res = await axios.get(`/api/posts/recent`)
+  dispatch({
+    type: GET_POSTS,
+    payload: res.data
+  })
 }
 
 export const getRecentPosts = () => async dispatch => {
-  try {
-    const res = await axios.get(`/api/posts/recent`)
-    dispatch({
-      type: GET_RECENT_POSTS,
-      payload: res.data
-    })
-  } catch (err) {
-    console.log(err)
-  }
+  const res = await axios.get(`/api/posts/recent`)
+
+  dispatch({
+    type: GET_RECENT_POSTS,
+    payload: res.data
+  })
 }
 
 export const searchPost = text => async dispatch => {
-  try {
-    const res = await axios.post('/api/posts/search-post', {
-      text
-    })
+  const res = await axios.post('/api/posts/search-post', {
+    text
+  })
 
-    dispatch({
-      type: SEARCH_POST,
-      payload: res.data
-    })
-  } catch (err) {
-    console.log(err)
-  }
-
-  // dispatch({
-  //   type: SEARCH_POST,
-  //   payload: text
-  // })
+  dispatch({
+    type: SEARCH_POST,
+    payload: res.data
+  })
 }
 
 export const clearSearch = () => async dispatch => {
