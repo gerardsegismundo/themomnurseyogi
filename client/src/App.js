@@ -18,10 +18,11 @@ import { closeSearch } from './_actions/uiActions'
 const App = ({ getPosts, closeSearch }) => {
   // Closes searchBar and hanburger nav when click outside
   const handleClick = e => {
+    // eslint-disable-next-line
     const includesClass = className =>
       e.target.className.includes(className) ? true : false
 
-    includesClass('trigger-search') && closeSearch()
+    // includesClass('trigger-search') && closeSearch()
   }
 
   useEffect(() => {
@@ -43,9 +44,7 @@ const App = ({ getPosts, closeSearch }) => {
 
           <Route
             exact
-            render={props => (
-              <Post key={props.match.params.pageid} {...props} />
-            )}
+            render={props => <Post key={props.match.params.id} {...props} />}
             path='/post/:id'
           />
         </Switch>

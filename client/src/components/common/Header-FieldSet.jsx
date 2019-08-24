@@ -1,53 +1,49 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import PostItem from '../common/Header-FieldSet-PostItem'
-import { getPosts } from '../../_actions/postActions'
+import { searchPost, clearSearch } from '../../_actions/postActions'
 
-const HeaderFieldSet = ({ getPosts, posts }) => {
-  const [isActive, setIsActive] = useState(false)
-  const [searchResult, setSearchResult] = useState('')
+const HeaderFieldSet = ({ searchResult, clearSearch, searchPost }) => {
+  const [searchbarIsActive, setSearchbarIsActive] = useState(false)
 
   const searchInput = useRef()
 
-  const clearSearch = () => {
+  const onClearSearch = () => {
     searchInput.current.blur()
     searchInput.current.value = ''
-    setSearchResult('')
-  }
-
-  const onSearch = () => {
-    setIsActive(!isActive)
-    document.activeElement.blur()
-
-    if (!isActive) return searchInput.current.focus()
     clearSearch()
   }
 
-  const filterPost = e => {
-    const { value } = searchInput.current
+  const onClickSearch = () => {
+    setSearchbarIsActive(!searchbarIsActive)
+    document.activeElement.blur()
 
-    posts === null && getPosts()
-
-    const result =
-      value &&
-      posts &&
-      posts.filter(post => {
-        const regex = new RegExp(`${value}`, 'gi')
-        return post.title.match(regex)
-      })
-
-    setSearchResult(result || '')
+    if (!searchbarIsActive) return searchInput.current.focus()
+    onClearSearch()
   }
 
-  let searchInputClass = `search-post__input ${isActive && 'is-active'}`
+  useEffect(() => {
+    console.log('ISSUE ON SEARCH RESULT FROM REDUX')
+  }, [searchResult])
+
+  // @issue displays null on first input
+  const onChange = async () => {
+    const text = searchInput.current.value
+    if (text.length <= 0) return
+    searchPost(text)
+  }
+
+  let searchInputClass = `search-post__input ${
+    searchbarIsActive ? 'is-active' : ''
+  }`
 
   return (
     <section className='header__fieldset col d-none d-md-flex flex justify-content-end'>
       <div className='search-post d-flex-row trigger-search'>
         <button
           className='btn btn-lg btn-txt btn--search trigger-search'
-          onClick={onSearch}
+          onClick={onClickSearch}
         >
           <i className='fa fa-search trigger-search' aria-hidden='true' />
         </button>
@@ -56,14 +52,14 @@ const HeaderFieldSet = ({ getPosts, posts }) => {
           type='search'
           className={`${searchInputClass} trigger-search`}
           placeholder='Search blog'
-          onChange={filterPost}
+          onChange={onChange}
           ref={searchInput}
         />
 
         {searchResult && searchResult.length > 0 && (
           <div
             className='search-post__results ml-5 trigger-search'
-            onClick={() => clearSearch()}
+            onClick={onClearSearch()}
           >
             <div className='search-post__results--arrow trigger-search' />
 
@@ -90,10 +86,10 @@ const HeaderFieldSet = ({ getPosts, posts }) => {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts.posts
+  searchResult: state.posts.searchResult
 })
 
 export default connect(
   mapStateToProps,
-  { getPosts }
+  { clearSearch, searchPost }
 )(HeaderFieldSet)

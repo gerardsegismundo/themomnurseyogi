@@ -4,10 +4,12 @@ import {
   GET_RECENT_POSTS,
   GET_POST,
   GET_POSTS,
+  // eslint-disable-next-line
   SEARCH_POST,
   GET_POST_DB,
   GET_RANDOM_POSTS_A,
-  GET_RANDOM_POSTS_B
+  GET_RANDOM_POSTS_B,
+  CLEAR_SEARCH
 } from './types'
 
 export const getPost = id => dispatch => {
@@ -67,8 +69,27 @@ export const getRecentPosts = () => async dispatch => {
 }
 
 export const searchPost = text => async dispatch => {
+  try {
+    const res = await axios.post('/api/posts/search-post', {
+      text
+    })
+
+    dispatch({
+      type: SEARCH_POST,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+
+  // dispatch({
+  //   type: SEARCH_POST,
+  //   payload: text
+  // })
+}
+
+export const clearSearch = () => async dispatch => {
   dispatch({
-    type: SEARCH_POST,
-    payload: text
+    type: CLEAR_SEARCH
   })
 }

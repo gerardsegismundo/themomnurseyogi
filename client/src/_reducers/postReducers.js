@@ -5,16 +5,18 @@ import {
   GET_RANDOM_POSTS_A,
   GET_RANDOM_POSTS_B,
   GET_POSTS,
-  SEARCH_POST
+  SEARCH_POST,
+  CLEAR_SEARCH
 } from '../_actions/types'
 
 const initialState = {
   posts: null,
+  post: null,
+  searchResult: null,
   recentPosts: null,
   randomPosts: null,
   randomPostsA: null,
   randomPostsB: null,
-  post: null,
   loading: false
 }
 
@@ -39,6 +41,7 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         recentPosts: payload
       }
+
     case GET_POSTS:
       return {
         ...state,
@@ -66,7 +69,14 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        post: state.posts.find(post => post._title === payload)
+        searchResult: payload
+      }
+
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        loading: false,
+        searchResult: null
       }
 
     default:
