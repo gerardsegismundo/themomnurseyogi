@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getPostLink, formatDate } from '../../helpers'
+import { getPostLink, formatDate } from '../../helpers/func'
 
 const Post = props => {
   const { title, imgURL, hashtags, date, body, _id } = props

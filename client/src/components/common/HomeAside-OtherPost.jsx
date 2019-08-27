@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { getPostLink, renderHashtags, formatDate } from '../../helpers'
+import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
 
 const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => {
   return (

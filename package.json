@@ -18,7 +18,10 @@
     "font-awesome": "^4.7.0",
     "helmet": "^3.20.0",
     "joi": "^14.3.1",
-    "mongoose": "^5.6.9"
+    "mongoose": "^5.6.9",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "react-modal": "^3.10.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",

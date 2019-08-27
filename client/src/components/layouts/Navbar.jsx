@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
 import SocialLinks from '../common/SocialLinks'
-import { useOutsideClick } from '../../helpers'
+import { useOutsideClick } from '../../helpers/func'
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false)

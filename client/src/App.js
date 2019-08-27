@@ -11,9 +11,12 @@ import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
 
+import ModalSwitch from './components/common/ModalSwitch'
+
 const App = () => {
   return (
     <>
+      <ModalSwitch />
       <Router>
         <Header />
         <Navbar />

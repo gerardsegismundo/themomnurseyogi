@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getPost, getPostDb } from '../../_actions/postActions'
 
-import { renderHashtags, formatDate } from '../../helpers'
+import { renderHashtags, formatDate } from '../../helpers/func'
 
 const Post = ({ location, getPost, getPostDb, post, posts }) => {
   const postId = location.pathname

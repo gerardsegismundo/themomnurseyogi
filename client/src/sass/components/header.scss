@@ -71,6 +71,15 @@
         }
       }
     }
+
+    .btn {
+      &--signin,
+      &--signup {
+        font-weight: 600;
+        width: 11vw;
+        max-width: 11rem;
+      }
+    }
   }
 
   &__main {
