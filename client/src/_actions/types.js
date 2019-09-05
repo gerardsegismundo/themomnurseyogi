@@ -13,3 +13,6 @@ export const GET_RECENT_POSTS = 'GET_RECENT_POSTS'
 export const CLOSE_BURGER = 'CLOSE_BURGER'
 export const TOGGLE_SEARCH = 'TOGGLE_SEARCH'
 export const CLOSE_SEARCH = 'CLOSE_SEARCH'
+
+// AUTH
+export const FETCH_USER = 'FETCH_USER'

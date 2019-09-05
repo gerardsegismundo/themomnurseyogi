@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import SocialLinks from '../common/SocialLinks'
 import { useOutsideClick } from '../../helpers/func'
@@ -29,16 +29,16 @@ const Navbar = () => {
 
   const NavLinks = () => (
     <>
-      <Link to='/' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/' onClick={e => setNavIsOpen(false)}>
         home
-      </Link>
-      <NavLink to='/blogs' onClick={e => setNavIsOpen(false)}>
+      </NavLink>
+      <NavLink exact to='/blogs' onClick={e => setNavIsOpen(false)}>
         blogs
       </NavLink>
-      <NavLink to='/about' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/about' onClick={e => setNavIsOpen(false)}>
         about
       </NavLink>
-      <NavLink to='/contact' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/contact' onClick={e => setNavIsOpen(false)}>
         contact
       </NavLink>
 

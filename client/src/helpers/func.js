@@ -1,5 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react'
+import axios from 'axios'
+
+const setAuthToken = token => {
+  if (token) return (axios.defaults.headers.common['x-auth-token'] = token)
+  delete axios.defaults.headers.common['x-auth-token']
+}
 
 const getPostLink = (title, id) => {
   return `/post/${title
@@ -36,4 +42,10 @@ const useOutsideClick = (ref, callback) => {
   })
 }
 
-export { getPostLink, formatDate, renderHashtags, useOutsideClick }
+export {
+  getPostLink,
+  formatDate,
+  renderHashtags,
+  useOutsideClick,
+  setAuthToken
+}

@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const { Post } = require('../models/Post')
+const { model } = require('mongoose')
+const Post = model('posts')
 
 // @route GET /recent
 // @desc  Get recent posts

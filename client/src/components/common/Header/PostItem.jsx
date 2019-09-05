@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getPostLink } from '../../helpers/func'
+import { getPostLink } from '../../../helpers/func'
 
 const PostItem = props => {
   const { title, id } = props

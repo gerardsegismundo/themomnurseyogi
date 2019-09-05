@@ -1,9 +1,8 @@
-const mongoose = require('mongoose')
+const { model, Schema } = require('mongoose')
 const Joi = require('joi')
-const Schema = mongoose.Schema
 
-const Post = mongoose.model(
-  'post',
+const Post = model(
+  'posts',
   new Schema({
     title: {
       type: String,
@@ -41,5 +40,4 @@ const validatePost = post => {
   return Joi.validate(post, schema)
 }
 
-exports.Post = Post
 exports.validate = validatePost

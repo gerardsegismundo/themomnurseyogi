@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-// Bootstrap, FontAwesome & Main Sass
+// CSS Files
+import 'normalize.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 import './sass/main.scss'

@@ -1,6 +1,6 @@
 import React from 'react'
 import SocialLinks from '../common/SocialLinks'
-import FieldSet from '../common/Header-FieldSet'
+import FieldSet from '../common/Header/Fieldset'
 
 const Header = () => {
   const classes =

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Modal from './Modal'
 
-const Test = () => {
+const ModalSwitch = () => {
   const [isOpen, setIsOpen] = useState(true)
 
   useEffect(() => {
@@ -23,23 +23,24 @@ const Test = () => {
 
   const onModalClose = () => {
     document.body.style.overflow = 'initial'
+    document.body.style.overflowX = 'hidden'
     setIsOpen(false)
   }
 
   const handleClick = e => {
     const { tagName, className } = e.target
 
-    if (tagName === 'BUTTON' && className.includes('btn--signup')) {
-      onModalOpen(true)
-    }
+    if (tagName === 'BUTTON' && className.includes('btn--signup')) onModalOpen()
   }
 
   // Close modal on escape
   const escFunction = e => {
-    if (isOpen && e.key === 'Escape') setIsOpen(false)
+    if (isOpen && e.key === 'Escape') onModalClose()
   }
 
-  return <>{isOpen && <Modal onModalClose={onModalClose} />}</>
+  return (
+    <>{isOpen && <Modal setIsOpen={setIsOpen} onModalClose={onModalClose} />}</>
+  )
 }
 
-export default Test
+export default ModalSwitch

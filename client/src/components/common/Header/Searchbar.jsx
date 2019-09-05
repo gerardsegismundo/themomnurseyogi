@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
 
-import PostItem from '../common/Header-FieldSet-PostItem'
+import PostItem from '../../common/Header/PostItem'
 
 import { connect } from 'react-redux'
-import { searchPost, clearSearch } from '../../_actions/postActions'
-import { useOutsideClick } from '../../helpers/func'
+import { searchPost, clearSearch } from '../../../_actions/postActions'
+import { useOutsideClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsAcive] = useState(false)

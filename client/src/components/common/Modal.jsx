@@ -5,17 +5,18 @@ import FacebookIcon from './svg/FacebookIcon'
 import GoogleIcon from './svg/GoogleIcon'
 import CloseIcon from './svg/CloseIcon'
 
-const Modal = ({ onModalClose }) => {
+const Modal = ({ setIsOpen, onModalClose }) => {
   const modalRef = useRef()
   useOutsideClick(modalRef, onModalClose)
 
   return (
     <>
-      <div
-        className={`my-modal__overlay${onModalClose ? ' d-flex' : ' d-none'}`}
-      >
-        <div className='my-modal'>
-          <div className='my-modal__content p-3' ref={modalRef}>
+      <div className={`my-modal__overlay${setIsOpen ? ' d-flex' : ' d-none'}`}>
+        <div className={`my-modal${setIsOpen ? ' is-open' : ' is-closed'}`}>
+          <div
+            className='my-modal__content p-3  d-flex align-items-center justify-content-center'
+            ref={modalRef}
+          >
             <i
               className='my-modal__content--close text-align-right hov'
               onClick={onModalClose}
@@ -25,41 +26,32 @@ const Modal = ({ onModalClose }) => {
 
             <div className='my-modal__content--section p-5'>
               <h1 className='my-modal__content--section--title'>
-                Join themomnurseyogi.
+                #themomnurseyogi.
               </h1>
 
-              <p className='my-modal__content--section--msg-1'>
+              {/* <p className='my-modal__content--section--msg-1'>
                 Create an account to receive great stories in your inbox.
-              </p>
+              </p> */}
 
               <center>
                 <a
                   href='/auth/google'
                   className='my-modal__content--section--btn-1 d-block align-self-center align-content-center'
+                  onClick={onModalClose}
                 >
                   <div className='d-flex align-items-center'>
                     <GoogleIcon />
-                    &nbsp;&nbsp;Signup with Google
+                    &nbsp;&nbsp;Sign in with Google
                   </div>
                 </a>
 
                 <button className='my-modal__content--section--btn-2 d-block'>
                   <div className='d-flex align-items-center'>
                     <FacebookIcon />
-                    &nbsp;&nbsp;Sign up with Facebook
+                    &nbsp;&nbsp;Sign in with Facebook
                   </div>
                 </button>
               </center>
-
-              <p className='my-modal__content--section--msg-2'>
-                Already have an account?
-                <a
-                  href='#!'
-                  className='my-modal__content--section--msg-2__sign-in'
-                >
-                  Sign in
-                </a>
-              </p>
             </div>
           </div>
         </div>

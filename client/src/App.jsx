@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+import queryString from 'query-string'
 
 import Home from './components/pages/Home'
 import Blogs from './components/pages/Blogs'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
-
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
-
 import ModalSwitch from './components/common/ModalSwitch'
 
+// import { connect } from 'react-redux'
+// import { fetchUser } from './_actions/authActions'
+
 const App = () => {
+  useEffect(() => {
+    if (window.location.search) {
+      const query = queryString.parse(window.location.search)
+    }
+  }, [])
   return (
     <>
       <ModalSwitch />
@@ -40,3 +48,7 @@ const App = () => {
 }
 
 export default App
+//  connect(
+//   null,
+//   { fetchUser }
+// )(App)
