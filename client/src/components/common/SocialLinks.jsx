@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
-const SocialLinks = ({ classes }) => {
+const SocialLinks = ({ classNames }) => {
   const links = (
-    <Fragment>
+    <>
       <a
         className='link'
         href='https://www.pinterest.ph/themomnurseyogi'
@@ -31,14 +31,14 @@ const SocialLinks = ({ classes }) => {
       >
         <i className='fa fa-facebook' />
       </a>
-    </Fragment>
+    </>
   )
 
-  // Has no className return fragment
-  return !classes ? (
-    <Fragment>{links}</Fragment>
+  // Has no className return
+  return !classNames ? (
+    <>{links}</>
   ) : (
-    <span className={`${classes} align-items-center`}>{links}</span>
+    <span className={`${classNames} align-items-center`}>{links}</span>
   )
 }
 

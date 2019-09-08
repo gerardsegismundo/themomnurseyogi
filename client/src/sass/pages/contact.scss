@@ -1,0 +1,58 @@
+.contact {
+  .aside-contact {
+    transform: translateY(-15rem);
+    margin-bottom: -13rem;
+  }
+
+  &__cover-img {
+    background-image: url('../../assets/dad.art.jpg');
+    background-size: cover;
+    height: 40rem;
+
+    @include respond(md) {
+      margin: 0 4vw;
+    }
+  }
+
+  .contact-section {
+    &__title {
+      margin: 3rem 0 4rem 0;
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 5rem;
+      text-align-last: center;
+    }
+
+    &__body {
+      line-height: 3rem;
+      color: rgba(46, 46, 46, 0.4);
+      font-weight: 600;
+    }
+
+    &__social-links {
+      display: block;
+      margin: 3.5rem 1vw 2rem 1vw;
+
+      i {
+        margin-right: 5vw;
+        color: rgba(46, 46, 46, 0.4);
+        font-size: 2rem;
+
+        &:hover {
+          transition: color ease-in-out 0.5s;
+          color: rgba(46, 46, 46, 0.9);
+        }
+      }
+    }
+
+    &__form {
+      margin: 3.5rem 1vw 2rem 1vw;
+      input {
+        margin-bottom: 1rem;
+      }
+
+      button {
+        margin-top: 5rem;
+      }
+    }
+  }
+}

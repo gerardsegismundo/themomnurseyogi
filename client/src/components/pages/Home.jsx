@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import Article from '../layouts/HomeArticle'
-import Aside from '../layouts/HomeAside'
+import Aside from '../layouts/Aside'
 
 import { connect } from 'react-redux'
 import { getRecentPosts } from '../../_actions/postActions'
@@ -14,11 +14,11 @@ const Home = ({ getRecentPosts }) => {
 
   return (
     <div className='home-page'>
-      <figure className='cover-image ' />
+      <figure className='cover-image' />
       <div className='container'>
         <div className='row'>
           <Article />
-          <Aside />
+          <Aside subscribeSectionClass='aside-home' />
         </div>
       </div>
     </div>

@@ -1,8 +1,4 @@
 .home-page {
-  @include respond(md) {
-    margin: 0 4vw;
-  }
-
   .cover-image {
     background-image: url('../../assets/cover.jpg');
     background-size: cover;
@@ -16,6 +12,7 @@
     }
     @include respond(md) {
       height: 50rem;
+      margin: 0 4vw;
     }
     @include respond(lg) {
       height: 55rem;

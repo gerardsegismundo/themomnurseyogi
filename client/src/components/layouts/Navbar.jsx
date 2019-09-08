@@ -29,38 +29,38 @@ const Navbar = () => {
 
   const NavLinks = () => (
     <>
-      <NavLink exact to='/' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/' onClick={() => setNavIsOpen(false)}>
         home
       </NavLink>
-      <NavLink exact to='/blogs' onClick={e => setNavIsOpen(false)}>
-        blogs
+      <NavLink exact to='/blog' onClick={() => setNavIsOpen(false)}>
+        blog
       </NavLink>
-      <NavLink exact to='/about' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/about' onClick={() => setNavIsOpen(false)}>
         about
       </NavLink>
-      <NavLink exact to='/contact' onClick={e => setNavIsOpen(false)}>
+      <NavLink exact to='/contact' onClick={() => setNavIsOpen(false)}>
         contact
       </NavLink>
 
-      <SocialLinks classes='nav__social-links d-flex d-md-none' />
+      <SocialLinks classNames='nav__social-links d-flex d-md-none' />
     </>
   )
 
-  let classes = `nav d-flex d-md-none mb-4 mt-4${
+  let classNames = `nav d-flex d-md-none mb-4 mt-4${
     isFixed ? ' sticky-top b-shadow' : ''
   }`
 
-  let classes_md = `nav-md d-none d-md-flex justify-content-around${
+  let classNames_md = `nav-md d-none d-md-flex justify-content-around${
     isFixed_md ? ' sticky-top py-3 b-shadow' : ''
   }`
 
   return (
     <>
-      <nav className={classes_md}>
+      <nav className={classNames_md}>
         <NavLinks />
       </nav>
 
-      <nav className={classes} ref={clickOut}>
+      <nav className={classNames} ref={clickOut}>
         <input
           type='checkbox'
           checked={navIsOpen}

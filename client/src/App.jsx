@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import Home from './components/pages/Home'
-import Blogs from './components/pages/Blogs'
+import Blog from './components/pages/Blog'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
@@ -18,8 +18,11 @@ import ModalSwitch from './components/common/ModalSwitch'
 
 const App = () => {
   useEffect(() => {
+    if (localStorage.token) {
+      // setAuthToken(localStorage.token);
+    }
     if (window.location.search) {
-      const query = queryString.parse(window.location.search)
+      // const query = queryString.parse(window.location.search)
     }
   }, [])
   return (
@@ -28,10 +31,10 @@ const App = () => {
       <Router>
         <Header />
         <Navbar />
-        <hr />
+        {/* <hr /> */}
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/blogs' component={Blogs} />
+          <Route exact path='/blog' component={Blog} />
           <Route exact path='/about' component={About} />
           <Route exact path='/contact' component={Contact} />
 

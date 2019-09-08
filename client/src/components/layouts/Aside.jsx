@@ -5,7 +5,11 @@ import OtherPost from '../common/HomeAside-OtherPost'
 import { connect } from 'react-redux'
 import { getRandomPostsA } from '../../_actions/postActions'
 
-const HomeAside = ({ getRandomPostsA, randomPostsA }) => {
+const HomeAside = ({
+  getRandomPostsA,
+  randomPostsA,
+  subscribeSectionClass
+}) => {
   useEffect(() => {
     getRandomPostsA()
 
@@ -15,7 +19,7 @@ const HomeAside = ({ getRandomPostsA, randomPostsA }) => {
   return (
     <aside className='col-sm-12 col-lg-4 d-flex-row order-2 ml-xl-5'>
       <center>
-        <Subscribe />
+        <Subscribe classNames={subscribeSectionClass} />
       </center>
 
       <div className='about d-none d-lg-block'>

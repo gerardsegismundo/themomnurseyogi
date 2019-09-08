@@ -5,14 +5,18 @@ import FacebookIcon from './svg/FacebookIcon'
 import GoogleIcon from './svg/GoogleIcon'
 import CloseIcon from './svg/CloseIcon'
 
-const Modal = ({ setIsOpen, onModalClose }) => {
+const Modal = ({ setIsModalOpen, onModalClose }) => {
   const modalRef = useRef()
   useOutsideClick(modalRef, onModalClose)
 
   return (
     <>
-      <div className={`my-modal__overlay${setIsOpen ? ' d-flex' : ' d-none'}`}>
-        <div className={`my-modal${setIsOpen ? ' is-open' : ' is-closed'}`}>
+      <div
+        className={`my-modal__overlay${setIsModalOpen ? ' d-flex' : ' d-none'}`}
+      >
+        <div
+          className={`my-modal${setIsModalOpen ? ' is-open' : ' is-closed'}`}
+        >
           <div
             className='my-modal__content p-3  d-flex align-items-center justify-content-center'
             ref={modalRef}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Modal from './Modal'
 
 const ModalSwitch = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     document.addEventListener('click', handleClick)
@@ -18,13 +18,13 @@ const ModalSwitch = () => {
 
   const onModalOpen = () => {
     document.body.style.overflow = 'hidden'
-    setIsOpen(true)
+    setIsModalOpen(true)
   }
 
   const onModalClose = () => {
     document.body.style.overflow = 'initial'
     document.body.style.overflowX = 'hidden'
-    setIsOpen(false)
+    setIsModalOpen(false)
   }
 
   const handleClick = e => {
@@ -35,11 +35,15 @@ const ModalSwitch = () => {
 
   // Close modal on escape
   const escFunction = e => {
-    if (isOpen && e.key === 'Escape') onModalClose()
+    if (isModalOpen && e.key === 'Escape') onModalClose()
   }
 
   return (
-    <>{isOpen && <Modal setIsOpen={setIsOpen} onModalClose={onModalClose} />}</>
+    <>
+      {isModalOpen && (
+        <Modal setIsModalOpen={setIsModalOpen} onModalClose={onModalClose} />
+      )}
+    </>
   )
 }
 
