@@ -3,7 +3,8 @@ import SocialLinks from '../common/SocialLinks'
 
 const ContactContent = () => {
   return (
-    <div className='contact-section col'>
+    <div className='contact-section col order-3 order-lg-1'>
+      <hr className='d-block my-5 d-lg-none wide' />
       <h2 className='contact-section__title'># Contact</h2>
       <p className='contact-section__body'>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
@@ -20,7 +21,6 @@ const ContactContent = () => {
           name=''
           className='form-control'
           placeholder='Message'
-          id=''
           cols='30'
           rows='10'
         ></textarea>

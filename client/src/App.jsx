@@ -8,6 +8,9 @@ import Blog from './components/pages/Blog'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
+
+import Admin from './components/admin/pages/dashboard'
+
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
@@ -25,19 +28,19 @@ const App = () => {
       // const query = queryString.parse(window.location.search)
     }
   }, [])
+
   return (
     <>
       <ModalSwitch />
       <Router>
         <Header />
         <Navbar />
-        {/* <hr /> */}
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/blog' component={Blog} />
           <Route exact path='/about' component={About} />
           <Route exact path='/contact' component={Contact} />
-
+          <Route exact path='/admin-dashboard' component={Admin} />
           <Route
             exact
             render={props => <Post key={props.match.params.id} {...props} />}

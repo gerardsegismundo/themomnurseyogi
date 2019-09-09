@@ -2,12 +2,19 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import SocialLinks from '../common/SocialLinks'
-import { useOutsideClick } from '../../helpers/func'
+import { useOutsideClick, displayNoneOnAdmin } from '../../helpers/func'
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false)
   const [isFixed_md, setIsFixed_md] = useState(false)
   const [navIsOpen, setNavIsOpen] = useState(false)
+
+  const nav_sm = useRef()
+  const nav_md = useRef()
+
+  // Removes display of navbar on admin page.
+  displayNoneOnAdmin(nav_sm)
+  displayNoneOnAdmin(nav_md)
 
   // Makes small nav stick on top on scroll
   useEffect(() => {
@@ -17,16 +24,15 @@ const Navbar = () => {
     }
 
     window.addEventListener('scroll', handleScroll)
+
     return () => window.removeEventListener('scroll', handleScroll)
     // eslint-disable-next-line
   }, [])
 
-  const clickOut = useRef()
-  // Close small nav on outside click close
-  useOutsideClick(clickOut, () => {
-    navIsOpen && setNavIsOpen(false)
-  })
+  // Close small nav on outside click closes
+  useOutsideClick(nav_sm, () => navIsOpen && setNavIsOpen(false))
 
+  // Navigation Links
   const NavLinks = () => (
     <>
       <NavLink exact to='/' onClick={() => setNavIsOpen(false)}>
@@ -42,25 +48,31 @@ const Navbar = () => {
         contact
       </NavLink>
 
+      <span className='d-md-none' href='' onClick={() => setNavIsOpen(false)}>
+        search
+      </span>
+
       <SocialLinks classNames='nav__social-links d-flex d-md-none' />
     </>
   )
 
-  let classNames = `nav d-flex d-md-none mb-4 mt-4${
+  // Small screen nav classes
+  let classNames_sm = `nav d-flex d-md-none mb-4 mt-4${
     isFixed ? ' sticky-top b-shadow' : ''
   }`
 
+  // Medium to large screen nav classes
   let classNames_md = `nav-md d-none d-md-flex justify-content-around${
     isFixed_md ? ' sticky-top py-3 b-shadow' : ''
   }`
 
   return (
     <>
-      <nav className={classNames_md}>
+      <nav className={classNames_md} ref={nav_md}>
         <NavLinks />
       </nav>
 
-      <nav className={classNames} ref={clickOut}>
+      <nav className={classNames_sm} ref={nav_sm}>
         <input
           type='checkbox'
           checked={navIsOpen}

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 
 const setAuthToken = token => {
@@ -42,7 +41,18 @@ const useOutsideClick = (ref, callback) => {
   })
 }
 
+// @issue Causes error on camel case so i used pascal case instead.
+const DisplayNoneOnAdmin = ref =>
+  useEffect(() => {
+    if (window.location.href.includes('admin')) {
+      ref && ref.current.classList.add('d-none-important')
+    }
+    // eslint-disable-next-line
+  }, [])
+
 export {
+  // @issue hackfix
+  DisplayNoneOnAdmin as displayNoneOnAdmin,
   getPostLink,
   formatDate,
   renderHashtags,

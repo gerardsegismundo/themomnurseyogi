@@ -43,3 +43,8 @@
     clear: both;
   }
 }
+
+@mixin page-title-font {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 5rem;
+}

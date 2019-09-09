@@ -2,9 +2,10 @@
 @import 'abstracts/mixins';
 
 @import 'base/base';
-@import 'base/modifybootstrap.scss';
+@import 'base/modifybootstrap';
 
 @import 'pages/home';
+@import 'pages/about';
 @import 'pages/post';
 @import 'pages/contact';
 

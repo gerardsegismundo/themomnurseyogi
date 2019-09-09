@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import SocialLinks from '../common/SocialLinks'
 import FieldSet from '../common/Header/Fieldset'
+import { displayNoneOnAdmin } from '../../helpers/func'
 
 const Header = () => {
+  // Removes display of header on admin dashboard.
+  const header = useRef()
+  displayNoneOnAdmin(header)
+
+  // ClassNames for SocailLink component.
   const socialLinksClassNames =
     'header__social-links col-lg-2 col-md-3 col-sm-4 col-xs-2 d-none d-md-flex justify-content-start mx-2'
 
   return (
-    <header className='header container-fluid'>
+    <header className='header container-fluid' ref={header}>
       <div className='row mt-md-4 px-xl-5 px-lg-4 px-md-3 mx-xl-5 mx-lg-4'>
         <SocialLinks classNames={socialLinksClassNames} />
         <FieldSet />

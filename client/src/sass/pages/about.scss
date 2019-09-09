@@ -1,0 +1,6 @@
+.about {
+  &__title {
+    @include page-title-font;
+    text-align: center;
+  }
+}
