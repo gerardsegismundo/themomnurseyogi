@@ -8,16 +8,17 @@ const Post = model(
       type: String,
       required: true
     },
-    date: {
-      type: Date,
-      default: Date.now
+    body: {
+      type: String,
+      required: true
     },
+    hashtags: Array,
     imgURL: {
       type: String,
       required: true
     },
-    body: {
-      type: String,
+    date: {
+      type: Date,
       required: true
     }
   })

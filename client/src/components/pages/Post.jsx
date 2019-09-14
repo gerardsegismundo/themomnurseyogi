@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getPost, getPostDb } from '../../_actions/postActions'
+import { getPost, getPostDb } from '../../redux/post/post.actions'
 
 import { renderHashtags, formatDate } from '../../helpers/func'
 

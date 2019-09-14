@@ -3,7 +3,7 @@ import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
 import OtherPost from '../common/HomeAside-OtherPost'
 import { connect } from 'react-redux'
-import { getRandomPostsA } from '../../_actions/postActions'
+import { getRandomPostsA } from '../../redux/post/post.actions'
 
 const HomeAside = ({
   getRandomPostsA,

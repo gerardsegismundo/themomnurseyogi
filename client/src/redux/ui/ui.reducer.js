@@ -1,10 +1,10 @@
-import { CLOSE_SEARCH, TOGGLE_SEARCH } from '../_actions/types'
+import { CLOSE_SEARCH, TOGGLE_SEARCH } from './ui.types'
 
 const initialState = {
   searchbarIsActive: false
 }
 
-export default (state = initialState, { type, payload }) => {
+const uiReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case TOGGLE_SEARCH:
       return {
@@ -21,3 +21,5 @@ export default (state = initialState, { type, payload }) => {
       return state
   }
 }
+
+export default uiReducer

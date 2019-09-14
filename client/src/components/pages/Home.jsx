@@ -4,7 +4,7 @@ import Article from '../layouts/HomeArticle'
 import Aside from '../layouts/Aside'
 
 import { connect } from 'react-redux'
-import { getRecentPosts } from '../../_actions/postActions'
+import { getRecentPosts } from '../../redux/post/post.actions'
 
 const Home = ({ getRecentPosts }) => {
   useEffect(() => {

@@ -7,7 +7,7 @@ import {
   GET_POSTS,
   SEARCH_POST,
   CLEAR_SEARCH
-} from '../_actions/types'
+} from './post.types'
 
 const initialState = {
   posts: null,

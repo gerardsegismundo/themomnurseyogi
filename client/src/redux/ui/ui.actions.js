@@ -1,4 +1,4 @@
-import { CLOSE_SEARCH, TOGGLE_SEARCH } from './types'
+import { CLOSE_SEARCH, TOGGLE_SEARCH } from './ui.types'
 
 export const toggleSearch = payload => dispatch => {
   dispatch({ type: TOGGLE_SEARCH, payload })

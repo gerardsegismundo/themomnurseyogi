@@ -16,6 +16,35 @@ router.get('/recent', async (req, res) => {
   res.json(posts)
 })
 
+// @route POST /
+// @desc  Add post
+router.post('/', async (req, res) => {
+  const { title, imgURL, body, hashtags } = req.body
+
+  // const settings = {
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric'
+  // }
+
+  const date = new Date()
+  // const newDate = new Date(today).toLocaleDateString('en-US', settings)
+
+  // // console.log(date)
+
+  const newPost = new Post({
+    title,
+    imgURL,
+    body,
+    hashtags,
+    date
+  })
+
+  await newPost.save()
+
+  res.json(newPost)
+})
+
 // @route GET /:id
 // @desc  Get post by id
 router.get('/:id', async (req, res) => {

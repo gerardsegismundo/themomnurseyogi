@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react'
 import PostItem from '../../common/Header/PostItem'
 
 import { connect } from 'react-redux'
-import { searchPost, clearSearch } from '../../../_actions/postActions'
+import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {

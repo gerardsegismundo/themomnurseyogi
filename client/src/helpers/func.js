@@ -41,21 +41,10 @@ const useOutsideClick = (ref, callback) => {
   })
 }
 
-// @issue Causes error on camel case so i used pascal case instead.
-const DisplayNoneOnAdmin = ref =>
-  useEffect(() => {
-    if (window.location.href.includes('admin')) {
-      ref && ref.current.classList.add('d-none-important')
-    }
-    // eslint-disable-next-line
-  }, [])
-
 export {
-  // @issue hackfix
-  DisplayNoneOnAdmin as displayNoneOnAdmin,
   getPostLink,
   formatDate,
+  setAuthToken,
   renderHashtags,
-  useOutsideClick,
-  setAuthToken
+  useOutsideClick
 }

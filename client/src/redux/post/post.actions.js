@@ -9,7 +9,7 @@ import {
   GET_RANDOM_POSTS_A,
   GET_RANDOM_POSTS_B,
   CLEAR_SEARCH
-} from './types'
+} from './post.types'
 
 export const getPost = id => dispatch => {
   dispatch({

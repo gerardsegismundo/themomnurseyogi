@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-// import queryString from 'query-string'
 
 import Home from './components/pages/Home'
 import Blog from './components/pages/Blog'
@@ -16,45 +14,43 @@ import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
 import ModalSwitch from './components/common/ModalSwitch'
 
-// import { connect } from 'react-redux'
-// import { fetchUser } from './_actions/authActions'
-
 const App = () => {
-  useEffect(() => {
-    if (localStorage.token) {
-      // setAuthToken(localStorage.token);
-    }
-    if (window.location.search) {
-      // const query = queryString.parse(window.location.search)
-    }
-  }, [])
+  const AdminDashboard = (
+    <Switch>
+      <Route exact path='/admin-dashboard' component={Admin} />
+    </Switch>
+  )
+
+  const ClientDashboard = (
+    <>
+      <Header />
+      <Navbar />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/blog' component={Blog} />
+        <Route exact path='/about' component={About} />
+        <Route exact path='/contact' component={Contact} />
+
+        <Route
+          exact
+          render={props => <Post key={props.match.params.id} {...props} />}
+          path='/post/:id'
+        />
+      </Switch>
+      <Footer />
+    </>
+  )
 
   return (
     <>
       <ModalSwitch />
       <Router>
-        <Header />
-        <Navbar />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/blog' component={Blog} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/contact' component={Contact} />
-          <Route exact path='/admin-dashboard' component={Admin} />
-          <Route
-            exact
-            render={props => <Post key={props.match.params.id} {...props} />}
-            path='/post/:id'
-          />
-        </Switch>
-        <Footer />
+        {window.location.href.includes('admin')
+          ? AdminDashboard
+          : ClientDashboard}
       </Router>
     </>
   )
 }
 
 export default App
-//  connect(
-//   null,
-//   { fetchUser }
-// )(App)

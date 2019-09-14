@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const ButtonGroup = ({ auth }) => {
-  console.log(auth)
+const ButtonGroup = ({}) => {
   const renderContent = () => {
     switch (auth) {
       case null:
@@ -27,8 +26,4 @@ const ButtonGroup = ({ auth }) => {
   return <>{renderContent()}</>
 }
 
-const mapStateToProps = ({ auth }) => ({
-  auth
-})
-
-export default connect(mapStateToProps)(ButtonGroup)
+export default connect()(ButtonGroup)

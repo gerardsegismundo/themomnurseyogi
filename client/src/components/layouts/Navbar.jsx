@@ -2,19 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import SocialLinks from '../common/SocialLinks'
-import { useOutsideClick, displayNoneOnAdmin } from '../../helpers/func'
+import { useOutsideClick } from '../../helpers/func'
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false)
   const [isFixed_md, setIsFixed_md] = useState(false)
   const [navIsOpen, setNavIsOpen] = useState(false)
-
-  const nav_sm = useRef()
-  const nav_md = useRef()
-
-  // Removes display of navbar on admin page.
-  displayNoneOnAdmin(nav_sm)
-  displayNoneOnAdmin(nav_md)
 
   // Makes small nav stick on top on scroll
   useEffect(() => {
@@ -30,6 +23,7 @@ const Navbar = () => {
   }, [])
 
   // Close small nav on outside click closes
+  const nav_sm = useRef()
   useOutsideClick(nav_sm, () => navIsOpen && setNavIsOpen(false))
 
   // Navigation Links
@@ -68,7 +62,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={classNames_md} ref={nav_md}>
+      <nav className={classNames_md}>
         <NavLinks />
       </nav>
 
