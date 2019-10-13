@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
@@ -12,16 +12,39 @@ import Admin from './components/admin/pages/dashboard'
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
-import ModalSwitch from './components/common/ModalSwitch'
+import Modal from './components/common/Modal'
 
-const App = () => {
+import { connect } from 'react-redux'
+import { setCurrentUser } from './redux/user/user.actions'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+
+const App = ({ setCurrentUser }) => {
+  useEffect(() => {
+    let unsubuscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          })
+        })
+      } else {
+        setCurrentUser(userAuth)
+      }
+    })
+    return () => unsubuscribeFromAuth()
+    // eslint-disable-next-line
+  }, [])
+
   const AdminDashboard = (
     <Switch>
       <Route exact path='/admin-dashboard' component={Admin} />
     </Switch>
   )
 
-  const ClientDashboard = (
+  const Client = (
     <>
       <Header />
       <Navbar />
@@ -43,14 +66,15 @@ const App = () => {
 
   return (
     <>
-      <ModalSwitch />
+      <Modal />
       <Router>
-        {window.location.href.includes('admin')
-          ? AdminDashboard
-          : ClientDashboard}
+        {window.location.href.includes('admin') ? AdminDashboard : Client}
       </Router>
     </>
   )
 }
 
-export default App
+export default connect(
+  null,
+  { setCurrentUser }
+)(App)

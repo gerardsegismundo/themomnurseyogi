@@ -1,3 +1,5 @@
 export const CLOSE_BURGER = 'CLOSE_BURGER'
 export const TOGGLE_SEARCH = 'TOGGLE_SEARCH'
 export const CLOSE_SEARCH = 'CLOSE_SEARCH'
+export const OPEN_MODAL = 'OPEN_MODAL'
+export const CLOSE_MODAL = 'CLOSE_MODAL'

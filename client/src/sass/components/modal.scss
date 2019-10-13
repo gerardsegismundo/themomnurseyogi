@@ -1,5 +1,12 @@
 .my-modal {
   position: absolute;
+  transition: 0.2s;
+  transform: scale(0.65);
+
+  &.is-open {
+    transition-delay: 0.1s;
+    transform: scale(1);
+  }
 
   &__overlay {
     position: absolute;
@@ -10,6 +17,7 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
+    display: flex;
   }
 
   &__content {

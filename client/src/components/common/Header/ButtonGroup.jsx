@@ -1,29 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { auth } from '../../../firebase/firebase.utils'
+import { openModal } from '../../../redux/ui/ui.actions'
 
-const ButtonGroup = ({}) => {
-  const renderContent = () => {
-    switch (auth) {
-      case null:
-        return
-      case false:
-        return (
-          <button
-            id='sign-in'
-            className='btn--signup btn btn-lg btn-outline-dark'
-          >
-            Sign in
-          </button>
-        )
-      default:
-        return (
-          <li>
-            <a href='/api/logout'>Signout</a>
-          </li>
-        )
-    }
-  }
-  return <>{renderContent()}</>
+const ButtonGroup = ({ currentUser, openModal }) => {
+  return currentUser ? (
+    <button
+      id='sign-out'
+      onClick={() => auth.signOut()}
+      className='btn--signup btn btn-lg btn-outline-dark'
+    >
+      Sign Out
+    </button>
+  ) : (
+    <button
+      id='sign-in'
+      onClick={openModal}
+      className='btn--signup btn btn-lg btn-outline-dark'
+    >
+      Sign in
+    </button>
+  )
 }
 
-export default connect()(ButtonGroup)
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(
+  mapStateToProps,
+  { openModal }
+)(ButtonGroup)

@@ -1,7 +1,13 @@
-import { CLOSE_SEARCH, TOGGLE_SEARCH } from './ui.types'
+import {
+  CLOSE_SEARCH,
+  TOGGLE_SEARCH,
+  OPEN_MODAL,
+  CLOSE_MODAL
+} from './ui.types'
 
 const initialState = {
-  searchbarIsActive: false
+  searchbarIsActive: false,
+  modalIsOpen: false
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
@@ -16,7 +22,16 @@ const uiReducer = (state = initialState, { type, payload }) => {
         ...state,
         seachIsOpen: false
       }
-
+    case OPEN_MODAL:
+      return {
+        ...state,
+        modalIsOpen: true
+      }
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modalIsOpen: false
+      }
     default:
       return state
   }

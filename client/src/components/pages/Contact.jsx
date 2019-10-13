@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <>
       <figure className='contact__cover-img'></figure>
-      <div class='contact container'>
+      <div className='contact container'>
         <div className='row'>
           <ContactSection />
           <Aside subscribeSectionClass='aside-contact' />

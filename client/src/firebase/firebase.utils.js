@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { FIREBASE_API_KEY } from '../config/de/keys'
+import { FIREBASE_API_KEY } from '../config/dev.keys'
 
 const config = {
   apiKey: FIREBASE_API_KEY,
@@ -15,13 +15,14 @@ const config = {
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return
+
   const userRef = firestore.doc(`users/${userAuth.uid}`)
 
-  const snapShot = await userRef.get()
+  const snapShot = await userRef.get() // <--- ERROR HERE
 
   if (!snapShot.exists) {
-    const { dispalyName, email } = userAuth
-    const createdAt = newDate()
+    const { displayName, email } = userAuth
+    const createdAt = new Date()
 
     try {
       await userRef.set({
@@ -38,10 +39,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef
 }
 
-// Initialize Firebase
 firebase.initializeApp(config)
-// Initialize Analytics
-firebase.analytics()
 
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
