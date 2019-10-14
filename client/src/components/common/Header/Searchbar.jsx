@@ -13,8 +13,10 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
 
   // Close search bar on click outside.
   useOutsideClick(clickOut, () => {
-    searchbarIsActive && setSearchbarIsAcive(false)
-    clearSearch()
+    if (searchbarIsActive) {
+      setSearchbarIsAcive(false)
+      clearSearch()
+    }
   })
 
   const searchInput = useRef()

@@ -3,15 +3,27 @@ import { connect } from 'react-redux'
 import { auth } from '../../../firebase/firebase.utils'
 import { openModal } from '../../../redux/ui/ui.actions'
 
+import firebase from 'firebase'
+
 const ButtonGroup = ({ currentUser, openModal }) => {
   return currentUser ? (
-    <button
-      id='sign-out'
-      onClick={() => auth.signOut()}
-      className='btn--signup btn btn-lg btn-outline-dark'
-    >
-      Sign Out
-    </button>
+    <>
+      <img
+        className='photourl'
+        src={firebase.auth().currentUser.photoURL}
+        alt=''
+        onClick={() => console.log('CLIKCED')}
+      />
+
+      {/* 
+      <button
+        id='sign-out'
+        onClick={() => auth.signOut()}
+        className='btn--signup btn btn-lg btn-outline-dark'
+      >
+        Sign Out
+      </button> */}
+    </>
   ) : (
     <button
       id='sign-in'
