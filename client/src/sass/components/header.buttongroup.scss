@@ -1,0 +1,95 @@
+.button-group {
+  display: flex-row;
+  height: 100%;
+
+  align-content: center;
+
+  .photourl {
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    margin: auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+
+    &:hover {
+      cursor: pointer;
+      transition: 0.1s;
+      box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .menu {
+    transform: translateX(-26rem);
+
+    &__list {
+      width: initial;
+      max-width: 32rem;
+      display: block;
+      border: 1px solid rgba(46, 46, 46, 0.065);
+      border-top: none;
+      border-bottom: 1.2px solid rgba(46, 46, 46, 0.13);
+      border-radius: 3px;
+      margin-top: 1.3rem;
+      background-color: white;
+      box-shadow: 4px 4px 10px rgba(46, 46, 46, 0.0975);
+      position: absolute;
+      line-height: 3.5rem;
+      z-index: 1;
+      overflow: hidden;
+      padding: 1rem 2rem;
+
+      &--item {
+        &:first-of-type {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          padding-bottom: 1rem;
+          margin-bottom: 0.4rem;
+        }
+
+        &.signout {
+          text-align: right;
+          color: rgba(0, 0, 0, 0.4);
+          font-weight: 400;
+          line-height: 3rem;
+
+          &:hover {
+            cursor: pointer;
+            color: rgba(0, 0, 0, 0.6);
+          }
+        }
+      }
+    }
+    &__avatar {
+      display: block;
+      overflow: hidden;
+      margin: auto;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+    }
+
+    &__caption {
+      &--displayname {
+        font-weight: 600;
+        overflow-wrap: break-word;
+      }
+
+      &--email {
+        color: rgba(46, 46, 46, 0.4);
+        font-weight: 400;
+        line-height: 3rem;
+        overflow-wrap: break-word;
+      }
+    }
+  }
+
+  .btn {
+    &--signin,
+    &--signup {
+      font-weight: 600;
+      width: 11vw;
+      max-width: 11rem;
+    }
+  }
+}

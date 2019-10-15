@@ -8,18 +8,17 @@ import { useOutsideClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
+  const searchGroup = useRef()
+  const searchInput = useRef()
 
-  const clickOut = useRef()
-
-  // Close search bar on click outside.
-  useOutsideClick(clickOut, () => {
+  // Closes search bar on outside click.
+  useOutsideClick(searchGroup, () => {
     if (searchbarIsActive) {
       setSearchbarIsAcive(false)
       clearSearch()
     }
   })
 
-  const searchInput = useRef()
   const onClearSearch = () => {
     searchInput.current.blur()
     searchInput.current.value = ''
@@ -44,7 +43,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   }`
   return (
     <div className='search-post d-flex-row'>
-      <div ref={clickOut}>
+      <div ref={searchGroup}>
         <button
           className='btn btn-lg btn-txt btn--search'
           onClick={onClickSearch}
