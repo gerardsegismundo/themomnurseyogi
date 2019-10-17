@@ -33,6 +33,7 @@ module.exports = app => {
 
   // Routes
   app.use(authRoute)
+  app.use('/post/api/posts', postRoute) // fix route bug in getPost
   app.use('/api/posts', postRoute)
   app.use('/api/*', notFound)
 }

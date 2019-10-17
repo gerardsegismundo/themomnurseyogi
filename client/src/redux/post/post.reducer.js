@@ -1,9 +1,7 @@
 import {
   GET_RECENT_POSTS,
   GET_POST,
-  GET_POST_DB,
-  GET_RANDOM_POSTS_A,
-  GET_RANDOM_POSTS_B,
+  GET_RANDOM_POSTS,
   GET_POSTS,
   SEARCH_POST,
   CLEAR_SEARCH
@@ -15,20 +13,12 @@ const initialState = {
   searchResult: null,
   recentPosts: null,
   randomPosts: null,
-  randomPostsA: null,
-  randomPostsB: null,
   loading: false
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_POST:
-      return {
-        ...state,
-        loading: false,
-        post: state.posts && state.posts.find(post => post._id === payload)
-      }
-    case GET_POST_DB:
       return {
         ...state,
         loading: false,
@@ -49,20 +39,11 @@ export default (state = initialState, { type, payload }) => {
         posts: payload
       }
 
-    // meantime only
-    case GET_RANDOM_POSTS_A:
+    case GET_RANDOM_POSTS:
       return {
         ...state,
         loading: false,
-        randomPostsA: state.posts
-      }
-
-    // meantime only
-    case GET_RANDOM_POSTS_B:
-      return {
-        ...state,
-        loading: false,
-        randomPostsB: state.posts
+        randomPosts: payload
       }
 
     case SEARCH_POST:

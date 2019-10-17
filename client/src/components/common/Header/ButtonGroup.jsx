@@ -4,8 +4,6 @@ import { auth } from '../../../firebase/firebase.utils'
 import { openModal } from '../../../redux/ui/ui.actions'
 import { useOutsideClick } from '../../../helpers/func'
 
-import firebase from 'firebase'
-
 const ButtonGroup = ({ currentUser, openModal }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const userPopMenu = useRef()
@@ -23,10 +21,10 @@ const ButtonGroup = ({ currentUser, openModal }) => {
   const toggleMenu = () => setMenuIsOpen(!menuIsOpen)
 
   return currentUser ? (
-    <div class='button-group'>
+    <div className='button-group'>
       <img
         className='photourl'
-        src={firebase.auth().currentUser.photoURL}
+        src={auth.currentUser.photoURL}
         alt='user'
         onClick={toggleMenu}
       />
@@ -37,17 +35,15 @@ const ButtonGroup = ({ currentUser, openModal }) => {
             <li className='menu__list--item row'>
               <img
                 className='menu__avatar col-3'
-                src={firebase.auth().currentUser.photoURL}
+                src={auth.currentUser.photoURL}
                 alt='user'
               />
 
               <figcaption className='menu__caption col-9'>
                 <p className='menu__caption--displayname'>
-                  {firebase.auth().currentUser.displayName}
+                  {auth.currentUser.displayName}
                 </p>
-                <p className='menu__caption--email'>
-                  {firebase.auth().currentUser.email}
-                </p>
+                <p className='menu__caption--email'>{auth.currentUser.email}</p>
               </figcaption>
             </li>
 

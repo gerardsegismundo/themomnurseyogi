@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import PostItem from '../../common/Header/PostItem'
 
@@ -7,6 +7,10 @@ import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
+  /*   useEffect(() => {
+    // eslint-disable-next-line
+  }, [searchResult]) */
+
   const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
   const searchGroup = useRef()
   const searchInput = useRef()
@@ -41,6 +45,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   let searchInputClass = `search-post__input ${
     searchbarIsActive ? 'is-active' : ''
   }`
+
   return (
     <div className='search-post d-flex-row'>
       <div ref={searchGroup}>
@@ -63,7 +68,6 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
       {searchResult && searchResult.length > 0 && (
         <div className='search-post__results ml-5'>
           <div className='search-post__results--arrow' />
-
           <ul className='search-post__results--lists' onClick={onClearSearch}>
             {searchResult.map(({ _id, title }) => (
               <PostItem key={_id} title={title} id={_id} />

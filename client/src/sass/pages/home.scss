@@ -92,6 +92,8 @@
 
   aside {
     .other-posts {
+      margin-top: 8rem;
+
       &__title {
         line-height: 2rem;
       }
@@ -115,5 +117,9 @@
         }
       }
     }
+  }
+
+  .ads {
+    margin-top: 8rem;
   }
 }

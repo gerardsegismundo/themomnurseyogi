@@ -9,7 +9,7 @@ const Contact = () => {
       <div className='contact container'>
         <div className='row'>
           <ContactSection />
-          <Aside subscribeSectionClass='aside-contact' />
+          <Aside subscribeSectionClass='aside-contact' showAsideItems={false} />
         </div>
       </div>
     </>

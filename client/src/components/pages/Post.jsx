@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getPost, getPostDb } from '../../redux/post/post.actions'
+import { getPost } from '../../redux/post/post.actions'
 
 import { renderHashtags, formatDate } from '../../helpers/func'
 
-const Post = ({ location, getPost, getPostDb, post, posts }) => {
+const Post = ({ location, getPost, post }) => {
   const postId = location.pathname
     .split('/')[2]
     .split('-')
     .slice(-1)[0]
 
   useEffect(() => {
-    posts ? getPost(postId) : getPostDb(postId)
+    getPost(postId)
 
     // eslint-disable-next-line
   }, [])
@@ -45,5 +45,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPost, getPostDb }
+  { getPost }
 )(Post)

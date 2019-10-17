@@ -1,71 +1,102 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 import {
   GET_RECENT_POSTS,
   GET_POST,
-  GET_POSTS,
   SEARCH_POST,
-  GET_POST_DB,
-  GET_RANDOM_POSTS_A,
-  GET_RANDOM_POSTS_B,
+  GET_RANDOM_POSTS,
   CLEAR_SEARCH
 } from './post.types'
 
-export const getPost = id => dispatch => {
-  dispatch({
-    type: GET_POST,
-    payload: id
-  })
-}
+const Posts = (() => {
+  let postsCache = {}
 
-export const getPostDb = id => async dispatch => {
-  const res = await axios.get(`/api/posts/${id}`)
+  const getPostsCache = async () => {
+    if (_.isEmpty(postsCache)) {
+      const res = await axios.get('api/posts')
+      postsCache = res.data
+    }
 
-  dispatch({
-    type: GET_POST_DB,
-    payload: res.data[0]
-  })
-}
+    return postsCache
+  }
 
-export const getRandomPostsA = () => async dispatch => {
-  dispatch({
-    type: GET_RANDOM_POSTS_A
-  })
-}
+  const random = () => async dispatch => {
+    const posts = await getPostsCache()
+    const threeRandomPosts = [...posts]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3)
 
-export const getRandomPostsB = () => async dispatch => {
-  dispatch({
-    type: GET_RANDOM_POSTS_B
-  })
-}
+    dispatch({
+      type: GET_RANDOM_POSTS,
+      payload: threeRandomPosts
+    })
+  }
 
-export const getPosts = () => async dispatch => {
-  const res = await axios.get(`/api/posts/recent`)
-  dispatch({
-    type: GET_POSTS,
-    payload: res.data
-  })
-}
+  const recent = () => async dispatch => {
+    const posts = await getPostsCache()
+    const threeRecentPosts = [...posts]
+      .sort((a, b) => a.date - b.date)
+      .slice(0, 3)
+      .reverse()
 
-export const getRecentPosts = () => async dispatch => {
-  const res = await axios.get(`/api/posts/recent`)
+    dispatch({
+      type: GET_RECENT_POSTS,
+      payload: threeRecentPosts
+    })
+  }
 
-  dispatch({
-    type: GET_RECENT_POSTS,
-    payload: res.data
-  })
-}
+  const findById = id => async dispatch => {
+    const posts = await getPostsCache()
+    const post = posts.find(post => post._id === id)
 
-export const searchPost = text => async dispatch => {
-  const res = await axios.post('/api/posts/search-post', {
-    text
-  })
+    dispatch({
+      type: GET_POST,
+      payload: post
+    })
+  }
 
-  dispatch({
-    type: SEARCH_POST,
-    payload: res.data
-  })
-}
+  const search = text => async dispatch => {
+    if (text.length === 0 || text === undefined || typeof text !== 'string') {
+      return dispatch({
+        type: SEARCH_POST,
+        payload: null
+      })
+    }
+
+    const posts = await getPostsCache()
+
+    const postTitles = posts.map(post => {
+      return {
+        _id: post._id,
+        title: post.title
+      }
+    })
+
+    const result = postTitles.filter(post => {
+      const regex = new RegExp(`${text}`, 'gi')
+
+      return post.title.match(regex)
+    })
+
+    dispatch({
+      type: SEARCH_POST,
+      payload: result
+    })
+  }
+
+  return {
+    random,
+    findById,
+    recent,
+    search
+  }
+})()
+
+export const getRandomPosts = Posts.random
+export const getPost = Posts.findById
+export const getRecentPosts = Posts.recent
+export const searchPost = Posts.search
 
 export const clearSearch = () => async dispatch => {
   dispatch({

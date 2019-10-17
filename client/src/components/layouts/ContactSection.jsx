@@ -1,7 +1,9 @@
 import React from 'react'
 import SocialLinks from '../common/SocialLinks'
+import { auth } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
 
-const ContactContent = () => {
+const ContactContent = ({ currentUser }) => {
   return (
     <div className='contact-section col order-3 order-lg-1'>
       <hr className='d-block my-5 d-lg-none wide' />
@@ -13,9 +15,21 @@ const ContactContent = () => {
       </p>
       <SocialLinks classNames='contact-section__social-links' />
       <form className='contact-section__form'>
-        <input type='text' className='form-control' placeholder='Name' />
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Name'
+          value={currentUser ? auth.currentUser.displayName : ''}
+          disabled
+        />
 
-        <input type='text' className='form-control' placeholder='Email' />
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Email'
+          value={currentUser ? auth.currentUser.email : ''}
+          disabled
+        />
 
         <textarea
           name=''
@@ -23,12 +37,25 @@ const ContactContent = () => {
           placeholder='Message'
           cols='30'
           rows='10'
+          disabled={currentUser ? false : true}
         ></textarea>
 
-        <button className='btn-primary btn-xl'>Send</button>
+        <button
+          className='btn-primary btn-xl'
+          disabled={currentUser ? false : true}
+        >
+          Send
+        </button>
       </form>
     </div>
   )
 }
 
-export default ContactContent
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(ContactContent)
