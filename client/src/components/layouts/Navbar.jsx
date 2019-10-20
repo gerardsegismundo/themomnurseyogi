@@ -32,8 +32,8 @@ const Navbar = () => {
       <NavLink exact to='/' onClick={() => setNavIsOpen(false)}>
         home
       </NavLink>
-      <NavLink exact to='/blog' onClick={() => setNavIsOpen(false)}>
-        blog
+      <NavLink exact to='/posts' onClick={() => setNavIsOpen(false)}>
+        posts
       </NavLink>
       <NavLink exact to='/about' onClick={() => setNavIsOpen(false)}>
         about

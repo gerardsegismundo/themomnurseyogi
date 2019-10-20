@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
-import Blog from './components/pages/Blog'
+import Posts from './components/pages/Posts'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
@@ -50,7 +50,7 @@ const App = ({ setCurrentUser }) => {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/blog' component={Blog} />
+        <Route exact path='/posts' component={Posts} />
         <Route exact path='/about' component={About} />
         <Route exact path='/contact' component={Contact} />
 

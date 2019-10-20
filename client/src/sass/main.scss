@@ -1,18 +1,18 @@
-@import 'abstracts/variables';
 @import 'abstracts/mixins';
+@import 'abstracts/variables';
 
 @import 'base/base';
 @import 'base/modifybootstrap';
 
-@import 'pages/home';
 @import 'pages/about';
-@import 'pages/post';
 @import 'pages/contact';
+@import 'pages/home';
+@import 'pages/post';
 
-@import 'components/navbar';
-@import 'components/header';
+@import 'components/comments.scss';
 @import 'components/footer';
-
-@import 'components/modal';
-@import 'components/subscribe';
 @import 'components/header.buttongroup';
+@import 'components/header';
+@import 'components/modal';
+@import 'components/navbar';
+@import 'components/subscribe';

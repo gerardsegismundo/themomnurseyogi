@@ -29,10 +29,7 @@
 .about {
   margin-top: 10rem;
   margin-bottom: 3rem;
-  &__name {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-  }
+
   &__name {
     margin-bottom: 2rem;
     font-size: 2.5rem;
@@ -41,8 +38,6 @@
   }
 
   &__content {
-    color: $light-font;
-    font-weight: 600;
-    line-height: 3rem;
+    @include standard-font;
   }
 }

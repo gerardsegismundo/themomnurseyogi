@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 
 import PostItem from '../../common/Header/PostItem'
 
@@ -7,10 +7,6 @@ import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
-  /*   useEffect(() => {
-    // eslint-disable-next-line
-  }, [searchResult]) */
-
   const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
   const searchGroup = useRef()
   const searchInput = useRef()

@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react'
 
-const getPostLink = (title, id) => {
-  return `/post/${title
-    .split(' ')
-    .join('-')
-    .toLowerCase()}-${id}`
-}
-
 const formatDate = date => {
   const settings = {
     year: 'numeric',
@@ -15,6 +8,20 @@ const formatDate = date => {
   }
 
   return new Date(date).toLocaleDateString('en-US', settings)
+}
+
+const getPostId = locationPath => {
+  return locationPath
+    .split('/')[2]
+    .split('-')
+    .slice(-1)[0]
+}
+
+const getPostLink = (title, id) => {
+  return `/post/${title
+    .split(' ')
+    .join('-')
+    .toLowerCase()}-${id}`
 }
 
 const renderHashtags = (hashtags, title) => {
@@ -35,4 +42,4 @@ const useOutsideClick = (ref, callback) => {
   })
 }
 
-export { getPostLink, formatDate, renderHashtags, useOutsideClick }
+export { formatDate, getPostId, getPostLink, renderHashtags, useOutsideClick }

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SocialLinks from '../common/SocialLinks'
 import { auth } from '../../firebase/firebase.utils'
+import { openModal } from '../../redux/ui/ui.actions'
 import { connect } from 'react-redux'
 
-const ContactContent = ({ currentUser }) => {
+const ContactSection = ({ currentUser, openModal }) => {
+  const [message, setMessage] = useState('')
+
   return (
     <div className='contact-section col order-3 order-lg-1'>
       <hr className='d-block my-5 d-lg-none wide' />
@@ -14,6 +17,7 @@ const ContactContent = ({ currentUser }) => {
         consequuntur deserunt, iure doloremque delectus sint.
       </p>
       <SocialLinks classNames='contact-section__social-links' />
+
       <form className='contact-section__form'>
         <input
           type='text'
@@ -32,7 +36,9 @@ const ContactContent = ({ currentUser }) => {
         />
 
         <textarea
-          name=''
+          name='message'
+          onChange={e => setMessage(e.target.value)}
+          value={message}
           className='form-control'
           placeholder='Message'
           cols='30'
@@ -40,12 +46,22 @@ const ContactContent = ({ currentUser }) => {
           disabled={currentUser ? false : true}
         ></textarea>
 
-        <button
-          className='btn-primary btn-xl'
-          disabled={currentUser ? false : true}
-        >
-          Send
-        </button>
+        {currentUser ? (
+          <button className='btn-primary btn-xl'>Send</button>
+        ) : (
+          <p className='contact-section__form--requiremsg'>
+            You must{' '}
+            <a
+              href='#sign-in-btn'
+              onClick={() => {
+                openModal()
+              }}
+            >
+              sign in
+            </a>{' '}
+            to send a message.
+          </p>
+        )}
       </form>
     </div>
   )
@@ -57,5 +73,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
-)(ContactContent)
+  { openModal }
+)(ContactSection)

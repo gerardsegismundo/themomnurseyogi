@@ -20,7 +20,23 @@ const Post = model(
     date: {
       type: Date,
       required: true
-    }
+    },
+    comments: [
+      {
+        name: {
+          type: String,
+          required: true
+        },
+        comment: {
+          type: String,
+          required: true
+        },
+        date: {
+          type: Date,
+          default: Date.now()
+        }
+      }
+    ]
   })
 )
 
@@ -42,3 +58,4 @@ const validatePost = post => {
 }
 
 exports.validate = validatePost
+exports.Post = Post

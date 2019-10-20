@@ -56,7 +56,7 @@ const ButtonGroup = ({ currentUser, openModal }) => {
     </div>
   ) : (
     <button
-      id='sign-in'
+      id='sign-in-btn'
       onClick={openModal}
       className='btn--signup btn btn-lg btn-outline-dark'
     >

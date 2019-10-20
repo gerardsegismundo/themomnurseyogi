@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { useOutsideClick } from '../../helpers/func'
-
 import { signInWithGoogle } from '../../firebase/firebase.utils'
-
 import FacebookIcon from './svg/FacebookIcon'
 import GoogleIcon from './svg/GoogleIcon'
 import CloseIcon from './svg/CloseIcon'
-
 import { connect } from 'react-redux'
 import { closeModal } from '../.../../../redux/ui/ui.actions'
 
@@ -38,7 +35,8 @@ const Modal = ({ modalIsOpen, closeModal }) => {
 
   return (
     <div
-      style={modalIsOpen ? { zIndex: 1 } : { zIndex: -1 }}
+      id='login-modal'
+      style={modalIsOpen ? { zIndex: '1' } : { zIndex: '-1' }}
       className={`my-modal__overlay${
         modalIsOpen ? ' opacity-1' : ' opacity-0'
       }`}

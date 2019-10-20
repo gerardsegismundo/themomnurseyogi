@@ -3,4 +3,20 @@
     @include page-title-font;
     text-align: center;
   }
+
+  &__hashtags {
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin: 2rem 1rem;
+      @include standard-font;
+      font-size: 2.1rem;
+    }
+  }
+
+  img {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
 }

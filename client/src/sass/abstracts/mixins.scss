@@ -48,3 +48,15 @@
   font-family: 'Shadows Into Light', cursive;
   font-size: 5rem;
 }
+
+@mixin standard-font {
+  color: $light-font;
+  font-weight: 600;
+  line-height: 3rem;
+}
+
+@mixin light-to-dark {
+  cursor: pointer;
+  transition: color ease-in-out 0.2s;
+  color: rgba(46, 46, 46, 0.9);
+}
