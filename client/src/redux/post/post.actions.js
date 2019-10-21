@@ -103,3 +103,9 @@ export const clearSearch = () => async dispatch => {
     type: CLEAR_SEARCH
   })
 }
+
+export const submitReply = payload => async dispatch => {
+  const res = await axios.post('/api/posts/comment', payload)
+
+  console.log(res)
+}

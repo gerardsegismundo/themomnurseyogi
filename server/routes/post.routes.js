@@ -34,12 +34,28 @@ router.post('/', async (req, res) => {
     imgURL,
     body,
     hashtags,
-    date
+    date,
+    comments: []
   })
 
   await newPost.save()
-
   res.json(newPost)
+})
+
+// @route POST /comment
+// @desct add comment
+router.post('/comment', async (req, res) => {
+  const { uid, displayName, photoURL, comment, postId } = req.body
+
+  console.log(comment)
+
+  const addComment = await Post.update(
+    { _id: postId },
+    { $push: { comments: { uid, displayName, photoURL, comment } } }
+  )
+
+  if (!addComment) return res.status(400).send('Adding comment failed')
+  res.status(200).send('Comment added successfully..')
 })
 
 module.exports = router
