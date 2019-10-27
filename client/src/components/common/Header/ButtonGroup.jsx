@@ -1,24 +1,24 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { auth } from '../../../firebase/firebase.utils'
-import { openModal } from '../../../redux/ui/ui.actions'
-import { useOutsideClick } from '../../../helpers/func'
+import {
+  openSignInModal,
+  openUserMenu,
+  closeUserMenu
+} from '../../../redux/ui/ui.actions'
 
-const ButtonGroup = ({ currentUser, openModal }) => {
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const userPopMenu = useRef()
+const ButtonGroup = props => {
+  const {
+    currentUser,
+    userMenuIsOpen,
+    openSignInModal,
+    openUserMenu,
+    closeUserMenu
+  } = props
 
-  // Closes menu on outside click.
-  useOutsideClick(userPopMenu, () => {
-    if (menuIsOpen) setMenuIsOpen(false)
-  })
-
-  const signOut = () => {
-    window.location = '/'
-    auth.signOut()
+  const toggleUserMenu = () => {
+    userMenuIsOpen ? closeUserMenu() : openUserMenu()
   }
-
-  const toggleMenu = () => setMenuIsOpen(!menuIsOpen)
 
   return currentUser ? (
     <div className='button-group'>
@@ -26,38 +26,13 @@ const ButtonGroup = ({ currentUser, openModal }) => {
         className='photourl'
         src={auth.currentUser.photoURL}
         alt='user'
-        onClick={toggleMenu}
+        onClick={toggleUserMenu}
       />
-
-      {menuIsOpen && (
-        <div className='menu' ref={userPopMenu}>
-          <ul className='menu__list'>
-            <li className='menu__list--item row'>
-              <img
-                className='menu__avatar col-3'
-                src={auth.currentUser.photoURL}
-                alt='user'
-              />
-
-              <figcaption className='menu__caption col-9'>
-                <p className='menu__caption--displayname'>
-                  {auth.currentUser.displayName}
-                </p>
-                <p className='menu__caption--email'>{auth.currentUser.email}</p>
-              </figcaption>
-            </li>
-
-            <li className='menu__list--item signout' onClick={signOut}>
-              Sign out
-            </li>
-          </ul>
-        </div>
-      )}
     </div>
   ) : (
     <button
       id='sign-in-btn'
-      onClick={openModal}
+      onClick={openSignInModal}
       className='btn--signup btn btn-lg btn-outline-dark'
     >
       Sign in
@@ -65,11 +40,12 @@ const ButtonGroup = ({ currentUser, openModal }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user, ui }) => ({
+  currentUser: user.currentUser,
+  userMenuIsOpen: ui.userMenuIsOpen
 })
 
 export default connect(
   mapStateToProps,
-  { openModal }
+  { openSignInModal, openUserMenu, closeUserMenu }
 )(ButtonGroup)

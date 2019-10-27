@@ -1,22 +1,20 @@
 import React, { useState, useRef } from 'react'
 
-import PostItem from '../../common/Header/PostItem'
+import SearchResults from '../../common/Header/SearchResults'
 
 import { connect } from 'react-redux'
 import { searchPost, clearSearch } from '../../../redux/post/post.actions'
-import { useOutsideClick } from '../../../helpers/func'
+import { useOutsideAndEscapeClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
   const searchGroup = useRef()
   const searchInput = useRef()
 
-  // Closes search bar on outside click.
-  useOutsideClick(searchGroup, () => {
-    if (searchbarIsActive) {
-      setSearchbarIsAcive(false)
-      clearSearch()
-    }
+  // Close searchbar on outsideClick and esc
+  useOutsideAndEscapeClick(searchGroup, searchbarIsActive, () => {
+    setSearchbarIsAcive(false)
+    onClearSearch()
   })
 
   const onClearSearch = () => {
@@ -25,7 +23,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
     clearSearch()
   }
 
-  const onClickSearch = () => {
+  const toggleSearchIcon = () => {
     setSearchbarIsAcive(!searchbarIsActive)
     document.activeElement.blur()
 
@@ -47,7 +45,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
       <div ref={searchGroup}>
         <button
           className='btn btn-lg btn-txt btn--search'
-          onClick={onClickSearch}
+          onClick={toggleSearchIcon}
         >
           <i className='fa fa-search' aria-hidden='true' />
         </button>
@@ -66,7 +64,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
           <div className='search-post__results--arrow' />
           <ul className='search-post__results--lists' onClick={onClearSearch}>
             {searchResult.map(({ _id, title }) => (
-              <PostItem key={_id} title={title} id={_id} />
+              <SearchResults key={_id} title={title} id={_id} />
             ))}
           </ul>
         </div>

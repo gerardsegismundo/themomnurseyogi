@@ -8,11 +8,13 @@
 @import 'pages/contact';
 @import 'pages/home';
 @import 'pages/post';
+@import 'pages/posts';
 
-@import 'components/comments.scss';
+@import 'components/comments';
 @import 'components/footer';
 @import 'components/header.buttongroup';
 @import 'components/header';
-@import 'components/modal';
+@import 'components/signinmodal';
 @import 'components/navbar';
 @import 'components/subscribe';
+@import 'components/usermenu';

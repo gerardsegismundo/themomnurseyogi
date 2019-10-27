@@ -12,7 +12,7 @@ import Admin from './components/admin/pages/dashboard'
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
-import Modal from './components/common/Modal'
+import SignInModal from './components/common/SignInModal'
 
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
@@ -66,7 +66,7 @@ const App = ({ setCurrentUser }) => {
 
   return (
     <>
-      <Modal />
+      <SignInModal />
       <Router>
         {window.location.href.includes('admin') ? AdminDashboard : Client}
       </Router>

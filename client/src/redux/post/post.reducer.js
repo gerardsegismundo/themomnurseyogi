@@ -1,8 +1,8 @@
 import {
-  GET_RECENT_POSTS,
   GET_POST,
-  GET_RANDOM_POSTS,
   GET_POSTS,
+  GET_RECENT_POSTS,
+  GET_RANDOM_POSTS,
   SEARCH_POST,
   CLEAR_SEARCH
 } from './post.types'
@@ -25,18 +25,19 @@ export default (state = initialState, { type, payload }) => {
         post: payload
       }
 
+    case GET_POSTS: {
+      return {
+        ...state,
+        loading: false,
+        posts: payload
+      }
+    }
+
     case GET_RECENT_POSTS:
       return {
         ...state,
         loading: false,
         recentPosts: payload
-      }
-
-    case GET_POSTS:
-      return {
-        ...state,
-        loading: false,
-        posts: payload
       }
 
     case GET_RANDOM_POSTS:

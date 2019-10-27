@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import SocialLinks from '../common/SocialLinks'
 import { auth } from '../../firebase/firebase.utils'
-import { openModal } from '../../redux/ui/ui.actions'
+import { openSignInModal } from '../../redux/ui/ui.actions'
 import { connect } from 'react-redux'
 
-const ContactSection = ({ currentUser, openModal }) => {
+const ContactSection = ({ currentUser, openSignInModal }) => {
   const [message, setMessage] = useState('')
 
   return (
@@ -51,14 +51,9 @@ const ContactSection = ({ currentUser, openModal }) => {
         ) : (
           <p className='contact-section__form--requiremsg'>
             You must{' '}
-            <a
-              href='#sign-in-btn'
-              onClick={() => {
-                openModal()
-              }}
-            >
+            <span onClick={openSignInModal} className='sign-in'>
               sign in
-            </a>{' '}
+            </span>{' '}
             to send a message.
           </p>
         )}
@@ -73,5 +68,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { openModal }
+  { openSignInModal }
 )(ContactSection)

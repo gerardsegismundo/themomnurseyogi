@@ -1,54 +1,45 @@
-import React, { useEffect, useRef } from 'react'
-import { useOutsideClick } from '../../helpers/func'
-import { signInWithGoogle } from '../../firebase/firebase.utils'
-import FacebookIcon from './svg/FacebookIcon'
-import GoogleIcon from './svg/GoogleIcon'
-import CloseIcon from './svg/CloseIcon'
+import React, { /* useEffect,  */ useRef } from 'react'
+import {
+  signInWithGoogle,
+  signInWithFacebook
+} from '../../firebase/firebase.utils'
+import { FacebookIcon, GoogleIcon, CloseIcon } from './SvgIcons'
 import { connect } from 'react-redux'
-import { closeModal } from '../.../../../redux/ui/ui.actions'
+import { closeSignInModal } from '../.../../../redux/ui/ui.actions'
+import { useOutsideAndEscapeClick } from '../../helpers/func'
 
-const Modal = ({ modalIsOpen, closeModal }) => {
+const SignInModal = ({ signInModalIsOpen, closeSignInModal }) => {
   const modalRef = useRef()
 
-  useEffect(() => {
-    document.addEventListener('keydown', onKeyDown, false)
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDown, false)
-    }
-    // eslint-disable-next-line
-  }, [modalIsOpen])
-
-  const onKeyDown = e => {
-    if (modalIsOpen && e.key === 'Escape') closeModal()
-  }
-
-  useOutsideClick(modalRef, () => {
-    if (modalIsOpen) return closeModal()
-    return null
-  })
+  // Close modal on outsideClick & esc
+  useOutsideAndEscapeClick(modalRef, signInModalIsOpen, closeSignInModal)
 
   const signInWithGoogleHandler = () => {
     signInWithGoogle()
-    closeModal()
+    closeSignInModal()
+  }
+
+  const signInWithFacebookHandler = () => {
+    signInWithFacebook()
+    closeSignInModal()
   }
 
   return (
     <div
       id='login-modal'
-      style={modalIsOpen ? { zIndex: '1' } : { zIndex: '-1' }}
+      style={signInModalIsOpen ? { zIndex: '1' } : { zIndex: '-1' }}
       className={`my-modal__overlay${
-        modalIsOpen ? ' opacity-1' : ' opacity-0'
+        signInModalIsOpen ? ' opacity-1' : ' opacity-0'
       }`}
     >
-      <div className={`my-modal${modalIsOpen ? ' is-open' : ''}`}>
+      <div className={`my-modal${signInModalIsOpen ? ' is-open' : ''}`}>
         <div
           className='my-modal__content p-3  d-flex align-items-center justify-content-center'
           ref={modalRef}
         >
           <i
             className='my-modal__content--close text-align-right hov'
-            onClick={closeModal}
+            onClick={closeSignInModal}
           >
             <CloseIcon />
           </i>
@@ -60,8 +51,8 @@ const Modal = ({ modalIsOpen, closeModal }) => {
 
             <center>
               <button
-                className='my-modal__content--section--btn-1 d-block align-self-center align-content-center'
                 onClick={signInWithGoogleHandler}
+                className='my-modal__content--section--btn-1 d-block align-self-center align-content-center'
               >
                 <div className='d-flex align-items-center'>
                   <GoogleIcon />
@@ -69,7 +60,10 @@ const Modal = ({ modalIsOpen, closeModal }) => {
                 </div>
               </button>
 
-              <button className='my-modal__content--section--btn-2 d-block'>
+              <button
+                onClick={signInWithFacebookHandler}
+                className='my-modal__content--section--btn-2 d-block'
+              >
                 <div className='d-flex align-items-center'>
                   <FacebookIcon />
                   &nbsp;&nbsp;Sign in with Facebook
@@ -84,10 +78,10 @@ const Modal = ({ modalIsOpen, closeModal }) => {
 }
 
 const mapStateToProps = state => ({
-  modalIsOpen: state.ui.modalIsOpen
+  signInModalIsOpen: state.ui.signInModalIsOpen
 })
 
 export default connect(
   mapStateToProps,
-  { closeModal }
-)(Modal)
+  { closeSignInModal }
+)(SignInModal)

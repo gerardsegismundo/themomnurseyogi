@@ -1,31 +1,38 @@
 import axios from 'axios'
 import _ from 'lodash'
+import { getThreeRandomPosts, getThreeRecentPosts } from '../../helpers/func'
 
 import {
   GET_RECENT_POSTS,
   GET_POST,
   SEARCH_POST,
   GET_RANDOM_POSTS,
-  CLEAR_SEARCH
+  CLEAR_SEARCH,
+  GET_POSTS
 } from './post.types'
 
 const Posts = (() => {
   let postsCache = {}
 
-  const getPostsCache = async () => {
+  const getPostsCache = async dispatch => {
     if (_.isEmpty(postsCache)) {
       const res = await axios.get('api/posts')
       postsCache = res.data
+
+      dispatch({
+        type: GET_POSTS,
+        payload: postsCache
+      })
     }
 
     return postsCache
   }
 
+  const getPosts = () => async dispatch => await getPostsCache(dispatch)
+
   const random = () => async dispatch => {
-    const posts = await getPostsCache()
-    const threeRandomPosts = [...posts]
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3)
+    const posts = await getPostsCache(dispatch)
+    const threeRandomPosts = getThreeRandomPosts(posts)
 
     dispatch({
       type: GET_RANDOM_POSTS,
@@ -34,11 +41,8 @@ const Posts = (() => {
   }
 
   const recent = () => async dispatch => {
-    const posts = await getPostsCache()
-    const threeRecentPosts = [...posts]
-      .sort((a, b) => a.date - b.date)
-      .slice(0, 3)
-      .reverse()
+    const posts = await getPostsCache(dispatch)
+    const threeRecentPosts = getThreeRecentPosts(posts)
 
     dispatch({
       type: GET_RECENT_POSTS,
@@ -47,7 +51,7 @@ const Posts = (() => {
   }
 
   const findById = id => async dispatch => {
-    const posts = await getPostsCache()
+    const posts = await getPostsCache(dispatch)
     const post = posts.find(post => post._id === id)
 
     dispatch({
@@ -64,7 +68,7 @@ const Posts = (() => {
       })
     }
 
-    const posts = await getPostsCache()
+    const posts = await getPostsCache(dispatch)
 
     const postTitles = posts.map(post => {
       return {
@@ -89,12 +93,14 @@ const Posts = (() => {
     random,
     findById,
     recent,
-    search
+    search,
+    getPosts
   }
 })()
 
-export const getRandomPosts = Posts.random
 export const getPost = Posts.findById
+export const getPosts = Posts.getPosts
+export const getRandomPosts = Posts.random
 export const getRecentPosts = Posts.recent
 export const searchPost = Posts.search
 

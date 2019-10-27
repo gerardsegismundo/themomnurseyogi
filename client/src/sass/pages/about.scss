@@ -1,5 +1,7 @@
 .about {
-  &__title {
+  padding-bottom: 10rem;
+
+  &__page-title {
     @include page-title-font;
     text-align: center;
   }

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
-import OtherPost from '../common/HomeAside-OtherPost'
+import OtherPost from '../common/OtherPosts'
 import { connect } from 'react-redux'
 import { getRandomPosts } from '../../redux/post/post.actions'
 
-const HomeAside = ({
+const Aside = ({
   getRandomPosts,
   randomPosts,
   subscribeSectionClass,
@@ -63,4 +63,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getRandomPosts }
-)(HomeAside)
+)(Aside)

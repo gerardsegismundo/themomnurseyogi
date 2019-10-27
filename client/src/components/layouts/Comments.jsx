@@ -3,11 +3,13 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { submitReply } from '../../redux/post/post.actions'
 import { formatDate } from '../../helpers/func'
+import { openSignInModal } from '../../redux/ui/ui.actions'
 
 const Comments = ({
   currentUser,
   post: { comments, _id: postId },
-  submitReply
+  submitReply,
+  openSignInModal
 }) => {
   const [reply, setReply] = useState('')
 
@@ -102,7 +104,13 @@ const Comments = ({
             <button className='btn-primary btn-xl'>Publish</button>
           </form>
         ) : (
-          <p>You must be logged in to comment.</p>
+          <p className='comments__reply--requiremsg'>
+            You must{' '}
+            <span onClick={openSignInModal} className='sign-in'>
+              sign in
+            </span>{' '}
+            in to comment.
+          </p>
         )}
       </div>
     </div>
@@ -116,5 +124,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { submitReply }
+  { submitReply, openSignInModal }
 )(Comments)

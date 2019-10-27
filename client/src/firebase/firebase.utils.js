@@ -23,8 +23,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const { displayName, email, photoURL, uid } = userAuth
     const createdAt = new Date()
 
-    console.log(userAuth)
-
     try {
       await userRef.set({
         uid,
@@ -47,8 +45,12 @@ firebase.initializeApp(config)
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 googleProvider.setCustomParameters({ prompt: 'select_account' })
 
+const facebookProvider = new firebase.auth.FacebookAuthProvider()
+facebookProvider.setCustomParameters({ prompt: 'select_account' })
+
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider)
+export const signInWithFacebook = () => auth.signInWithPopup(facebookProvider)
+
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
-
 export default firebase

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     requried: true
@@ -12,4 +12,4 @@ const userSchema = new Schema({
   thumbnail: String
 })
 
-model('users', userSchema)
+model('users', UserSchema)

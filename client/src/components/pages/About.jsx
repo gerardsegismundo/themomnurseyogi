@@ -4,7 +4,7 @@ import aboutImage from '../../assets/about.jpg'
 const About = () => {
   return (
     <div className='container about'>
-      <h2 className='about__title'>#Hi I'm Maydee Biascan</h2>
+      <h2 className='about__page-title'>#Hi I'm Maydee Biascan</h2>
 
       <p className='about__hashtags'>
         <span>#mom</span>

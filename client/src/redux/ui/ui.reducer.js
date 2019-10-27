@@ -1,13 +1,16 @@
 import {
   CLOSE_SEARCH,
   TOGGLE_SEARCH,
-  OPEN_MODAL,
-  CLOSE_MODAL
+  OPEN_SIGNIN_MODAL,
+  CLOSE_SIGNIN_MODAL,
+  OPEN_USER_MENU,
+  CLOSE_USER_MENU
 } from './ui.types'
 
 const initialState = {
   searchbarIsActive: false,
-  modalIsOpen: false
+  signInModalIsOpen: false,
+  userMenuIsOpen: false
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
@@ -22,16 +25,27 @@ const uiReducer = (state = initialState, { type, payload }) => {
         ...state,
         seachIsOpen: false
       }
-    case OPEN_MODAL:
+    case OPEN_SIGNIN_MODAL:
       return {
         ...state,
-        modalIsOpen: true
+        signInModalIsOpen: true
       }
-    case CLOSE_MODAL:
+    case CLOSE_SIGNIN_MODAL:
       return {
         ...state,
-        modalIsOpen: false
+        signInModalIsOpen: false
       }
+    case OPEN_USER_MENU:
+      return {
+        ...state,
+        userMenuIsOpen: true
+      }
+    case CLOSE_USER_MENU:
+      return {
+        ...state,
+        userMenuIsOpen: false
+      }
+
     default:
       return state
   }

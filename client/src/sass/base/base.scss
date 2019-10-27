@@ -105,3 +105,11 @@ body {
 .hov {
   cursor: pointer;
 }
+
+span.sign-in {
+  @include standard-font;
+  &:hover {
+    text-decoration: underline;
+    @include light-to-dark;
+  }
+}

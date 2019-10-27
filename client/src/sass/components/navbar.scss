@@ -22,8 +22,8 @@
   a {
     text-transform: uppercase;
     font-weight: 500;
-
-    opacity: 0.7;
+    letter-spacing: 0.05rem;
+    opacity: 0.6;
 
     &:hover {
       opacity: 0.85;
@@ -31,6 +31,7 @@
 
     &.active {
       opacity: 1;
+      text-shadow: 1px 1px 1px rgba(1, 1, 1, 0.2);
     }
   }
 }
