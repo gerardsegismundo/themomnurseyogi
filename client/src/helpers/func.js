@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import uuid from 'react-uuid'
+// import _ from 'lodash'
 
 const formatDate = date => {
   const settings = {
@@ -27,14 +28,10 @@ const getPostLink = (title, id) => {
     .toLowerCase()}-${id}`
 }
 
+const getThreeRecentPosts = posts => [...posts].slice(0, 3)
+
 const getThreeRandomPosts = posts =>
   [...posts].sort(() => 0.5 - Math.random()).slice(0, 3)
-
-const getThreeRecentPosts = posts =>
-  [...posts]
-    .sort((a, b) => a.date - b.date)
-    .slice(0, 3)
-    .reverse()
 
 const renderHashtags = hashtags => {
   return hashtags && hashtags.map(tag => <li key={uuid()}>#{tag}</li>)
@@ -53,6 +50,10 @@ const useOutsideClick = (ref, callback) => {
 }
 
 const useOutsideAndEscapeClick = (ref, condition, callback) => {
+  const onKeyDown = e => {
+    if (condition && e.key === 'Escape') callback()
+  }
+
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false)
 
@@ -62,13 +63,38 @@ const useOutsideAndEscapeClick = (ref, condition, callback) => {
     // eslint-disable-next-line
   }, [condition])
 
-  const onKeyDown = e => {
-    if (condition && e.key === 'Escape') callback()
-  }
-
   useOutsideClick(ref, () => {
     if (condition) return callback()
     return null
+  })
+}
+
+const useConfirmOnEnter = (condition, callback) => {
+  const onKeyDown = e => {
+    if (condition && e.key === 'Enter') callback()
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown, false)
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false)
+    }
+    // eslint-disable-next-line
+  }, [condition])
+}
+
+const useOnKeyDownEnter = (activeElementId, callback) => {
+  const onKeyDown = e => {
+    if (e.key === 'Enter' && document.activeElement.id === activeElementId)
+      callback(e)
+  }
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown, false)
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false)
+    }
   })
 }
 
@@ -81,5 +107,7 @@ export {
   getThreeRandomPosts,
   getThreeRecentPosts,
   sliceParagraph,
-  useOutsideAndEscapeClick
+  useOutsideAndEscapeClick,
+  useOnKeyDownEnter,
+  useConfirmOnEnter
 }

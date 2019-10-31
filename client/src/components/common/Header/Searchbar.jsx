@@ -7,13 +7,13 @@ import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideAndEscapeClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
-  const [searchbarIsActive, setSearchbarIsAcive] = useState(false)
+  const [searchbarIsActive, setSearchbarIsActive] = useState(false)
   const searchGroup = useRef()
   const searchInput = useRef()
 
   // Close searchbar on outsideClick and esc
   useOutsideAndEscapeClick(searchGroup, searchbarIsActive, () => {
-    setSearchbarIsAcive(false)
+    setSearchbarIsActive(false)
     onClearSearch()
   })
 
@@ -24,7 +24,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   }
 
   const toggleSearchIcon = () => {
-    setSearchbarIsAcive(!searchbarIsActive)
+    setSearchbarIsActive(!searchbarIsActive)
     document.activeElement.blur()
 
     if (!searchbarIsActive) return searchInput.current.focus()

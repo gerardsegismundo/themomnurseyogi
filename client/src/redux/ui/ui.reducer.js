@@ -3,14 +3,18 @@ import {
   TOGGLE_SEARCH,
   OPEN_SIGNIN_MODAL,
   CLOSE_SIGNIN_MODAL,
+  OPEN_DELETE_MODAL,
+  CLOSE_DELETE_MODAL,
   OPEN_USER_MENU,
   CLOSE_USER_MENU
 } from './ui.types'
 
 const initialState = {
   searchbarIsActive: false,
+  userMenuIsOpen: false,
   signInModalIsOpen: false,
-  userMenuIsOpen: false
+  deleteModalIsOpen: false,
+  deleteModalId: ''
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
@@ -34,6 +38,17 @@ const uiReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         signInModalIsOpen: false
+      }
+    case OPEN_DELETE_MODAL:
+      return {
+        ...state,
+        deleteModalIsOpen: true,
+        deleteModalId: payload
+      }
+    case CLOSE_DELETE_MODAL:
+      return {
+        ...state,
+        deleteModalIsOpen: false
       }
     case OPEN_USER_MENU:
       return {

@@ -20,7 +20,7 @@ const Posts = ({ getPosts, posts }) => {
       {posts &&
         posts.map(({ _id, title, body, hashtags, imgURL }) => {
           return (
-            <div className='post row'>
+            <div className='post row' key={_id}>
               <div className='post__img-col col-3'>
                 <Link to={getPostLink(title, _id)}>
                   <img src={imgURL} alt='post' className='img-fluid m-auto' />

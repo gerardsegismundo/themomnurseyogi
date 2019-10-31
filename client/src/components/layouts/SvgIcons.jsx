@@ -29,8 +29,14 @@ const FacebookIcon = () => (
   </svg>
 )
 
-const CloseIcon = () => (
-  <svg width='29' height='29'>
+const CloseIcon = ({ onClick }) => (
+  <svg
+    width='29'
+    height='29'
+    style={{ cursor: 'pointer' }}
+    className='close-icon'
+    onClick={onClick}
+  >
     <path d='M20.13 8.11l-5.61 5.61-5.609-5.61-.801.801 5.61 5.61-5.61 5.61.801.8 5.61-5.609 5.61 5.61.8-.801-5.609-5.61 5.61-5.61'></path>
   </svg>
 )

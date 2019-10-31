@@ -12,7 +12,8 @@ import Admin from './components/admin/pages/dashboard'
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
-import SignInModal from './components/common/SignInModal'
+import SignInModal from './components/layouts/SignInModal'
+import DeleteModal from './components/layouts/DeleteModal'
 
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
@@ -66,6 +67,7 @@ const App = ({ setCurrentUser }) => {
 
   return (
     <>
+      <DeleteModal />
       <SignInModal />
       <Router>
         {window.location.href.includes('admin') ? AdminDashboard : Client}

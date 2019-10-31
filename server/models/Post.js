@@ -38,5 +38,5 @@ const validatePost = post => {
   return Joi.validate(post, schema)
 }
 
-model('posts', PostSchema)
+model('post', PostSchema)
 exports.validate = validatePost

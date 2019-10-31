@@ -21,12 +21,49 @@
         border-radius: 50%;
       }
 
+      &__right-col {
+        width: 100%;
+      }
       &__label {
         margin-bottom: 0.5rem;
       }
 
       &__msg {
         @include standard-font;
+      }
+
+      &__crud {
+        line-height: 3rem;
+        margin-top: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: rgba(46, 46, 46, 0.5);
+
+        textarea[name='comment'] {
+          min-height: 5em;
+          max-height: 50vh;
+          overflow: hidden;
+        }
+
+        span {
+          opacity: 0;
+          cursor: pointer;
+
+          &:first-of-type {
+            margin-right: 1.25rem;
+          }
+
+          &:hover {
+            color: rgba(46, 46, 46, 0.7);
+            text-shadow: 1px 1px 1px rgba(46, 46, 46, 0.2);
+          }
+        }
+      }
+
+      &:hover {
+        span {
+          opacity: 1;
+        }
       }
     }
   }

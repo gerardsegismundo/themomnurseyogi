@@ -16,7 +16,7 @@ const Posts = (() => {
 
   const getPostsCache = async dispatch => {
     if (_.isEmpty(postsCache)) {
-      const res = await axios.get('api/posts')
+      const res = await axios.get('/api/posts')
       postsCache = res.data
 
       dispatch({
@@ -108,10 +108,4 @@ export const clearSearch = () => async dispatch => {
   dispatch({
     type: CLEAR_SEARCH
   })
-}
-
-export const submitReply = payload => async dispatch => {
-  const res = await axios.post('/api/posts/comment', payload)
-
-  console.log(res)
 }

@@ -9,10 +9,12 @@ require('express-async-errors')
 // Models
 require('../models/User')
 require('../models/Post')
+require('../models/Comment')
 
 // Routes
 const authRoute = require('../routes/auth.routes')
 const postRoute = require('../routes/post.routes')
+const commentRoute = require('../routes/comment.routes')
 const notFound = require('../routes/notFound.routes')
 
 module.exports = app => {
@@ -33,7 +35,8 @@ module.exports = app => {
 
   // Routes
   app.use(authRoute)
-  app.use('/post/api/posts', postRoute) // fix route bug in getPost
+  // app.use('/post/api/posts', postRoute) // fix route bug in getPost
   app.use('/api/posts', postRoute)
+  app.use('/api/comments', commentRoute)
   app.use('/api/*', notFound)
 }

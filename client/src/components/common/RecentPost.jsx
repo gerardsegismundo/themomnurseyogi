@@ -29,12 +29,14 @@ const Post = ({ title, imgURL, hashtags, date, body, _id }) => (
 
     <p className='post__body'>{sliceParagraph(body)}</p>
 
-    <div className='post__footer d-flex align-content-center align-self-center justify-content-end'>
-      <Link to={getPostLink(title, _id)} className='btn-primary btn-xl'>
+    {/* <div className='post__footer d-flex align-content-center align-self-center justify-content-start'> */}
+
+    <Link to={getPostLink(title, _id)}>
+      <button className='btn-primary btn-xl align-content-center mb-2'>
         Read more
-      </Link>
-      <h2 className='post__footer--comments'>2 comments</h2>
-    </div>
+      </button>
+    </Link>
+    {/* </div> */}
   </div>
 )
 
