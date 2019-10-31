@@ -28,6 +28,17 @@ router.post('/', async (req, res) => {
   res.json(newComment)
 })
 
+router.patch('/', async (req, res) => {
+  const { _id, comment } = req.body
+
+  const updateComment = await Comment.findByIdAndUpdate(_id, {
+    $set: { comment, date: Date.now() }
+  })
+  if (!updateComment) res.status(400).send('Comment update error.')
+
+  res.status(200).send('Comment updated.')
+})
+
 // @route DELETE /:id
 // @desc delete comment
 router.delete('/:id', async (req, res) => {

@@ -1,7 +1,8 @@
 import {
   LOAD_COMMENTS,
-  SUBMIT_COMMENT,
-  DELETE_COMMENT
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  UPDATE_COMMENT
 } from '../comment/comment.types'
 import axios from 'axios'
 const API = '/api/comments'
@@ -15,12 +16,21 @@ export const loadComments = postId => async dispatch => {
   })
 }
 
-export const submitComment = comment => async dispatch => {
+export const addComment = comment => async dispatch => {
   const res = await axios.post(API, comment)
 
   dispatch({
-    type: SUBMIT_COMMENT,
+    type: ADD_COMMENT,
     payload: res.data
+  })
+}
+
+export const updateComment = comment => async dispatch => {
+  axios.patch(API, comment)
+
+  dispatch({
+    type: UPDATE_COMMENT,
+    payload: comment
   })
 }
 

@@ -44,6 +44,7 @@ li {
 
 html {
   font-size: 58%;
+  word-spacing: 0.15rem;
 
   @include respond(sm) {
     font-size: 61%;

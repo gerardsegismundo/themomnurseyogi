@@ -3,17 +3,17 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { useOnKeyDownEnter } from '../../helpers/func'
 import { openSignInModal } from '../../redux/ui/ui.actions'
-import { submitComment } from '../../redux/comment/comment.action'
+import { addComment } from '../../redux/comment/comment.action'
 
 const CommentForm = ({
   currentUser,
   post: { _id: postId },
   openSignInModal,
-  submitComment
+  addComment
 }) => {
   const [newComment, setNewComment] = useState('')
 
-  const handleSubmitComment = e => {
+  const handleAddComment = e => {
     e.preventDefault()
 
     const payload = {
@@ -24,18 +24,18 @@ const CommentForm = ({
       comment: newComment
     }
 
-    submitComment(payload)
+    addComment(payload)
     setNewComment('')
   }
 
-  useOnKeyDownEnter('textarea-comment', handleSubmitComment)
+  useOnKeyDownEnter('textarea-comment', handleAddComment)
 
   return (
     <div className='comments__reply'>
       <h2 className='comments__reply--heading'>Leave a Comment</h2>
       {currentUser ? (
         <form
-          onSubmit={e => handleSubmitComment(e)}
+          onSubmit={e => handleAddComment(e)}
           className='comments__reply--form'
         >
           <div>
@@ -76,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { openSignInModal, submitComment }
+  { openSignInModal, addComment }
 )(CommentForm)

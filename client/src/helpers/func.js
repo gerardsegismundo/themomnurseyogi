@@ -64,7 +64,10 @@ const useOutsideAndEscapeClick = (ref, condition, callback) => {
   }, [condition])
 
   useOutsideClick(ref, () => {
-    if (condition) return callback()
+    if (condition) {
+      console.log('CONDITION!')
+      return callback()
+    }
     return null
   })
 }
@@ -86,8 +89,12 @@ const useConfirmOnEnter = (condition, callback) => {
 
 const useOnKeyDownEnter = (activeElementId, callback) => {
   const onKeyDown = e => {
-    if (e.key === 'Enter' && document.activeElement.id === activeElementId)
-      callback(e)
+    // if (e.key === 'Enter' && document.activeElement.id === activeElementId)
+    //   callback(e)
+    if (document.activeElement.id === activeElementId) {
+      if (e.keyCode === 13 && e.shiftKey) return
+      else if (e.key === 'Enter') callback(e)
+    }
   }
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false)

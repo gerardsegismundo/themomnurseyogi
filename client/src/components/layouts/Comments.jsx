@@ -1,32 +1,53 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import { formatDate } from '../../helpers/func'
+import {
+  formatDate,
+  useOnKeyDownEnter,
+  useOutsideAndEscapeClick
+} from '../../helpers/func'
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
-import { loadComments } from '../../redux/comment/comment.action'
+import { loadComments, updateComment } from '../../redux/comment/comment.action'
 
 import CommentForm from '../common/CommentForm'
 
 const Comments = ({
   currentUser,
   post: { _id: postId },
-  loadComments,
   comments,
-  openDeleteModal
+  openDeleteModal,
+  loadComments,
+  updateComment
 }) => {
-  const [editComment, setEditComment] = useState('')
-  const [isEditingComment, setIsEditingComment] = useState(true)
-  // eslint-disable-next-line
-  const [editCommentData, setEditCommentData] = useState('')
+  const [editedComment, setEditedComment] = useState({ comment: '', _id: '' })
+  const [isEditingComment, setIsEditingComment] = useState(false)
+  const editedCommentTextarea = useRef()
 
   useEffect(() => {
     loadComments(postId)
     //eslint-disable-next-line
   }, [postId])
 
-  const handleEditComment = comment => {
+  const handleEditComment = ({ comment, _id }) => {
     setIsEditingComment(true)
-    setEditComment(comment)
+    setEditedComment({ comment, _id })
   }
+
+  const exitEditComment = () => {
+    setIsEditingComment(false)
+    setEditedComment({ comment: '', _id: '' })
+  }
+
+  const saveEditComment = () => {
+    updateComment(editedComment)
+    exitEditComment()
+  }
+
+  useOnKeyDownEnter('edited-comment', saveEditComment)
+  useOutsideAndEscapeClick(
+    editedCommentTextarea,
+    isEditingComment,
+    exitEditComment
+  )
 
   return (
     <div className='comments'>
@@ -49,16 +70,23 @@ const Comments = ({
                 />
 
                 <div className='comment__right-col'>
-                  <h4 className='comment__label'>
-                    {displayName} &nbsp;&nbsp;|&nbsp;&nbsp; {formatDate(date)}
-                  </h4>
+                  {editedComment._id !== _id && (
+                    <>
+                      <h4 className='comment__label'>
+                        {displayName} &nbsp;&nbsp;|&nbsp;&nbsp;{' '}
+                        {formatDate(date)}
+                      </h4>
+                      <p className='comment__msg'>{comment}</p>
+                    </>
+                  )}
 
                   {currentUser && uid === currentUser.id && (
                     <div className='comment__crud'>
-                      {!isEditingComment ? (
+                      {!isEditingComment || editedComment._id !== _id ? (
                         <>
-                          <p className='comment__msg'>{comment}</p>
-                          <span onClick={() => handleEditComment(comment)}>
+                          <span
+                            onClick={() => handleEditComment({ comment, _id })}
+                          >
                             edit
                           </span>
                           <span onClick={() => openDeleteModal(_id)}>
@@ -69,17 +97,20 @@ const Comments = ({
                         <>
                           <textarea
                             onChange={e => {
-                              setEditComment(e.target.value)
+                              setEditedComment({
+                                _id,
+                                comment: e.target.value
+                              })
                             }}
-                            name='comment'
-                            value={editComment}
+                            ref={editedCommentTextarea}
+                            id='edited-comment'
+                            name='edited-comment'
+                            value={editedComment.comment}
                             className='form-control'
                           ></textarea>
 
-                          <span onClick={() => setIsEditingComment(false)}>
-                            cancel
-                          </span>
-                          <span onClick={() => openDeleteModal(_id)}>save</span>
+                          <span onClick={exitEditComment}>cancel</span>
+                          <span onClick={saveEditComment}>save</span>
                         </>
                       )}
                     </div>
@@ -107,5 +138,5 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps,
-  { openSignInModal, loadComments, openDeleteModal }
+  { openSignInModal, loadComments, openDeleteModal, updateComment }
 )(Comments)

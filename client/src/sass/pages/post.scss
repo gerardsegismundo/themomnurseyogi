@@ -36,10 +36,11 @@
   }
 
   &__body {
+    text-indent: 30px;
     margin: 5rem 0;
     max-width: 60vw;
     text-align: left;
-    line-height: 3.5rem;
+    line-height: 4.5rem;
 
     color: rgba($elegant-color, 0.8);
   }
