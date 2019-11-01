@@ -13,7 +13,6 @@ const Aside = ({
 }) => {
   useEffect(() => {
     getRandomPosts()
-
     // eslint-disable-next-line
   }, [])
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import uuid from 'react-uuid'
-// import _ from 'lodash'
 
 const formatDate = date => {
   const settings = {
@@ -27,11 +26,6 @@ const getPostLink = (title, id) => {
     .join('-')
     .toLowerCase()}-${id}`
 }
-
-const getThreeRecentPosts = posts => [...posts].slice(0, 3)
-
-const getThreeRandomPosts = posts =>
-  [...posts].sort(() => 0.5 - Math.random()).slice(0, 3)
 
 const renderHashtags = hashtags => {
   return hashtags && hashtags.map(tag => <li key={uuid()}>#{tag}</li>)
@@ -111,8 +105,6 @@ export {
   getPostLink,
   renderHashtags,
   useOutsideClick,
-  getThreeRandomPosts,
-  getThreeRecentPosts,
   sliceParagraph,
   useOutsideAndEscapeClick,
   useOnKeyDownEnter,

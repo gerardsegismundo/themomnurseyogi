@@ -1,6 +1,5 @@
 import axios from 'axios'
 import _ from 'lodash'
-import { getThreeRandomPosts, getThreeRecentPosts } from '../../helpers/func'
 
 import {
   GET_RECENT_POSTS,
@@ -8,11 +7,14 @@ import {
   SEARCH_POST,
   GET_RANDOM_POSTS,
   CLEAR_SEARCH,
-  GET_POSTS
+  GET_POSTS,
+  GET_OTHER_RANDOM_POSTS
 } from './post.types'
 
 const Posts = (() => {
-  let postsCache = {}
+  let postsCache = []
+  let recentPostsCache = []
+  let randomPostsCache = []
 
   const getPostsCache = async dispatch => {
     if (_.isEmpty(postsCache)) {
@@ -28,29 +30,49 @@ const Posts = (() => {
     return postsCache
   }
 
+  const getRecentPostsCache = async dispatch => {
+    if (_.isEmpty(recentPostsCache)) {
+      const posts = await getPostsCache(dispatch)
+      recentPostsCache = [...posts].slice(0, 3)
+
+      dispatch({
+        type: GET_RECENT_POSTS,
+        payload: recentPostsCache
+      })
+    }
+
+    return recentPostsCache
+  }
+
+  const getRandomPostsCache = async dispatch => {
+    if (_.isEmpty(randomPostsCache)) {
+      const posts = await getPostsCache(dispatch)
+      const excludedPosts = await getRecentPostsCache(dispatch)
+
+      const notIncludedInRecentPosts = _.difference(posts, excludedPosts)
+
+      randomPostsCache = notIncludedInRecentPosts
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4)
+
+      dispatch({
+        type: GET_RANDOM_POSTS,
+        payload: randomPostsCache
+      })
+    }
+
+    return randomPostsCache
+  }
+
   const getPosts = () => async dispatch => await getPostsCache(dispatch)
 
-  const random = () => async dispatch => {
-    const posts = await getPostsCache(dispatch)
-    const threeRandomPosts = getThreeRandomPosts(posts)
+  const getRecentPosts = () => async dispatch =>
+    await getRecentPostsCache(dispatch)
 
-    dispatch({
-      type: GET_RANDOM_POSTS,
-      payload: threeRandomPosts
-    })
-  }
+  const getRandomPosts = () => async dispatch =>
+    await getRandomPostsCache(dispatch)
 
-  const recent = () => async dispatch => {
-    const posts = await getPostsCache(dispatch)
-    const threeRecentPosts = getThreeRecentPosts(posts)
-
-    dispatch({
-      type: GET_RECENT_POSTS,
-      payload: threeRecentPosts
-    })
-  }
-
-  const findById = id => async dispatch => {
+  const getPost = id => async dispatch => {
     const posts = await getPostsCache(dispatch)
     const post = posts.find(post => post._id === id)
 
@@ -60,7 +82,24 @@ const Posts = (() => {
     })
   }
 
-  const search = text => async dispatch => {
+  const getOtherRandomPosts = () => async dispatch => {
+    const posts = await getPostsCache(dispatch)
+    const recentPosts = await getRecentPostsCache(dispatch)
+    const randomPosts = await getRandomPostsCache(dispatch)
+    const otherRandomPosts = _.difference(posts, [
+      ...recentPosts,
+      ...randomPosts
+    ])
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 4)
+
+    dispatch({
+      type: GET_OTHER_RANDOM_POSTS,
+      payload: otherRandomPosts
+    })
+  }
+
+  const searchPost = text => async dispatch => {
     if (text.length === 0 || text === undefined || typeof text !== 'string') {
       return dispatch({
         type: SEARCH_POST,
@@ -90,19 +129,23 @@ const Posts = (() => {
   }
 
   return {
-    random,
-    findById,
-    recent,
-    search,
-    getPosts
+    getRandomPosts,
+    getPost,
+    getRecentPosts,
+    searchPost,
+    getPosts,
+    getOtherRandomPosts
   }
 })()
 
-export const getPost = Posts.findById
-export const getPosts = Posts.getPosts
-export const getRandomPosts = Posts.random
-export const getRecentPosts = Posts.recent
-export const searchPost = Posts.search
+export const {
+  getRandomPosts,
+  getPost,
+  getRecentPosts,
+  searchPost,
+  getPosts,
+  getOtherRandomPosts
+} = Posts
 
 export const clearSearch = () => async dispatch => {
   dispatch({

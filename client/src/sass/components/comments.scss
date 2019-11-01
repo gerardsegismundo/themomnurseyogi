@@ -46,7 +46,10 @@
         }
 
         span {
-          opacity: 0;
+          &.hidden {
+            opacity: 0;
+          }
+
           cursor: pointer;
 
           &:first-of-type {

@@ -4,7 +4,8 @@ import {
   GET_RECENT_POSTS,
   GET_RANDOM_POSTS,
   SEARCH_POST,
-  CLEAR_SEARCH
+  CLEAR_SEARCH,
+  GET_OTHER_RANDOM_POSTS
 } from './post.types'
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   searchResult: null,
   recentPosts: null,
   randomPosts: null,
+  otherRandomPosts: null,
   loading: false
 }
 
@@ -46,6 +48,14 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         randomPosts: payload
       }
+
+    case GET_OTHER_RANDOM_POSTS: {
+      return {
+        ...state,
+        loading: false,
+        otherRandomPosts: payload
+      }
+    }
 
     case SEARCH_POST:
       return {

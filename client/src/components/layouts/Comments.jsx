@@ -85,11 +85,15 @@ const Comments = ({
                       {!isEditingComment || editedComment._id !== _id ? (
                         <>
                           <span
+                            className='hidden'
                             onClick={() => handleEditComment({ comment, _id })}
                           >
                             edit
                           </span>
-                          <span onClick={() => openDeleteModal(_id)}>
+                          <span
+                            className='hidden'
+                            onClick={() => openDeleteModal(_id)}
+                          >
                             delete
                           </span>
                         </>

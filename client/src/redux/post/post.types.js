@@ -5,5 +5,5 @@ export const SEARCH_POST = 'SEARCH_POST'
 export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const GET_POSTS = 'GET_POSTS'
 export const GET_RECENT_POSTS = 'GET_RECENT_POSTS'
-
+export const GET_OTHER_RANDOM_POSTS = 'GET_OTHER_RANDOM_POSTS'
 export const SUBMIT_REPLY = 'SUBMIT_REPLY'

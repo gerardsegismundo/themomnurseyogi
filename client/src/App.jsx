@@ -18,6 +18,7 @@ import DeleteModal from './components/layouts/DeleteModal'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import OtherPostsFooter from './components/layouts/OtherPostsFooter'
 
 const App = ({ setCurrentUser }) => {
   useEffect(() => {
@@ -61,6 +62,7 @@ const App = ({ setCurrentUser }) => {
           path='/post/:id'
         />
       </Switch>
+      <OtherPostsFooter />
       <Footer />
     </>
   )
