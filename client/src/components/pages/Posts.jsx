@@ -29,9 +29,13 @@ const Posts = ({ getPosts, posts }) => {
 
               <div className='post__content-col col-8'>
                 <Link to={getPostLink(title, _id)}>
-                  <h2>{title}</h2>
-                  <p>{sliceParagraph(body)}</p>
-                  <ul>{renderHashtags(hashtags)}</ul>
+                  <h2 className='post__content-col--title'>{title}</h2>
+                  <p className='post__content-col--body'>
+                    {sliceParagraph(body)}
+                  </p>
+                  <p className='post__content-col--hashtags'>
+                    {renderHashtags(hashtags)}
+                  </p>
                 </Link>
               </div>
             </div>

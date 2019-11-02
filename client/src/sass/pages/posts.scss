@@ -32,7 +32,7 @@
     }
 
     &__content-col {
-      h2 {
+      &--title {
         font-size: 2.5rem;
         margin-top: 0.5rem;
         margin-bottom: 2rem;
@@ -46,14 +46,16 @@
         }
       }
 
-      p {
+      &--body,
+      &--hashtags {
         @include standard-font;
       }
-      ul {
+
+      &--hashtags {
         @include standard-font;
         display: flex;
 
-        li {
+        span {
           margin: 1rem 1rem 1rem 0;
         }
       }

@@ -13,7 +13,7 @@
   }
 
   &__date {
-    margin: 2rem 0;
+    margin: 5rem 0 2rem 0;
   }
 
   &__title {
@@ -23,8 +23,9 @@
   &__hashtags {
     display: flex;
     justify-content: center;
+    margin-bottom: 4rem;
 
-    li {
+    span {
       margin: 1rem 2vw;
     }
   }
