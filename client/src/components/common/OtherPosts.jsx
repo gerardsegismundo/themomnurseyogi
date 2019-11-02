@@ -21,9 +21,9 @@ const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => {
 
             <h4>{title}</h4>
 
-            <ul className='other-posts__hashtags d-flex justify-content-start'>
-              {renderHashtags(hashtags)}
-            </ul>
+            <p className='other-posts__hashtags d-flex justify-content-start'>
+              {renderHashtags(hashtags, 3)}
+            </p>
           </div>{' '}
         </Link>
       )}

@@ -1,26 +1,44 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getOtherRandomPosts } from '../../redux/post/post.actions'
+import { getRandomPosts } from '../../redux/post/post.actions'
+import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
+import { Link } from 'react-router-dom'
 
-const OtherPostsFooter = ({ getOtherRandomPosts, otherRandomPosts }) => {
+const OtherPostsFooter = ({ getRandomPosts, randomPosts }) => {
   useEffect(() => {
-    getOtherRandomPosts()
+    getRandomPosts()
   }, [])
+
   return (
-    <div className='container-fluid'>
+    <div className='other-posts-footer container-fluid'>
       <div className='row'>
-        {otherRandomPosts &&
-          otherRandomPosts.map(post => <p key={post._id}>{post.title}</p>)}
+        {randomPosts &&
+          randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
+            <div className='post col-sm-12 col-lg-6 col-xl-3 d-flex' key={_id}>
+              <figure>
+                <Link to={getPostLink(title, _id)}>
+                  <img className='img-fluid' src={imgURL} alt='post' />
+                </Link>
+              </figure>
+              <div className='right-col'>
+                <p className='date'>{formatDate(date)}</p>
+                <Link to={getPostLink(title, _id)}>
+                  <h4 className='title'>{title}</h4>
+                </Link>
+                <p className='hashtags'>{renderHashtags(hashtags, 3)}</p>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   )
 }
 
 const mapStateToProps = ({ posts }) => ({
-  otherRandomPosts: posts.otherRandomPosts
+  randomPosts: posts.randomPosts
 })
 
 export default connect(
   mapStateToProps,
-  { getOtherRandomPosts }
+  { getRandomPosts }
 )(OtherPostsFooter)

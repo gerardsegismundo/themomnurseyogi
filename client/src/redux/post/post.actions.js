@@ -45,6 +45,8 @@ const Posts = (() => {
   }
 
   const getRandomPostsCache = async dispatch => {
+    let numberOfChanges = 0
+    let numberOfCalls = 0
     if (_.isEmpty(randomPostsCache)) {
       const posts = await getPostsCache(dispatch)
       const excludedPosts = await getRecentPostsCache(dispatch)
@@ -55,12 +57,20 @@ const Posts = (() => {
         .sort(() => 0.5 - Math.random())
         .slice(0, 4)
 
+      numberOfChanges++
+      console.log('number of changes: ', numberOfChanges)
       dispatch({
         type: GET_RANDOM_POSTS,
         payload: randomPostsCache
       })
     }
 
+    console.log(
+      'RANDOM POSTS CACHE: ',
+      randomPostsCache.map(post => post.title)
+    )
+    numberOfCalls++
+    console.log('getRandomPosts called: ' + numberOfCalls)
     return randomPostsCache
   }
 
@@ -84,14 +94,21 @@ const Posts = (() => {
 
   const getOtherRandomPosts = () => async dispatch => {
     const posts = await getPostsCache(dispatch)
+    console.log('POSTS: ', posts.map(post => post.title))
     const recentPosts = await getRecentPostsCache(dispatch)
+    console.log('RECENT POSTS: ', recentPosts.map(post => post.title))
     const randomPosts = await getRandomPostsCache(dispatch)
+    console.log('RANDOM POSTS: ', randomPosts.map(post => post.title))
+    const excludedPosts = [...recentPosts, ...randomPosts]
+    console.log('EXCLUDED POSTS: ', excludedPosts.map(post => post.title))
+
     const otherRandomPosts = _.difference(posts, [
       ...recentPosts,
       ...randomPosts
     ])
       .sort(() => 0.5 - Math.random())
       .slice(0, 4)
+    console.log('OTHERS: ', otherRandomPosts.map(post => post.title))
 
     dispatch({
       type: GET_OTHER_RANDOM_POSTS,

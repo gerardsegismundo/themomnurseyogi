@@ -3,37 +3,18 @@ import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
 import OtherPost from '../common/OtherPosts'
 import { connect } from 'react-redux'
-import { getRandomPosts } from '../../redux/post/post.actions'
+import { getOtherRandomPosts } from '../../redux/post/post.actions'
 
 const Aside = ({
-  getRandomPosts,
-  randomPosts,
+  getOtherRandomPosts,
+  otherRandomPosts,
   subscribeSectionClass,
   showAsideItems = true
 }) => {
   useEffect(() => {
-    getRandomPosts()
+    getOtherRandomPosts()
     // eslint-disable-next-line
   }, [])
-
-  const AsideItems = () => (
-    <>
-      {randomPosts &&
-        randomPosts.map(props => (
-          <OtherPost
-            key={props._id}
-            classes='d-none d-lg-flex justify-content-center'
-            {...props}
-          />
-        ))}
-
-      <img
-        className='ads mx-auto d-none d-lg-flex'
-        src={adsImage}
-        alt='Advertisement'
-      />
-    </>
-  )
 
   return (
     <aside className='col-sm-12 col-lg-4 d-flex-row order-2 ml-xl-5'>
@@ -50,16 +31,35 @@ const Aside = ({
           Nemo!
         </p>
       </div>
-      {showAsideItems && <AsideItems />}
+      {showAsideItems && (
+        <>
+          {otherRandomPosts &&
+            otherRandomPosts
+              .map(props => (
+                <OtherPost
+                  key={props._id}
+                  classes='d-none d-lg-flex justify-content-center'
+                  {...props}
+                />
+              ))
+              .slice(0, 3)}
+
+          <img
+            className='ads mx-auto d-none d-lg-flex'
+            src={adsImage}
+            alt='Advertisement'
+          />
+        </>
+      )}
     </aside>
   )
 }
 
 const mapStateToProps = state => ({
-  randomPosts: state.posts.randomPosts
+  otherRandomPosts: state.posts.otherRandomPosts
 })
 
 export default connect(
   mapStateToProps,
-  { getRandomPosts }
+  { getOtherRandomPosts }
 )(Aside)

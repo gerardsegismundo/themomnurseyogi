@@ -51,7 +51,7 @@
       }
 
       &__hash-tags {
-        li {
+        span {
           margin: 0 1rem;
         }
       }
@@ -76,10 +76,6 @@
         color: $light-font;
         font-weight: 600;
       }
-
-      // &__footer {
-      //   margin-top: 3rem;
-      // }
     }
   }
 
@@ -117,8 +113,10 @@
         color: $light-font;
         overflow: hidden;
         max-width: 27rem;
+        display: block;
 
-        li {
+        word-wrap: break-word;
+        span {
           margin-right: 1rem;
         }
       }
