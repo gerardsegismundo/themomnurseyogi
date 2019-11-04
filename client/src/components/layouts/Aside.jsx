@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
 import OtherPost from '../common/OtherPosts'
 import { connect } from 'react-redux'
-import { getOtherRandomPosts } from '../../redux/post/post.actions'
 
 const Aside = ({
-  getOtherRandomPosts,
-  otherRandomPosts,
+  randomPosts,
   subscribeSectionClass,
   showAsideItems = true
 }) => {
-  useEffect(() => {
-    getOtherRandomPosts()
-    // eslint-disable-next-line
-  }, [])
-
   return (
     <aside className='col-sm-12 col-lg-4 d-flex-row order-2 ml-xl-5'>
       <center>
@@ -33,8 +26,8 @@ const Aside = ({
       </div>
       {showAsideItems && (
         <>
-          {otherRandomPosts &&
-            otherRandomPosts
+          {randomPosts &&
+            randomPosts
               .map(props => (
                 <OtherPost
                   key={props._id}
@@ -55,11 +48,11 @@ const Aside = ({
   )
 }
 
-const mapStateToProps = state => ({
-  otherRandomPosts: state.posts.otherRandomPosts
+const mapStateToProps = ({ posts }) => ({
+  randomPosts: posts.filteredPosts.random
 })
 
 export default connect(
   mapStateToProps,
-  { getOtherRandomPosts }
+  {}
 )(Aside)

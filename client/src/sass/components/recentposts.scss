@@ -1,0 +1,59 @@
+article {
+  .recent-posts {
+    margin: 3rem 0 4rem 0;
+    font-family: $google-font;
+    font-size: 5rem;
+    text-align-last: center;
+  }
+
+  .recent-post {
+    margin-top: 6rem;
+    margin-bottom: 10rem;
+
+    &__date,
+    &__hash-tags {
+      color: $light-font;
+      font-weight: 600;
+    }
+
+    &__date {
+      text-transform: uppercase;
+    }
+
+    &__title {
+      font-size: 3.5rem;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    &__hash-tags {
+      span {
+        margin: 0 1rem;
+      }
+    }
+
+    &__img {
+      max-height: 45rem;
+      margin-top: 3rem;
+      max-width: 100%;
+
+      @include respond(sm) {
+        max-height: 55rem;
+      }
+
+      @include respond(md) {
+        max-height: initial;
+      }
+    }
+
+    &__body {
+      margin-top: 1rem;
+      line-height: 3rem;
+      color: $light-font;
+      font-weight: 600;
+      margin-bottom: 5rem;
+      text-transform: capitalize;
+      text-indent: 5rem;
+    }
+  }
+}

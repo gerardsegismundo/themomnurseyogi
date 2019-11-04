@@ -51,6 +51,7 @@ const CommentForm = ({
               placeholder='Write a comment...'
               className='form-control col'
               rows='4'
+              required
             />
           </div>
 

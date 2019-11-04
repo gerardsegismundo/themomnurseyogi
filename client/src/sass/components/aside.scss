@@ -1,0 +1,43 @@
+aside {
+  .other-posts {
+    &:not(:first-of-type) {
+      margin-top: 8rem;
+    }
+
+    h4 {
+      line-height: 2rem;
+      opacity: 0.9;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    &__img {
+      margin-bottom: 3rem;
+      width: 27rem;
+    }
+
+    &__date {
+      font-weight: 600;
+      color: $light-font;
+      margin-bottom: 1rem;
+    }
+
+    &__hashtags {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: $light-font;
+      overflow: hidden;
+      max-width: 27rem;
+      display: block;
+
+      word-wrap: break-word;
+      span {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

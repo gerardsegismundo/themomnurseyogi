@@ -1,26 +1,24 @@
 import axios from 'axios'
+// eslint-disable-next-line
 import _ from 'lodash'
 
 import {
-  GET_RECENT_POSTS,
   GET_POST,
-  SEARCH_POST,
-  GET_RANDOM_POSTS,
-  CLEAR_SEARCH,
   GET_POSTS,
-  GET_OTHER_RANDOM_POSTS
+  SEARCH_POST,
+  CLEAR_SEARCH,
+  // eslint-disable-next-line
+  FILTER_POSTS
 } from './post.types'
 
 const Posts = (() => {
-  let postsCache = []
-  let recentPostsCache = []
-  let randomPostsCache = []
+  let postsCache = null
 
   const getPostsCache = async dispatch => {
-    if (_.isEmpty(postsCache)) {
+    if (!postsCache) {
       const res = await axios.get('/api/posts')
       postsCache = res.data
-
+      console.log('POSTS CACHE: ', postsCache.map(post => post.title))
       dispatch({
         type: GET_POSTS,
         payload: postsCache
@@ -30,57 +28,7 @@ const Posts = (() => {
     return postsCache
   }
 
-  const getRecentPostsCache = async dispatch => {
-    if (_.isEmpty(recentPostsCache)) {
-      const posts = await getPostsCache(dispatch)
-      recentPostsCache = [...posts].slice(0, 3)
-
-      dispatch({
-        type: GET_RECENT_POSTS,
-        payload: recentPostsCache
-      })
-    }
-
-    return recentPostsCache
-  }
-
-  const getRandomPostsCache = async dispatch => {
-    let numberOfChanges = 0
-    let numberOfCalls = 0
-    if (_.isEmpty(randomPostsCache)) {
-      const posts = await getPostsCache(dispatch)
-      const excludedPosts = await getRecentPostsCache(dispatch)
-
-      const notIncludedInRecentPosts = _.difference(posts, excludedPosts)
-
-      randomPostsCache = notIncludedInRecentPosts
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 4)
-
-      numberOfChanges++
-      console.log('number of changes: ', numberOfChanges)
-      dispatch({
-        type: GET_RANDOM_POSTS,
-        payload: randomPostsCache
-      })
-    }
-
-    console.log(
-      'RANDOM POSTS CACHE: ',
-      randomPostsCache.map(post => post.title)
-    )
-    numberOfCalls++
-    console.log('getRandomPosts called: ' + numberOfCalls)
-    return randomPostsCache
-  }
-
   const getPosts = () => async dispatch => await getPostsCache(dispatch)
-
-  const getRecentPosts = () => async dispatch =>
-    await getRecentPostsCache(dispatch)
-
-  const getRandomPosts = () => async dispatch =>
-    await getRandomPostsCache(dispatch)
 
   const getPost = id => async dispatch => {
     const posts = await getPostsCache(dispatch)
@@ -92,28 +40,11 @@ const Posts = (() => {
     })
   }
 
-  const getOtherRandomPosts = () => async dispatch => {
-    const posts = await getPostsCache(dispatch)
-    console.log('POSTS: ', posts.map(post => post.title))
-    const recentPosts = await getRecentPostsCache(dispatch)
-    console.log('RECENT POSTS: ', recentPosts.map(post => post.title))
-    const randomPosts = await getRandomPostsCache(dispatch)
-    console.log('RANDOM POSTS: ', randomPosts.map(post => post.title))
-    const excludedPosts = [...recentPosts, ...randomPosts]
-    console.log('EXCLUDED POSTS: ', excludedPosts.map(post => post.title))
+  const filterPosts = () => async dispatch => {
+    console.log('FILTERPOSTS!!')
+    if (!postsCache) await getPostsCache(dispatch)
 
-    const otherRandomPosts = _.difference(posts, [
-      ...recentPosts,
-      ...randomPosts
-    ])
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 4)
-    console.log('OTHERS: ', otherRandomPosts.map(post => post.title))
-
-    dispatch({
-      type: GET_OTHER_RANDOM_POSTS,
-      payload: otherRandomPosts
-    })
+    console.log(postsCache)
   }
 
   const searchPost = text => async dispatch => {
@@ -146,23 +77,14 @@ const Posts = (() => {
   }
 
   return {
-    getRandomPosts,
     getPost,
-    getRecentPosts,
-    searchPost,
     getPosts,
-    getOtherRandomPosts
+    filterPosts,
+    searchPost
   }
 })()
 
-export const {
-  getRandomPosts,
-  getPost,
-  getRecentPosts,
-  searchPost,
-  getPosts,
-  getOtherRandomPosts
-} = Posts
+export const { getPost, getPosts, searchPost, filterPosts } = Posts
 
 export const clearSearch = () => async dispatch => {
   dispatch({

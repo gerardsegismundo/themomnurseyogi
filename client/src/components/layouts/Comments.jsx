@@ -111,6 +111,8 @@ const Comments = ({
                             name='edited-comment'
                             value={editedComment.comment}
                             className='form-control'
+                            placeholder='Write a comment...'
+                            required
                           ></textarea>
 
                           <span onClick={exitEditComment}>cancel</span>

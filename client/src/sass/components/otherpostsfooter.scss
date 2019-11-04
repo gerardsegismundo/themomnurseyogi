@@ -1,28 +1,19 @@
 .other-posts-footer {
   border-top: 1px solid rgba(46, 46, 46, 0.15);
   margin-top: 8rem;
-  padding: 5rem 3vw 0rem 3vw;
-
-  @include respond(md) {
-    padding-left: 10vw;
-  }
-
-  @include respond(lg) {
-    padding-left: 3vw;
-  }
+  padding-top: 5rem;
 
   .post {
     margin-top: 3rem;
     margin-bottom: 3rem;
-    figure {
-      max-width: 185px;
-      max-height: 185px;
 
-      img {
-        cursor: pointer;
-        width: 100%;
-        margin: auto;
-      }
+    figure {
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 20rem;
+      height: 20.5rem;
+
+      background-position: center;
     }
 
     .right-col {
@@ -31,6 +22,7 @@
       overflow: hidden;
 
       .date {
+        margin-top: 1rem;
         text-transform: uppercase;
         @include standard-font;
 
@@ -42,6 +34,7 @@
       }
 
       .title {
+        margin-top: 0.75rem;
         line-height: 2rem;
         opacity: 0.9;
 
@@ -53,7 +46,7 @@
       }
 
       .hashtags {
-        margin-top: 1.5rem;
+        margin-top: 2rem;
         font-size: 1.3rem;
         overflow: hidden;
         word-wrap: break-word;
@@ -61,6 +54,17 @@
         overflow: hidden;
         line-height: 2rem;
         font-weight: 500;
+      }
+
+      .read-more {
+        display: inline-block;
+        font-weight: 500;
+        margin-top: 3rem;
+        // position: absolute;
+        // bottom: 2rem;
+        font-size: 1.4rem;
+        color: #2f2f2f;
+        text-decoration: underline;
       }
     }
   }

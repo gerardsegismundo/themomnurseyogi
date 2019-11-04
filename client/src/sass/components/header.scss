@@ -22,7 +22,7 @@
         &.is-active {
           transform: translateY(0.4rem);
           opacity: 1;
-          width: 20rem;
+          width: 25rem;
           padding-left: 1rem;
           padding-right: 3rem;
         }
@@ -34,19 +34,20 @@
 
       &__results {
         &--arrow {
-          transform: rotate(45deg) translate(7rem, -6rem);
+          transform: rotate(45deg) translate(9rem, -8rem);
           background: white;
           height: 1.5rem;
           width: 1.5rem;
           position: absolute;
-          border: 1px solid rgba($elegant-color, 0.065);
-          z-index: 0;
+          border: 1px solid rgba($elegant-color, 0.08);
+
           box-shadow: 4px 4px 10px rgba($elegant-color, 0.0975);
         }
 
         &--lists {
-          width: 20rem;
-          font-weight: 500;
+          z-index: 1;
+          width: 25rem;
+          font-weight: 400;
           display: block;
           border: 1px solid rgba($elegant-color, 0.065);
           border-top: none;
@@ -59,13 +60,16 @@
 
           li {
             padding: 1rem 1.5rem;
+            opacity: 0.9;
 
             &:not(:last-of-type) {
               border-bottom: 1px solid rgba($elegant-color, 0.05);
             }
             &:hover {
               cursor: pointer;
+              opacity: 1;
               background-color: rgba($elegant-color, 0.02);
+              text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
             }
           }
           line-height: 3.5rem;

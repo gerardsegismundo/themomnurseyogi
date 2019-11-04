@@ -19,19 +19,27 @@
     &__img-col {
       overflow: hidden;
 
-      img {
-        display: flex;
-        align-self: center;
-        max-height: 22rem;
+      figure {
+        height: 30rem;
+        width: 100%;
+        margin-bottom: 5rem;
 
-        margin: auto;
-        &:hover {
-          cursor: pointer;
+        @include respond(md) {
+          height: 25rem;
+          width: 25rem;
+          margin-bottom: 0;
         }
+
+        background-size: cover;
+        background-position: center;
       }
     }
 
     &__content-col {
+      @include respond(md) {
+        padding-left: 5rem;
+      }
+
       &--title {
         font-size: 2.5rem;
         margin-top: 0.5rem;
@@ -54,9 +62,30 @@
       &--hashtags {
         @include standard-font;
         display: flex;
+        margin-bottom: 3rem;
 
         span {
-          margin: 1rem 1rem 1rem 0;
+          margin: 2rem 1rem 0 0;
+
+          @include respond(md) {
+            margin: 1rem 1rem 0rem 0;
+          }
+        }
+      }
+
+      &--read-more {
+        font-weight: 500;
+        font-size: 1.8rem;
+        color: #2f2f2f;
+        text-decoration: underline;
+
+        p {
+          opacity: 0.8;
+
+          &:hover {
+            opacity: 1;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+          }
         }
       }
     }
