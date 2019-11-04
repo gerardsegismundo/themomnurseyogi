@@ -1,5 +1,4 @@
 import axios from 'axios'
-// eslint-disable-next-line
 import _ from 'lodash'
 
 import {
@@ -7,7 +6,6 @@ import {
   GET_POSTS,
   SEARCH_POST,
   CLEAR_SEARCH,
-  // eslint-disable-next-line
   FILTER_POSTS
 } from './post.types'
 
@@ -18,7 +16,7 @@ const Posts = (() => {
     if (!postsCache) {
       const res = await axios.get('/api/posts')
       postsCache = res.data
-      console.log('POSTS CACHE: ', postsCache.map(post => post.title))
+
       dispatch({
         type: GET_POSTS,
         payload: postsCache
@@ -28,10 +26,12 @@ const Posts = (() => {
     return postsCache
   }
 
-  const getPosts = () => async dispatch => await getPostsCache(dispatch)
+  const getPosts = () => async dispatch => {
+    return postsCache || (await getPostsCache(dispatch))
+  }
 
   const getPost = id => async dispatch => {
-    const posts = await getPostsCache(dispatch)
+    const posts = postsCache || (await getPostsCache(dispatch))
     const post = posts.find(post => post._id === id)
 
     dispatch({
@@ -41,21 +41,41 @@ const Posts = (() => {
   }
 
   const filterPosts = () => async dispatch => {
-    console.log('FILTERPOSTS!!')
     if (!postsCache) await getPostsCache(dispatch)
 
-    console.log(postsCache)
+    // Get 3 recent posts from posts cache.
+    const recentPosts = postsCache.slice(0, 3)
+
+    // Get 4 randomized posts from difference of recent posts and posts.
+    const randomPosts = (() => {
+      const notRecentPosts = _.difference([...postsCache], [...recentPosts])
+      return _.sampleSize(notRecentPosts, 4)
+    })()
+
+    // Get 4 another randomized posts that is different from recent & random posts
+    const otherRandomPosts = (() => {
+      const notRecentAndRandom = _.difference(postsCache, [
+        ...recentPosts,
+        randomPosts
+      ])
+      return _.sampleSize(notRecentAndRandom, 4)
+    })()
+
+    dispatch({
+      type: FILTER_POSTS,
+      payload: { recentPosts, randomPosts, otherRandomPosts }
+    })
   }
 
   const searchPost = text => async dispatch => {
-    if (text.length === 0 || text === undefined || typeof text !== 'string') {
+    if (_.isEmpty(text) || typeof text !== 'string') {
       return dispatch({
         type: SEARCH_POST,
         payload: null
       })
     }
 
-    const posts = await getPostsCache(dispatch)
+    const posts = postsCache || (await getPostsCache(dispatch))
 
     const postTitles = posts.map(post => {
       return {

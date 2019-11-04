@@ -14,7 +14,7 @@ const Posts = ({ getPosts, posts }) => {
   }, [])
 
   return (
-    <div className='container posts-page'>
+    <div className='container posts'>
       <h2 className='posts__page-title'># Posts</h2>
 
       {posts &&
@@ -24,9 +24,7 @@ const Posts = ({ getPosts, posts }) => {
               <div className='post__img-col cl-sm-12 col-md-4 col-lg-3'>
                 <Link to={getPostLink(title, _id)}>
                   {/* <img src={imgURL} alt='post' className='img-fluid m-auto' /> */}
-                  <figure
-                    style={{ backgroundImage: `url(${imgURL})` }}
-                  ></figure>
+                  <figure style={{ backgroundImage: `url(${imgURL})` }} />
                 </Link>
               </div>
 

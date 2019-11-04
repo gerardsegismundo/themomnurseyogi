@@ -36,6 +36,7 @@ export default (state = initialState, { type, payload }) => {
     }
 
     case FILTER_POSTS: {
+      console.log(payload)
       return {
         ...state,
         filteredPosts: payload

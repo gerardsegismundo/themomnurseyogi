@@ -3,11 +3,16 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
 
+import { filterPosts } from './redux/post/post.actions'
+
 import ClientApp from './ClientApp'
 import AdminApp from './AdminApp'
 
-const App = ({ setCurrentUser }) => {
-  useEffect(() => setCurrentUser())
+const App = ({ setCurrentUser, filterPosts }) => {
+  useEffect(() => {
+    setCurrentUser()
+    filterPosts()
+  })
 
   return (
     <Router>
@@ -18,5 +23,5 @@ const App = ({ setCurrentUser }) => {
 
 export default connect(
   null,
-  { setCurrentUser }
+  { setCurrentUser, filterPosts }
 )(App)
