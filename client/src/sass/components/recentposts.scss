@@ -55,5 +55,12 @@ article {
       text-transform: capitalize;
       text-indent: 5rem;
     }
+
+    &__read-more {
+      width: 100%;
+      @include respond(md) {
+        width: 50%;
+      }
+    }
   }
 }

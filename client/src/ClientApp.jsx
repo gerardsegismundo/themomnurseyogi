@@ -13,7 +13,7 @@ import Post from './components/pages/Post'
 import SignInModal from './components/layouts/SignInModal'
 import DeleteModal from './components/layouts/DeleteModal'
 
-// import OtherPostsFooter from './components/layouts/OtherPostsFooter'
+import OtherPostsFooter from './components/layouts/OtherPostsFooter'
 
 const ClientApp = () => {
   return (
@@ -34,7 +34,7 @@ const ClientApp = () => {
           path='/post/:id'
         />
       </Switch>
-      {/* <OtherPostsFooter /> */}
+      <OtherPostsFooter />
       <Footer />
     </>
   )

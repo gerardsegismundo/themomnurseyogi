@@ -28,7 +28,7 @@ const Post = ({ title, imgURL, hashtags, date, body, _id }) => (
     <p className='recent-post__body'>{sliceParagraph(body)}</p>
 
     <Link to={getPostLink(title, _id)}>
-      <button className='btn-primary btn-xl align-content-center mb-2'>
+      <button className='recent-post__read-more btn-primary btn-xl align-content-center mb-2'>
         Read more
       </button>
     </Link>

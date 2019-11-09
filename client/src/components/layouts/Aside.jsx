@@ -5,7 +5,7 @@ import OtherPost from '../common/OtherPosts'
 import { connect } from 'react-redux'
 
 const Aside = ({
-  randomPosts,
+  otherRandomPosts,
   subscribeSectionClass,
   showAsideItems = true
 }) => {
@@ -26,16 +26,14 @@ const Aside = ({
       </div>
       {showAsideItems && (
         <>
-          {randomPosts &&
-            randomPosts
-              .map(props => (
-                <OtherPost
-                  key={props._id}
-                  classes='d-none d-lg-flex justify-content-center'
-                  {...props}
-                />
-              ))
-              .slice(0, 3)}
+          {otherRandomPosts &&
+            otherRandomPosts.map(props => (
+              <OtherPost
+                key={props._id}
+                classes='d-none d-lg-flex justify-content-center'
+                {...props}
+              />
+            ))}
 
           <img
             className='ads mx-auto d-none d-lg-flex'
@@ -49,7 +47,7 @@ const Aside = ({
 }
 
 const mapStateToProps = ({ posts }) => ({
-  randomPosts: posts.filteredPosts.random
+  otherRandomPosts: posts.otherRandomPosts
 })
 
 export default connect(

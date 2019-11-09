@@ -6,7 +6,9 @@ import {
   OPEN_DELETE_MODAL,
   CLOSE_DELETE_MODAL,
   OPEN_USER_MENU,
-  CLOSE_USER_MENU
+  CLOSE_USER_MENU,
+  ENABLE_STICKY,
+  DISABLE_STICKY
 } from './ui.types'
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
   userMenuIsOpen: false,
   signInModalIsOpen: false,
   deleteModalIsOpen: false,
-  deleteModalId: ''
+  deleteModalId: '',
+  isSticky: false
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
@@ -32,7 +35,8 @@ const uiReducer = (state = initialState, { type, payload }) => {
     case OPEN_SIGNIN_MODAL:
       return {
         ...state,
-        signInModalIsOpen: true
+        signInModalIsOpen: true,
+        isSticky: false
       }
     case CLOSE_SIGNIN_MODAL:
       return {
@@ -59,6 +63,16 @@ const uiReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userMenuIsOpen: false
+      }
+    case ENABLE_STICKY:
+      return {
+        ...state,
+        isSticky: true
+      }
+    case DISABLE_STICKY:
+      return {
+        ...state,
+        isSticky: false
       }
 
     default:

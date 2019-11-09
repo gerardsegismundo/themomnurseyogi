@@ -31,10 +31,10 @@ const OtherPostsFooter = ({ randomPosts }) => {
 }
 
 const mapStateToProps = ({ posts }) => ({
-  randomPosts: posts.filteredPosts.random
+  randomPosts: posts.randomPosts
 })
 
 export default connect(
   mapStateToProps,
-  {}
+  null
 )(OtherPostsFooter)

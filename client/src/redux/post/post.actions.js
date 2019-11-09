@@ -48,7 +48,7 @@ const Posts = (() => {
 
     // Get 4 randomized posts from difference of recent posts and posts.
     const randomPosts = (() => {
-      const notRecentPosts = _.difference([...postsCache], [...recentPosts])
+      const notRecentPosts = _.difference(postsCache, recentPosts)
       return _.sampleSize(notRecentPosts, 4)
     })()
 
@@ -56,9 +56,9 @@ const Posts = (() => {
     const otherRandomPosts = (() => {
       const notRecentAndRandom = _.difference(postsCache, [
         ...recentPosts,
-        randomPosts
+        ...randomPosts
       ])
-      return _.sampleSize(notRecentAndRandom, 4)
+      return _.sampleSize(notRecentAndRandom, 3)
     })()
 
     dispatch({

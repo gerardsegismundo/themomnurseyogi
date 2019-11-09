@@ -6,8 +6,18 @@ import {
   OPEN_USER_MENU,
   CLOSE_USER_MENU,
   OPEN_DELETE_MODAL,
-  CLOSE_DELETE_MODAL
+  CLOSE_DELETE_MODAL,
+  ENABLE_STICKY,
+  DISABLE_STICKY
 } from './ui.types'
+
+export const enableSticky = () => dispatch =>
+  dispatch({
+    type: ENABLE_STICKY
+  })
+
+export const disableSticky = () => dispatch =>
+  dispatch({ type: DISABLE_STICKY })
 
 const hideScrollBar = (isHidden = true) => {
   if (isHidden) return (document.body.style.overflow = 'hidden')

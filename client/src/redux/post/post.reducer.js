@@ -7,14 +7,12 @@ import {
 } from './post.types'
 
 const initialState = {
-  posts: null,
   post: null,
+  posts: null,
   searchResult: null,
-  filteredPosts: {
-    recent: null,
-    random: null,
-    otherRandom: null
-  },
+  recentPosts: null,
+  randomPosts: null,
+  otherRandomPosts: null,
   loading: false
 }
 
@@ -36,10 +34,12 @@ export default (state = initialState, { type, payload }) => {
     }
 
     case FILTER_POSTS: {
-      console.log(payload)
+      const { recentPosts, randomPosts, otherRandomPosts } = payload
       return {
         ...state,
-        filteredPosts: payload
+        recentPosts,
+        randomPosts,
+        otherRandomPosts
       }
     }
 

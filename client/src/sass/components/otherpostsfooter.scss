@@ -1,9 +1,13 @@
 .other-posts-footer {
   border-top: 1px solid rgba(46, 46, 46, 0.15);
-  margin-top: 8rem;
+  margin-top: 4vmax;
   padding-top: 5rem;
 
   .post {
+    @media (max-width: 768px) {
+      padding-left: 9.5vw;
+    }
+
     margin-top: 3rem;
     margin-bottom: 3rem;
 
@@ -11,13 +15,22 @@
       background-size: cover;
       background-repeat: no-repeat;
       width: 20rem;
-      height: 20.5rem;
+      height: 20rem;
+
+      @include respond(xl) {
+        width: calc(3rem + 8vw);
+        height: calc(3rem + 8vw);
+      }
 
       background-position: center;
     }
 
     .right-col {
-      margin-left: 1.5rem;
+      margin-left: 7vw;
+      @include respond(md) {
+        margin-left: 1.5rem;
+      }
+
       word-wrap: break-word;
       overflow: hidden;
 
@@ -60,8 +73,6 @@
         display: inline-block;
         font-weight: 500;
         margin-top: 3rem;
-        // position: absolute;
-        // bottom: 2rem;
         font-size: 1.4rem;
         color: #2f2f2f;
         text-decoration: underline;

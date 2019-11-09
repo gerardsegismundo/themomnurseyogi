@@ -2,6 +2,20 @@
 
 > A full stack blog MERN app with admin dashboard.
 
+## Sample layout
+
+![Sample Layout](https://i.imgur.com/9LQDH85.jpg)
+
+## Sample Javascript Code
+
+![Sample Javascript Code](https://i.imgur.com/Zw3DXRX.jpg)
+Uses Memoization, Closures, IIFE's, Modularization, Callback and other advanced Javascript concepts to improve Big O(time coplexity) and code more readable.
+
+## Sample Bootstrap, SCSS Code
+
+![Sample CSS Code](https://i.imgur.com/Zw3DXRX.jpg)
+Uses bootstrap library, css media queries, flex, grid, viewport units(vmin, vh...) to create fully responsive design.
+
 ## Quick Start
 
 ```bash

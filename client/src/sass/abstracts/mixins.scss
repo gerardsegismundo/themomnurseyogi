@@ -1,5 +1,4 @@
 // MEDIA QUERY MANAGER
-
 @mixin respond($breakpoint) {
   @if $breakpoint == sm {
     // Small devices (landscape phones, 576px and up)

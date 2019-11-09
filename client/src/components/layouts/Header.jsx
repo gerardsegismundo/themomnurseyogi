@@ -13,7 +13,7 @@ const Header = () => (
       />
       <FieldSet />
     </div>
-    <UserMenu></UserMenu>
+    <UserMenu/>
 
     <main className='header__main d-flex-row justify-content-center text-center'>
       <h1>themomnurseyogi</h1>
