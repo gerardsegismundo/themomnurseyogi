@@ -10,7 +10,7 @@
 
 ![Sample Javascript Code](https://i.imgur.com/Zw3DXRX.jpg)
 
-> Uses Memoization, Closures, IIFE's, Modularization, Callback and other advanced Javascript concepts to improve time coplexity(Big O) and code readability.
+> Uses Memoization, Closures, IIFE's, Modularization, Callback and other coding concepts to improve time coplexity(Big O) and code readability.
 
 ## Sample Bootstrap, SCSS Code
 
