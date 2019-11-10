@@ -14,10 +14,12 @@ import SignInModal from './components/layouts/SignInModal'
 import DeleteModal from './components/layouts/DeleteModal'
 
 import OtherPostsFooter from './components/layouts/OtherPostsFooter'
+import SmallSearchbar from './components/layouts/SmallSearchbar'
 
 const ClientApp = () => {
   return (
     <>
+      <SmallSearchbar />
       <DeleteModal />
       <SignInModal />
       <Header />

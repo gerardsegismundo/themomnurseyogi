@@ -3,11 +3,20 @@ import SocialLinks from '../SocialLinks'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { auth } from '../../../firebase/firebase.utils'
-import { openSignInModal } from '../../../redux/ui/ui.actions'
+import {
+  openSignInModal,
+  toggleSmallSearchbar
+} from '../../../redux/ui/ui.actions'
 
-const NavbarLinks = ({ setNavIsOpen, openSignInModal, currentUser }) => {
+const NavbarLinks = ({
+  setNavIsOpen,
+  openSignInModal,
+  currentUser,
+  toggleSmallSearchbar,
+  smallSearchbarIsOpen
+}) => {
   const signOut = () => {
-    window.location = '/'
+    window.location.reload()
     auth.signOut()
   }
 
@@ -37,18 +46,26 @@ const NavbarLinks = ({ setNavIsOpen, openSignInModal, currentUser }) => {
         {currentUser ? 'signout' : 'signin'}
       </span>
 
-      <span onClick={closeNavbar}>search</span>
+      <span
+        onClick={() => {
+          toggleSmallSearchbar()
+          closeNavbar()
+        }}
+      >
+        search
+      </span>
 
       <SocialLinks classNames='nav__social-links d-flex d-md-none' />
     </>
   )
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({ user, ui }) => ({
+  currentUser: user.currentUser,
+  smallSearchbarIsOpen: ui.smallSearchbarIsOpen
 })
 
 export default connect(
   mapStateToProps,
-  { openSignInModal }
+  { openSignInModal, toggleSmallSearchbar }
 )(NavbarLinks)

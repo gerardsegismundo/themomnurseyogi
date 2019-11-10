@@ -8,8 +8,21 @@ import {
   OPEN_DELETE_MODAL,
   CLOSE_DELETE_MODAL,
   ENABLE_STICKY,
-  DISABLE_STICKY
+  DISABLE_STICKY,
+  TOGGLE_SMALL_SEARCHBAR
 } from './ui.types'
+
+const hideScrollBar = (isHidden = true) => {
+  if (isHidden) return (document.body.style.overflow = 'hidden')
+  document.body.style.overflow = 'initial'
+  document.body.style.overflowX = 'hidden'
+}
+
+export const toggleSmallSearchbar = smallSearchbarIsOpen => dispatch => {
+  // toggles window scrollbar
+  hideScrollBar(!smallSearchbarIsOpen)
+  dispatch({ type: TOGGLE_SMALL_SEARCHBAR })
+}
 
 export const enableSticky = () => dispatch =>
   dispatch({
@@ -18,12 +31,6 @@ export const enableSticky = () => dispatch =>
 
 export const disableSticky = () => dispatch =>
   dispatch({ type: DISABLE_STICKY })
-
-const hideScrollBar = (isHidden = true) => {
-  if (isHidden) return (document.body.style.overflow = 'hidden')
-  document.body.style.overflow = 'initial'
-  document.body.style.overflowX = 'hidden'
-}
 
 export const toggleSearch = payload => dispatch => {
   dispatch({ type: TOGGLE_SEARCH, payload })

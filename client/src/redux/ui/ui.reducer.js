@@ -8,7 +8,8 @@ import {
   OPEN_USER_MENU,
   CLOSE_USER_MENU,
   ENABLE_STICKY,
-  DISABLE_STICKY
+  DISABLE_STICKY,
+  TOGGLE_SMALL_SEARCHBAR
 } from './ui.types'
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   signInModalIsOpen: false,
   deleteModalIsOpen: false,
   deleteModalId: '',
-  isSticky: false
+  isSticky: false,
+  smallSearchbarIsOpen: true
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
@@ -26,6 +28,11 @@ const uiReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         searchbarIsActive: payload
+      }
+    case TOGGLE_SMALL_SEARCHBAR:
+      return {
+        ...state,
+        smallSearchbarIsOpen: !state.smallSearchbarIsOpen
       }
     case CLOSE_SEARCH:
       return {

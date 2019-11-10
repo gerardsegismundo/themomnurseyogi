@@ -1,27 +1,42 @@
 import React, { useRef } from 'react'
+import { FacebookIcon, GoogleIcon, CloseIcon } from './SvgIcons'
+import { connect } from 'react-redux'
+import { useOutsideAndEscapeClick } from '../../helpers/func'
+
+import {
+  closeSignInModal,
+  enableSticky
+} from '../.../../../redux/ui/ui.actions'
+
 import {
   signInWithGoogle,
   signInWithFacebook
 } from '../../firebase/firebase.utils'
-import { FacebookIcon, GoogleIcon, CloseIcon } from './SvgIcons'
-import { connect } from 'react-redux'
-import { closeSignInModal } from '../.../../../redux/ui/ui.actions'
-import { useOutsideAndEscapeClick } from '../../helpers/func'
 
-const SignInModal = ({ signInModalIsOpen, closeSignInModal }) => {
+const SignInModal = ({
+  signInModalIsOpen,
+  closeSignInModal,
+  isSticky,
+  enableSticky
+}) => {
   const signInModalRef = useRef()
 
   // Close signInModal on outsideClick & esc
-  useOutsideAndEscapeClick(signInModalRef, signInModalIsOpen, closeSignInModal)
+  useOutsideAndEscapeClick(signInModalRef, signInModalIsOpen, () => {
+    closeSignInModal()
+    !isSticky && enableSticky()
+  })
 
   const signInWithGoogleHandler = () => {
     signInWithGoogle()
     closeSignInModal()
+    !isSticky && enableSticky()
   }
 
   const signInWithFacebookHandler = () => {
     signInWithFacebook()
     closeSignInModal()
+    !isSticky && enableSticky()
   }
 
   return (
@@ -67,11 +82,12 @@ const SignInModal = ({ signInModalIsOpen, closeSignInModal }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  signInModalIsOpen: state.ui.signInModalIsOpen
+const mapStateToProps = ({ ui }) => ({
+  signInModalIsOpen: ui.signInModalIsOpen,
+  isSticky: ui.isSticky
 })
 
 export default connect(
   mapStateToProps,
-  { closeSignInModal }
+  { closeSignInModal, enableSticky }
 )(SignInModal)

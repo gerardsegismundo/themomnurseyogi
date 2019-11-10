@@ -26,8 +26,8 @@
     }
 
     .right-col {
-      margin-left: 7vw;
-      @include respond(md) {
+      margin-left: calc(1.25rem + 4vw);
+      @include respond(xl) {
         margin-left: 1.5rem;
       }
 

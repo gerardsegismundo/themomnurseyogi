@@ -29,8 +29,9 @@ const NavbarMedium = ({ isSticky, enableSticky, disableSticky }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  isSticky: state.ui.isSticky
+const mapStateToProps = ({ ui }) => ({
+  isSticky: ui.isSticky,
+  signInModalIsOpen: ui.signInModalIsOpen
 })
 
 export default connect(
