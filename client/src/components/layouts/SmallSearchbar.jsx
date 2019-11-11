@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { toggleSmallSearchbar } from '../../redux/ui/ui.actions'
+import { toggleSmallSearchbar, enableSticky } from '../../redux/ui/ui.actions'
 import { CloseIcon } from './SvgIcons'
 
-const SmallSearchbar = ({ toggleSmallSearchbar, smallSearchbarIsOpen }) => {
+const SmallSearchbar = ({
+  toggleSmallSearchbar,
+  smallSearchbarIsOpen,
+  enableSticky
+}) => {
+  // Focus on input on render
+  const searchInputRef = useRef()
+  useEffect(() => {
+    if (smallSearchbarIsOpen) searchInputRef.current.focus()
+  }, [smallSearchbarIsOpen])
+
+  const onClearSearch = () => {
+    searchInputRef.current.blur()
+    searchInputRef.current.value = ''
+  }
+
+  const closeSmallSearchBar = () => {
+    if (window.pageYOffset >= 220) enableSticky()
+    toggleSmallSearchbar(smallSearchbarIsOpen)
+    onClearSearch()
+  }
+
+  const onChange = async => {
+    const text = searchInputRef.current.value
+    console.log(text)
+  }
+
   return (
     smallSearchbarIsOpen && (
       <div
@@ -11,15 +37,17 @@ const SmallSearchbar = ({ toggleSmallSearchbar, smallSearchbarIsOpen }) => {
           smallSearchbarIsOpen ? ' is-open ' : ''
         }d-flex d-md-none`}
       >
-        <CloseIcon onClick={() => toggleSmallSearchbar(smallSearchbarIsOpen)} />
+        <CloseIcon onClick={closeSmallSearchBar} />
         <div
           className={`searchbar-sm${smallSearchbarIsOpen ? ' is-open' : ''}`}
         >
           <i className='fa fa-search' />
           <input
+            ref={searchInputRef}
             type='search'
             className='searchbar-sm__input form-control'
             placeholder='Search blog'
+            onChange={onChange}
           />
         </div>
       </div>
@@ -33,5 +61,5 @@ const mapStateToProps = ({ ui }) => ({
 
 export default connect(
   mapStateToProps,
-  { toggleSmallSearchbar }
+  { toggleSmallSearchbar, enableSticky }
 )(SmallSearchbar)

@@ -8,18 +8,18 @@ import { useOutsideAndEscapeClick } from '../../../helpers/func'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsActive] = useState(false)
-  const searchGroup = useRef()
-  const searchInput = useRef()
+  const searchGroupRef = useRef()
+  const searchInputRef = useRef()
 
   // Close searchbar on outsideClick and esc
-  useOutsideAndEscapeClick(searchGroup, searchbarIsActive, () => {
+  useOutsideAndEscapeClick(searchGroupRef, searchbarIsActive, () => {
     setSearchbarIsActive(false)
     onClearSearch()
   })
 
   const onClearSearch = () => {
-    searchInput.current.blur()
-    searchInput.current.value = ''
+    searchInputRef.current.blur()
+    searchInputRef.current.value = ''
     clearSearch()
   }
 
@@ -27,22 +27,18 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
     setSearchbarIsActive(!searchbarIsActive)
     document.activeElement.blur()
 
-    if (!searchbarIsActive) return searchInput.current.focus()
+    if (!searchbarIsActive) return searchInputRef.current.focus()
     onClearSearch()
   }
 
   const onChange = async () => {
-    const text = searchInput.current.value
+    const text = searchInputRef.current.value
     searchPost(text)
   }
 
-  let searchInputClass = `search-post__input ${
-    searchbarIsActive ? 'is-active' : ''
-  }`
-
   return (
     <div className='search-post d-flex-row'>
-      <div ref={searchGroup}>
+      <div ref={searchGroupRef}>
         <button
           className='btn btn-lg btn-txt btn--search'
           onClick={toggleSearchIcon}
@@ -52,10 +48,12 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
 
         <input
           type='search'
-          className={searchInputClass}
+          className={`search-post__input ${
+            searchbarIsActive ? 'is-active' : ''
+          }`}
           placeholder='Search blog'
           onChange={onChange}
-          ref={searchInput}
+          ref={searchInputRef}
         />
       </div>
 

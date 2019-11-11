@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { auth } from '../../../firebase/firebase.utils'
 import {
   openSignInModal,
-  toggleSmallSearchbar
+  toggleSmallSearchbar,
+  disableSticky
 } from '../../../redux/ui/ui.actions'
 
 const NavbarLinks = ({
@@ -13,7 +14,8 @@ const NavbarLinks = ({
   openSignInModal,
   currentUser,
   toggleSmallSearchbar,
-  smallSearchbarIsOpen
+  smallSearchbarIsOpen,
+  disableSticky
 }) => {
   const signOut = () => {
     window.location.reload()
@@ -50,6 +52,7 @@ const NavbarLinks = ({
         onClick={() => {
           toggleSmallSearchbar()
           closeNavbar()
+          disableSticky()
         }}
       >
         search
@@ -67,5 +70,5 @@ const mapStateToProps = ({ user, ui }) => ({
 
 export default connect(
   mapStateToProps,
-  { openSignInModal, toggleSmallSearchbar }
+  { openSignInModal, toggleSmallSearchbar, disableSticky }
 )(NavbarLinks)

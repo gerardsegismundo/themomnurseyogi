@@ -5,7 +5,7 @@ import { enableSticky, disableSticky } from '../../../redux/ui/ui.actions'
 import useStickOnTop from './useStickOnTop'
 
 const NavbarMedium = ({ isSticky, enableSticky, disableSticky }) => {
-  useStickOnTop(312, enableSticky, disableSticky)
+  useStickOnTop(318, enableSticky, disableSticky)
 
   return (
     <nav

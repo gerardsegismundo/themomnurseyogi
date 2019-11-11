@@ -19,7 +19,7 @@ const initialState = {
   deleteModalIsOpen: false,
   deleteModalId: '',
   isSticky: false,
-  smallSearchbarIsOpen: true
+  smallSearchbarIsOpen: false
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
