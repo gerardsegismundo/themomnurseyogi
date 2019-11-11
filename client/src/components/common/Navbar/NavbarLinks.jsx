@@ -14,12 +14,23 @@ const NavbarLinks = ({
   openSignInModal,
   currentUser,
   toggleSmallSearchbar,
-  smallSearchbarIsOpen,
+
   disableSticky
 }) => {
   const signOut = () => {
     window.location.reload()
     auth.signOut()
+  }
+
+  const onSign = () => {
+    closeNavbar()
+    currentUser ? signOut() : openSignInModal()
+  }
+
+  const onSearch = () => {
+    toggleSmallSearchbar()
+    closeNavbar()
+    disableSticky()
   }
 
   const closeNavbar = () => setNavIsOpen(false)
@@ -39,33 +50,17 @@ const NavbarLinks = ({
         contact
       </NavLink>
 
-      <span
-        onClick={() => {
-          closeNavbar()
-          currentUser ? signOut() : openSignInModal()
-        }}
-      >
-        {currentUser ? 'signout' : 'signin'}
-      </span>
+      <span onClick={onSearch}>search</span>
 
-      <span
-        onClick={() => {
-          toggleSmallSearchbar()
-          closeNavbar()
-          disableSticky()
-        }}
-      >
-        search
-      </span>
+      <span onClick={onSign}>{currentUser ? 'signout' : 'signin'}</span>
 
       <SocialLinks classNames='nav__social-links d-flex d-md-none' />
     </>
   )
 }
 
-const mapStateToProps = ({ user, ui }) => ({
-  currentUser: user.currentUser,
-  smallSearchbarIsOpen: ui.smallSearchbarIsOpen
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
 })
 
 export default connect(

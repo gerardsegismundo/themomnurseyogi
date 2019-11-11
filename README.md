@@ -12,11 +12,11 @@
 
 > Uses Memoization, Closures, IIFE's, Modularization, Callback and other coding concepts to improve time coplexity(Big O) and code readability.
 
-## Sample Bootstrap, SCSS Code
+## Sample Bootstrap, Sass(SCSS) Code
 
 ![Sample CSS Code](https://i.imgur.com/Zw3DXRX.jpg)
 
-> Uses bootstrap library, css media queries, flex, grid, viewport units(vmin, vh...) to create fully responsive design.
+> Uses bootstrap library, css media queries, flex, grid, calc() function, viewport units(vmin, vh...) to create fully responsive design.
 
 ## Quick Start
 
