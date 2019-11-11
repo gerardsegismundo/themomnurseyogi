@@ -10,13 +10,14 @@
 
 ![Sample Javascript Code](https://i.imgur.com/Zw3DXRX.jpg)
 
-> Uses Memoization, Closures, IIFE's, Modularization, Callback and other coding concepts to improve time coplexity(Big O) and code readability.
+> Used Memoization, Closures, IIFE's, Modularization, Callback and other coding concepts to improve time coplexity(Big O) and code readability.
 
 ## Sample Bootstrap, Sass(SCSS) Code
 
-![Sample CSS Code](https://i.imgur.com/Zw3DXRX.jpg)
+![Sample CSS Code](https://i.imgur.com/BBLXa79.jpg)
 
-> Uses bootstrap library, css media queries, flex, grid, calc() function, viewport units(vmin, vh...) to create fully responsive design.
+> Used bootstrap library, css media queries, flex, grid, calc() function, viewport units(vmin, vh...) to create fully responsive design.
+> Used BEM naming convention for a long term maintainable CSS codebase
 
 ## Quick Start
 
