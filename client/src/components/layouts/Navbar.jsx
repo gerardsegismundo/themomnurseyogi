@@ -10,14 +10,12 @@ const Navbar = () => {
   const screenTest = e => setIsScreenSmall(e.matches)
 
   useEffect(() => {
+    setIsScreenSmall(smallScreenMediaQuery.matches)
     smallScreenMediaQuery.addListener(screenTest)
-
     return () => smallScreenMediaQuery.removeListener(screenTest)
-  })
+  }, [smallScreenMediaQuery])
 
-  {
-    return isScreenSmall ? <NavbarSmall /> : <NavbarMedium />
-  }
+  return isScreenSmall ? <NavbarSmall /> : <NavbarMedium />
 }
 
 export default Navbar
