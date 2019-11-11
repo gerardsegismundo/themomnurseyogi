@@ -1,8 +1,6 @@
 // Keys for dev and prod
-const devKeys = require('./dev.keys')
-const prodKeys = require('./prod.keys')
-
-// export keys
-process.env.NODE_ENV === 'production'
-  ? (module.exports = prodKeys)
-  : (module.exports = devKeys)
+if (process.env.NODE_ENV === 'production') {
+  return (module.exports = require('./prod.keys'))
+} else {
+  module.exports = require('./dev.keys')
+}
