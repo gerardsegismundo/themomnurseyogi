@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { FIREBASE_API_KEY } from '../config/dev.keys'
+import { FIREBASE_API_KEY } from '../config/keys'
 
 const config = {
   apiKey: FIREBASE_API_KEY,
