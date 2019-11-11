@@ -59,6 +59,10 @@
         @include standard-font;
       }
 
+      &--body {
+        text-transform: capitalize;
+      }
+
       &--hashtags {
         @include standard-font;
         display: flex;

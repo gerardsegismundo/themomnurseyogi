@@ -4,7 +4,13 @@
   }
   &__social-links {
     & > a {
+      opacity: 0.7;
       margin-right: 3vw;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
