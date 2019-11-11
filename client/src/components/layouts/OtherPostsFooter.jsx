@@ -5,33 +5,28 @@ import { Link } from 'react-router-dom'
 
 const OtherPostsFooter = ({ randomPosts }) => {
   return (
-    !window.location.href.includes('posts') && (
-      <div className='other-posts-footer container-fluid'>
-        <div className='row'>
-          {randomPosts &&
-            randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
-              <div
-                className='post col-sm-12 col-md-6 col-xl-3 d-flex'
-                key={_id}
-              >
+    <div className='other-posts-footer container-fluid'>
+      <div className='row'>
+        {randomPosts &&
+          randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
+            <div className='post col-sm-12 col-md-6 col-xl-3 d-flex' key={_id}>
+              <Link to={getPostLink(title, _id)}>
+                <figure style={{ backgroundImage: `url(${imgURL})` }} />{' '}
+              </Link>
+              <div className='right-col'>
+                <p className='date'>{formatDate(date)}</p>
                 <Link to={getPostLink(title, _id)}>
-                  <figure style={{ backgroundImage: `url(${imgURL})` }} />{' '}
+                  <h4 className='title'>{title}</h4>
                 </Link>
-                <div className='right-col'>
-                  <p className='date'>{formatDate(date)}</p>
-                  <Link to={getPostLink(title, _id)}>
-                    <h4 className='title'>{title}</h4>
-                  </Link>
-                  <p className='hashtags'>{renderHashtags(hashtags, 3)}</p>
-                  <Link to={getPostLink(title, _id)} className='read-more'>
-                    Read more
-                  </Link>
-                </div>
+                <p className='hashtags'>{renderHashtags(hashtags, 3)}</p>
+                <Link to={getPostLink(title, _id)} className='read-more'>
+                  Read more
+                </Link>
               </div>
-            ))}
-        </div>
+            </div>
+          ))}
       </div>
-    )
+    </div>
   )
 }
 
