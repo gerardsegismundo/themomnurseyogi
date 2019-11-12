@@ -91,17 +91,22 @@
       margin-top: 7rem;
     }
 
-    h1 {
+    &--title {
       font-family: $google-font;
-      font-size: 7rem;
-      // letter-spacing: 0.1rem;
+      font-size: 15vw;
+
       @include respond(sm) {
         font-size: 9rem;
       }
     }
 
-    h4 {
-      font-size: 1.7rem;
+    &--subtitle {
+      font-size: calc(1rem + 1vw);
+
+      @include respond(sm) {
+        font-size: 1.7rem;
+      }
+
       margin-top: 2rem;
 
       letter-spacing: 0.5rem;

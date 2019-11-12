@@ -10,16 +10,24 @@ const OtherPostsFooter = ({ randomPosts }) => {
         {randomPosts &&
           randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
             <div className='post col-sm-12 col-md-6 col-xl-3 d-flex' key={_id}>
-              <Link to={getPostLink(title, _id)}>
-                <figure style={{ backgroundImage: `url(${imgURL})` }} />{' '}
+              <Link to={getPostLink(title, _id)} class='post__img-container'>
+                <figure
+                  className='post__img-container__img'
+                  style={{ backgroundImage: `url(${imgURL})` }}
+                />{' '}
               </Link>
-              <div className='right-col'>
-                <p className='date'>{formatDate(date)}</p>
+              <div className='post__labels'>
+                <p className='post__labels--date'>{formatDate(date)}</p>
                 <Link to={getPostLink(title, _id)}>
-                  <h4 className='title'>{title}</h4>
+                  <h4 className='post__labels--title'>{title}</h4>
                 </Link>
-                <p className='hashtags'>{renderHashtags(hashtags, 3)}</p>
-                <Link to={getPostLink(title, _id)} className='read-more'>
+                <p className='post__labels--hashtags'>
+                  {renderHashtags(hashtags, 3)}
+                </p>
+                <Link
+                  to={getPostLink(title, _id)}
+                  className='post__labels--read-more'
+                >
                   Read more
                 </Link>
               </div>
@@ -34,7 +42,4 @@ const mapStateToProps = ({ posts }) => ({
   randomPosts: posts.randomPosts
 })
 
-export default connect(
-  mapStateToProps,
-  null
-)(OtherPostsFooter)
+export default connect(mapStateToProps, null)(OtherPostsFooter)

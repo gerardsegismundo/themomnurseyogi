@@ -11,34 +11,48 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
 
-    figure {
-      background-size: cover;
-      background-repeat: no-repeat;
-      width: 20rem;
-      height: 20rem;
+    &__img-container {
+      display: flex;
+      align-items: center;
 
-      @include respond(xl) {
-        width: calc(3rem + 8vw);
-        height: calc(3rem + 8vw);
+      &__img {
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 40vw;
+
+        width: 40vw;
+
+        @include respond(sm) {
+          height: 20rem;
+          width: 20rem;
+        }
+
+        @include respond(xl) {
+          height: calc(3rem + 8vw);
+          width: calc(3rem + 8vw);
+        }
+
+        background-position: center;
       }
-
-      background-position: center;
     }
 
-    .right-col {
+    &__labels {
       margin-left: calc(1.25rem + 4vw);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
       @include respond(xl) {
         margin-left: 1.5rem;
       }
 
       word-wrap: break-word;
-      overflow: hidden;
 
-      .date {
-        margin-top: 1rem;
+      &--date {
         text-transform: uppercase;
-        @include standard-font;
-
+        color: rgba(46, 46, 46, 0.5);
+        font-weight: 600;
+        line-height: calc(0.65rem + 1vw);
         font-weight: 700;
         font-size: 1rem;
         letter-spacing: 0.08rem;
@@ -46,10 +60,15 @@
         color: #afafaf;
       }
 
-      .title {
-        margin-top: 0.75rem;
+      &--title {
+        margin-top: 2rem;
         line-height: 2rem;
         opacity: 0.9;
+
+        @include respond(md) {
+          margin-top: 0.75rem;
+          line-height: calc(0.65rem + 1vw);
+        }
 
         &:hover {
           cursor: pointer;
@@ -58,21 +77,20 @@
         }
       }
 
-      .hashtags {
+      &--hashtags {
         margin-top: 2rem;
         font-size: 1.3rem;
-        overflow: hidden;
+
         word-wrap: break-word;
         color: rgba(46, 46, 46, 0.5);
-        overflow: hidden;
         line-height: 2rem;
         font-weight: 500;
       }
 
-      .read-more {
+      &--read-more {
         display: inline-block;
         font-weight: 500;
-        margin-top: 3rem;
+        margin-top: calc(1.2rem + 0.5vw);
         font-size: 1.4rem;
         color: #2f2f2f;
         text-decoration: underline;
