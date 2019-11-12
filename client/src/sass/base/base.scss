@@ -65,7 +65,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  position: relative;
   box-sizing: border-box;
   font-size: $default-font-size;
 }
