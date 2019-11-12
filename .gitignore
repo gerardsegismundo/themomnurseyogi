@@ -35,3 +35,4 @@ yarn.lock
 notes.txt
 dev.keys.js
 debug.log
+.prettierrc
