@@ -2,6 +2,8 @@
 
 > A full stack blog MERN app with admin dashboard.
 
+[link to project!](https://rocky-peak-91924.herokuapp.com/)
+
 ## Sample layout
 
 ![Sample Layout](https://i.imgur.com/9LQDH85.jpg)
