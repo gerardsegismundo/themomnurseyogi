@@ -9,8 +9,7 @@
     "server": "nodemon server/server.js",
     "client": "npm run start --prefix client",
     "clientinstall": "npm run --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "cors": "^2.8.5",
