@@ -2,7 +2,7 @@
 
 > A full stack blog MERN app with admin dashboard.
 
-Here's the link to this project -> [themomnurseyogi](https://rocky-peak-91924.herokuapp.com/)
+Here's the link to this project -> [https://themomnurseyogi.herokuapp.com/](https://themomnurseyogi.herokuapp.com/)
 
 ## Sample layout
 
