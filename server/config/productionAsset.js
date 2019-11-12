@@ -1,21 +1,7 @@
-const path = require('path')
-const express = require('express')
+// const path = require('path')
+// const express = require('express')
 
-// Serve static asssets in production
-module.exports = app => {
-  if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('../../client/build'))
+// // Serve static asssets in production
+// module.exports = app => {
 
-    app.get('*', (req, res) =>
-      res.sendFile(
-        path.resolve(
-          __dirname,
-          '../../client',
-          '../../client/build',
-          'index.html'
-        )
-      )
-    )
-  }
-}
+// }
