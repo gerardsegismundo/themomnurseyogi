@@ -82,14 +82,6 @@
     }
   }
 
-  &__btn:hover &__icon::before {
-    top: -1rem;
-  }
-
-  &__btn:hover &__icon::after {
-    top: 1rem;
-  }
-
   &__checkbox:checked + &__btn &__icon {
     background-color: transparent;
   }
