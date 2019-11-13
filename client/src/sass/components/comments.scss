@@ -79,7 +79,12 @@
 
     &--form {
       margin: auto;
-      margin-bottom: 20rem;
+      margin-bottom: 13rem;
+      // margin-bottom: 20rem;
+
+      @include respond(xl) {
+        margin-bottom: calc(13rem + 4vw);
+      }
 
       div {
         display: flex;
