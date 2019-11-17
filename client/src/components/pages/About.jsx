@@ -6,19 +6,15 @@ const About = () => {
     <div className='container about'>
       <h2 className='about__page-title'>#Hi I'm Maydee Biascan</h2>
 
-      <p className='about__hashtags'>
-        <span>#mom</span>
-        <span>#nurse</span>
-        <span>#yogi</span>
-      </p>
+      <p className='about__hashtags'>#mom #nurse #yogi</p>
 
       <img
         src={aboutImage}
         alt='family'
-        className='d-flex img-fluid  mx-auto'
+        className='about__img d-flex img-fluid mx-auto'
       />
 
-      <p className='standard-font text-center'>
+      <p className='about__body standard-font'>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo saepe
         neque beatae eveniet. Doloremque nostrum et laboriosam alias, enim qui
         blanditiis esse non nam error. Lorem ipsum dolor sit amet consectetur,
@@ -28,7 +24,7 @@ const About = () => {
       </p>
       <br />
 
-      <p className='standard-font text-center'>
+      <p className='about__body standard-font'>
         Dolore suscipit, iure earum deleniti fuga quaerat excepturi eum,
         voluptate deserunt rerum mollitia, ipsam voluptates veritatis ipsum
         accusamus cupiditate! Inventore adipisci aperiam cum iusto quo itaque

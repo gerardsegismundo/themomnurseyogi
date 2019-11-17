@@ -15,7 +15,6 @@ import {
 const hideScrollBar = (isHidden = true) => {
   if (isHidden) return (document.body.style.overflow = 'hidden')
   document.body.style.overflow = 'initial'
-  document.body.style.overflowX = 'hidden'
 }
 
 export const toggleSmallSearchbar = smallSearchbarIsOpen => dispatch => {

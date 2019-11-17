@@ -9,16 +9,19 @@
   &__hashtags {
     display: flex;
     justify-content: center;
-
-    span {
-      margin: 2rem 1rem;
-      @include standard-font;
-      font-size: 2.1rem;
-    }
+    margin: 2rem;
+    @include standard-font;
+    font-size: 2.1rem;
+    word-spacing: 3rem;
   }
 
-  img {
+  &__img {
     margin-top: 5rem;
     margin-bottom: 5rem;
+  }
+
+  &__body {
+    text-align: justify;
+    text-indent: 30px;
   }
 }

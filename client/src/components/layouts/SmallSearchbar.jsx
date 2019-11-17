@@ -82,7 +82,9 @@ const mapStateToProps = ({ ui, posts }) => ({
   searchResult: posts.searchResult
 })
 
-export default connect(
-  mapStateToProps,
-  { toggleSmallSearchbar, enableSticky, searchPost, clearSearch }
-)(SmallSearchbar)
+export default connect(mapStateToProps, {
+  toggleSmallSearchbar,
+  enableSticky,
+  searchPost,
+  clearSearch
+})(SmallSearchbar)

@@ -10,7 +10,10 @@ const OtherPostsFooter = ({ randomPosts }) => {
         {randomPosts &&
           randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
             <div className='post col-sm-12 col-md-6 col-xl-3 d-flex' key={_id}>
-              <Link to={getPostLink(title, _id)} class='post__img-container'>
+              <Link
+                to={getPostLink(title, _id)}
+                className='post__img-container'
+              >
                 <figure
                   className='post__img-container__img'
                   style={{ backgroundImage: `url(${imgURL})` }}
