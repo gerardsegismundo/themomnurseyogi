@@ -27,8 +27,11 @@ const Post = ({ location, getPost, post }) => {
       </ul>
       <img src={imgURL} alt={title} className='post__img' />
       <center>
-        <p className='post__body fw-600 d-flex align-self-center align-content-center'>
-          <span>{body}</span>
+        <p
+          id='post-body'
+          className='post__body fw-600 align-self-center align-content-center'
+        >
+          {body}
         </p>
       </center>
 
@@ -42,7 +45,4 @@ const mapStateToProps = state => ({
   posts: state.posts.posts
 })
 
-export default connect(
-  mapStateToProps,
-  { getPost }
-)(Post)
+export default connect(mapStateToProps, { getPost })(Post)

@@ -40,13 +40,28 @@
     }
   }
 
+  &__body::first-letter {
+    text-transform: uppercase !important;
+  }
+
   &__body {
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    ::first-letter {
+      text-transform: uppercase;
+    }
+
     text-align: justify;
     text-indent: 30px;
     margin: 5rem 0;
     max-width: 88vw;
-    text-align: left;
     line-height: 4.5rem;
     color: rgba($elegant-color, 0.8);
   }
+}
+
+#post-body::first-letter {
+  text-transform: uppercase;
 }

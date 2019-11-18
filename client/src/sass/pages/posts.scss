@@ -54,6 +54,10 @@
         }
       }
 
+      &--body::first-letter {
+        text-transform: uppercase;
+      }
+
       &--body,
       &--hashtags {
         @include standard-font;

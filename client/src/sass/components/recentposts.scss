@@ -47,6 +47,9 @@ article {
     }
 
     &__body {
+      &::first-letter {
+        text-transform: uppercase;
+      }
       margin-top: 1rem;
       line-height: 3rem;
       color: $light-font;
