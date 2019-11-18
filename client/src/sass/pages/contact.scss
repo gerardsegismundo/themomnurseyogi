@@ -5,12 +5,14 @@
   }
 
   &__cover-img {
+    margin-top: 3rem;
     background-image: url('../../assets/dad.art.jpg');
     background-size: cover;
     height: 40rem;
 
     @include respond(md) {
-      margin: 0 4vw;
+      margin-left: 4vw;
+      margin-right: 4vw;
     }
   }
 

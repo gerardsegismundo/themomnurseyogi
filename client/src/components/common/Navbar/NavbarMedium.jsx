@@ -9,8 +9,8 @@ const NavbarMedium = ({ isSticky, enableSticky, disableSticky }) => {
 
   return (
     <nav
-      className={`${
-        isSticky ? 'sticky-top py-3 b-shadow ' : ''
+      className={`sticky-top ${
+        isSticky ? 'b-shadow ' : ''
       }nav-md d-none d-md-flex justify-content-around`}
     >
       <NavLink exact to='/'>
@@ -34,7 +34,6 @@ const mapStateToProps = ({ ui }) => ({
   signInModalIsOpen: ui.signInModalIsOpen
 })
 
-export default connect(
-  mapStateToProps,
-  { enableSticky, disableSticky }
-)(NavbarMedium)
+export default connect(mapStateToProps, { enableSticky, disableSticky })(
+  NavbarMedium
+)

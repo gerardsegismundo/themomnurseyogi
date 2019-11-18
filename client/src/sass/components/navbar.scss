@@ -1,22 +1,18 @@
-.b-shadow {
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-}
-
 .nav-md {
-  margin: 3rem 0;
   background-color: $bg-clearwhite;
-  padding: 0 10vw;
+  padding: 1rem 10vw;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0);
 
-  @include respond(md-lg) {
-    padding: 0 18vw;
+  &.b-shadow {
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   }
 
-  @media (min-width: 937px) {
-    padding: 0 21vw;
+  @include respond(md-lg) {
+    padding: 1rem 12vw;
   }
 
   @include respond(lg) {
-    padding: 0 25vw;
+    padding: 1rem 25vw;
   }
 
   a {
