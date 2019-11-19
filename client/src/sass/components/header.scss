@@ -40,6 +40,7 @@
       }
 
       &__results {
+        z-index: 9999;
         &--arrow {
           transform: rotate(45deg) translate(9rem, -8rem);
           background: white;
