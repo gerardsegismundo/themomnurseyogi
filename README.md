@@ -18,7 +18,7 @@ Here's the link to this project -> [https://themomnurseyogi.herokuapp.com/](http
 
 ![Sample CSS Code](https://i.imgur.com/BBLXa79.jpg)
 
-> Used bootstrap library, css media queries, flex, grid, calc() function, viewport units(vmin, vh...) to create fully responsive design.
+> Used bootstrap library, css media queries, flex, grid, calc() function,, front-relative(rem, em) & viewport units(vmin, vh...) to create fully responsive design.
 > Used BEM naming convention for a long term maintainable CSS codebase
 
 ## Quick Start
