@@ -42,8 +42,7 @@ const uiReducer = (state = initialState, { type, payload }) => {
     case OPEN_SIGNIN_MODAL:
       return {
         ...state,
-        signInModalIsOpen: true,
-        isSticky: false
+        signInModalIsOpen: true
       }
     case CLOSE_SIGNIN_MODAL:
       return {

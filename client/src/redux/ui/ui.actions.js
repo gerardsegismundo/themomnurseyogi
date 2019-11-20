@@ -13,8 +13,8 @@ import {
 } from './ui.types'
 
 const hideScrollBar = (isHidden = true) => {
-  if (isHidden) return (document.body.style.overflow = 'hidden')
-  document.body.style.overflow = 'initial'
+  if (isHidden) return (document.documentElement.style.overflowY = 'hidden')
+  document.documentElement.style.overflowY = 'auto'
 }
 
 export const toggleSmallSearchbar = smallSearchbarIsOpen => dispatch => {

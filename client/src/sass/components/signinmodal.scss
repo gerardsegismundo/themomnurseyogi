@@ -11,7 +11,7 @@
   background-color: rgba(255, 255, 255, 0.97);
 
   &.is-open {
-    z-index: 1;
+    z-index: 9999;
     opacity: 1;
   }
 
