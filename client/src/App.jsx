@@ -21,7 +21,4 @@ const App = ({ setCurrentUser, filterPosts }) => {
   )
 }
 
-export default connect(
-  null,
-  { setCurrentUser, filterPosts }
-)(App)
+export default connect(null, { setCurrentUser, filterPosts })(App)

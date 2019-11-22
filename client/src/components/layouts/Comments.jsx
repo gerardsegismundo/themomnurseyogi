@@ -142,7 +142,9 @@ const mapStateToProps = ({
   comments
 })
 
-export default connect(
-  mapStateToProps,
-  { openSignInModal, loadComments, openDeleteModal, updateComment }
-)(Comments)
+export default connect(mapStateToProps, {
+  openSignInModal,
+  loadComments,
+  openDeleteModal,
+  updateComment
+})(Comments)

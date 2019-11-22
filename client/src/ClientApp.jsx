@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Route, Switch } from 'react-router-dom'
 
 import Header from './components/layouts/Header'
@@ -15,10 +16,12 @@ import DeleteModal from './components/layouts/DeleteModal'
 
 import OtherPostsFooter from './components/layouts/OtherPostsFooter'
 import SmallSearchbar from './components/layouts/SmallSearchbar'
+import ScrollToTopController from './ScrollToTopController'
 
 const ClientApp = () => {
   return (
     <>
+      <ScrollToTopController />
       <SmallSearchbar />
       <DeleteModal />
       <SignInModal />

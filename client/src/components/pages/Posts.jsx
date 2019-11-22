@@ -19,11 +19,10 @@ const Posts = ({ getPosts, posts }) => {
       {posts &&
         posts.map(({ _id, title, body, hashtags, imgURL }) => {
           return (
-            <Fade cascade>
-              <div className='post row' key={_id}>
+            <Fade cascade key={_id}>
+              <div className='post row'>
                 <div className='post__img-col cl-sm-12 col-md-4 col-lg-3'>
                   <Link to={getPostLink(title, _id)}>
-                    {/* <img src={imgURL} alt='post' className='img-fluid m-auto' /> */}
                     <figure style={{ backgroundImage: `url(${imgURL})` }} />
                   </Link>
                 </div>
