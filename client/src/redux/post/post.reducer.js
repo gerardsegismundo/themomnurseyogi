@@ -3,7 +3,8 @@ import {
   GET_POSTS,
   SEARCH_POST,
   FILTER_POSTS,
-  CLEAR_SEARCH
+  CLEAR_SEARCH,
+  CHANGE_OTHER_POSTS
 } from './post.types'
 
 const initialState = {
@@ -30,6 +31,13 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         posts: payload
+      }
+    }
+
+    case CHANGE_OTHER_POSTS: {
+      return {
+        ...state,
+        randomPosts: payload
       }
     }
 

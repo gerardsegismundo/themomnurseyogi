@@ -6,7 +6,8 @@ import {
   GET_POSTS,
   SEARCH_POST,
   CLEAR_SEARCH,
-  FILTER_POSTS
+  FILTER_POSTS,
+  CHANGE_OTHER_POSTS
 } from './post.types'
 
 const Posts = (() => {
@@ -67,6 +68,19 @@ const Posts = (() => {
     })
   }
 
+  const changeOtherPosts = id => async dispatch => {
+    if (!postsCache) await getPostsCache(dispatch)
+
+    const others = postsCache.filter(({ _id }) => _id !== id)
+
+    const newOtherPosts = _.sampleSize(others, 4)
+
+    dispatch({
+      type: CHANGE_OTHER_POSTS,
+      payload: newOtherPosts
+    })
+  }
+
   const searchPost = text => async dispatch => {
     if (_.isEmpty(text) || typeof text !== 'string') {
       return dispatch({
@@ -100,11 +114,18 @@ const Posts = (() => {
     getPost,
     getPosts,
     filterPosts,
-    searchPost
+    searchPost,
+    changeOtherPosts
   }
 })()
 
-export const { getPost, getPosts, searchPost, filterPosts } = Posts
+export const {
+  getPost,
+  getPosts,
+  searchPost,
+  filterPosts,
+  changeOtherPosts
+} = Posts
 
 export const clearSearch = () => async dispatch => {
   dispatch({
