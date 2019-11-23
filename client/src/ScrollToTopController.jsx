@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import queryString from 'query-string'
 
 import {
@@ -33,12 +33,26 @@ const useRouter = () => {
 }
 
 const ScrollToTopController = () => {
+  // Window screen
+  const [isScreenSmall, setIsScreenSmall] = useState()
+  const smallScreenMediaQuery = window.matchMedia('(max-width: 767px)')
+
+  // test if screen is small device
+  const screenTest = e => setIsScreenSmall(e.matches)
+
+  useEffect(() => {
+    setIsScreenSmall(smallScreenMediaQuery.matches)
+    smallScreenMediaQuery.addListener(screenTest)
+    return () => smallScreenMediaQuery.removeListener(screenTest)
+  }, [smallScreenMediaQuery])
+
+  // Window scroll
   const { pathname, search } = useRouter()
 
   useEffect(() => {
     try {
       window.scroll({
-        top: 320,
+        top: isScreenSmall ? 265 : 400,
         left: 0
         // behavior: 'smooth'
       })
@@ -46,7 +60,7 @@ const ScrollToTopController = () => {
       // just a fallback for older browsers
       window.scrollTo(0, 0)
     }
-  }, [pathname, search])
+  }, [pathname, search, isScreenSmall])
 
   return null
 }

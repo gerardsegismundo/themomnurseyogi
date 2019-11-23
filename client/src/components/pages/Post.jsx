@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getPost } from '../../redux/post/post.actions'
 import Comments from '../layouts/Comments'
+import Spinner from '../layouts/Spinner'
 
 import { renderHashtags, formatDate, getPostId } from '../../helpers/func'
 
@@ -9,11 +10,15 @@ const Post = ({ location, getPost, post }) => {
   useEffect(() => {
     const postId = getPostId(location.pathname)
     getPost(postId)
-
-    // eslint-disable-next-line
   }, [])
 
-  if (!post) return <div className='container'>loading.....</div>
+  if (!post) {
+    return (
+      <div className='post--spinner'>
+        <Spinner msg={'Loading post... '} />
+      </div>
+    )
+  }
 
   const { imgURL, date, hashtags, title, body } = post
 

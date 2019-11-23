@@ -1,0 +1,32 @@
+.spinner {
+  display: flex;
+  height: 50vh;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  background-color: white;
+  z-index: 9999;
+  opacity: 0.925;
+
+  .items {
+    transform: translatey(-5vh);
+
+    div {
+      align-self: center;
+      margin: auto;
+    }
+  }
+
+  &__msg {
+    margin-top: 4rem;
+    color: #36d7b7;
+    font-family: $google-font;
+    font-size: 3.25rem;
+    letter-spacing: 0.1rem;
+  }
+}

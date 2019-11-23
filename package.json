@@ -19,7 +19,8 @@
     "helmet": "^3.20.0",
     "joi": "^14.3.1",
     "mongoose": "^5.6.9",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "react-spinners": "^0.6.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",

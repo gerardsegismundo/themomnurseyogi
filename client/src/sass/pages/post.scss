@@ -1,6 +1,12 @@
 .post {
   margin-top: 3rem;
   overflow: hidden;
+
+  &--spinner {
+    position: relative;
+    height: 100vh;
+  }
+
   &__story,
   &__date,
   &__title {
