@@ -5,7 +5,7 @@ const Spinner = ({ msg }) => {
   return (
     <div className='spinner'>
       <div className='items'>
-        <HashLoader sizeUnit={'px'} size={50} color={'#36D7B7'} />
+        <HashLoader sizeUnit={'px'} size={50} color={'#CC0066'} />
         <h2 className='spinner__msg'>{msg}</h2>
       </div>
     </div>

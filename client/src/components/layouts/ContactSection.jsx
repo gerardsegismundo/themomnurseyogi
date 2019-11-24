@@ -1,11 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SocialLinks from '../common/SocialLinks'
 import { auth } from '../../firebase/firebase.utils'
 import { openSignInModal } from '../../redux/ui/ui.actions'
 import { connect } from 'react-redux'
+import { useOnKeyDownEnter } from '../../helpers/func'
+import axios from 'axios'
+import Toast from 'light-toast'
 
 const ContactSection = ({ currentUser, openSignInModal }) => {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({})
+  const [isSendingMessage, setIsSendingMessage] = useState(false)
+  const [messageIsInvalid, setMessageIsInvalid] = useState(false)
+
+  useEffect(() => {
+    setMessage({
+      displayName: currentUser && auth.currentUser.displayName,
+      email: currentUser && auth.currentUser.email,
+      ...message.body
+    })
+
+    // eslint-disable-next-line
+  }, [currentUser])
+
+  const handleOnChange = e => {
+    if (messageIsInvalid && e.target.value.length > 0) {
+      setMessageIsInvalid(false)
+    }
+    setMessage({ ...message, body: e.target.value })
+  }
+
+  const handleSendMessage = async e => {
+    e.preventDefault()
+
+    if (!message.body) return setMessageIsInvalid(true)
+
+    setIsSendingMessage(true)
+    Toast.loading('Sending message...')
+    await axios.post('/api/messages', message)
+
+    setTimeout(() => {
+      setIsSendingMessage(false)
+      Toast.success('Message sent.', 2000)
+    }, 2000)
+
+    setMessage({ ...message, body: '' })
+  }
+
+  useOnKeyDownEnter('textarea-message', handleSendMessage)
 
   return (
     <div className='contact-section col order-3 order-lg-1'>
@@ -37,19 +78,31 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
 
         <textarea
           name='message'
-          onChange={e => setMessage(e.target.value)}
-          value={message}
-          className='form-control'
+          id='textarea-message'
+          onChange={e => handleOnChange(e)}
+          value={message.body}
+          className={`form-control ${messageIsInvalid && 'is-invalid'}`}
           placeholder='Message'
           cols='30'
           rows='10'
-          disabled={currentUser ? false : true}
+          disabled={!currentUser || isSendingMessage}
+          required
         ></textarea>
+        {messageIsInvalid && (
+          <div className='invalid-feedback'>Please provide a message.</div>
+        )}
 
         {currentUser ? (
-          <button className='btn-primary btn-xl'>Send</button>
+          <button
+            className={`btn-${
+              isSendingMessage ? 'secondary' : 'primary'
+            } contact-section__form__send-btn btn-xl`}
+            onClick={e => handleSendMessage(e)}
+          >
+            {isSendingMessage ? 'Sending...' : 'Send'}
+          </button>
         ) : (
-          <p className='contact-section__form--requiremsg'>
+          <p className='contact-section__form__requiremsg'>
             You must{' '}
             <span onClick={openSignInModal} className='sign-in'>
               sign in
@@ -66,7 +119,4 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(
-  mapStateToProps,
-  { openSignInModal }
-)(ContactSection)
+export default connect(mapStateToProps, { openSignInModal })(ContactSection)

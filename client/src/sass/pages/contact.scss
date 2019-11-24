@@ -49,11 +49,11 @@
         margin-bottom: 1rem;
       }
 
-      button {
+      &__send-btn {
         margin-top: 5rem;
       }
 
-      &--requiremsg {
+      &__requiremsg {
         margin-top: 2.5rem;
         margin-bottom: 5rem;
         @include standard-font;

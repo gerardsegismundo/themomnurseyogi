@@ -7,7 +7,6 @@ const Footer = () => (
       <span className='footer__copyright col order-2 justify-content-center justify-content-md-start'>
         Copyright &copy; 2019 Themomnurseyogi. All rights reserved.
       </span>
-      <span />
       <SocialLinks
         classNames={'footer__links col-12 col-md-3 order-1 order-md-3'}
       />

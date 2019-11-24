@@ -10,6 +10,7 @@ const Post = ({ location, getPost, post }) => {
   useEffect(() => {
     const postId = getPostId(location.pathname)
     getPost(postId)
+    // eslint-disable-next-line
   }, [])
 
   if (!post) {

@@ -1,18 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
 import queryString from 'query-string'
 
-import {
-  useParams,
-  useLocation,
-  useHistory,
-  useRouteMatch
-} from 'react-router-dom'
+import { useParams, useLocation, useHistory } from 'react-router-dom'
 
 const useRouter = () => {
   const params = useParams()
   const location = useLocation()
   const history = useHistory()
-  const match = useRouteMatch()
 
   return useMemo(() => {
     return {
@@ -22,14 +16,9 @@ const useRouter = () => {
       query: {
         ...queryString.parse(location.search),
         ...params
-      },
-      // Include match, location, history objects so we have
-      // access to extra React Router functionality if needed.
-      match,
-      location,
-      history
+      }
     }
-  }, [params, match, location, history])
+  }, [params, location, history])
 }
 
 const ScrollToTopController = () => {
@@ -47,20 +36,20 @@ const ScrollToTopController = () => {
   }, [smallScreenMediaQuery])
 
   // Window scroll
-  const { pathname, search } = useRouter()
+  const { pathname } = useRouter()
 
   useEffect(() => {
     try {
       window.scroll({
-        top: isScreenSmall ? 265 : 400,
+        top: pathname === '/' ? 0 : isScreenSmall ? 265 : 350,
         left: 0
         // behavior: 'smooth'
       })
-    } catch (error) {
+    } catch (err) {
       // just a fallback for older browsers
       window.scrollTo(0, 0)
     }
-  }, [pathname, search, isScreenSmall])
+  }, [pathname, isScreenSmall])
 
   return null
 }
