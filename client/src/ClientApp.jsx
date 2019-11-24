@@ -11,6 +11,8 @@ import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
 
+import { NotificationContainer } from 'react-notifications'
+
 import SignInModal from './components/layouts/SignInModal'
 import DeleteModal from './components/layouts/DeleteModal'
 
@@ -25,6 +27,7 @@ const ClientApp = () => {
       <SmallSearchbar />
       <DeleteModal />
       <SignInModal />
+      <NotificationContainer />
       <Header />
       <Navbar />
       <Switch>

@@ -5,7 +5,8 @@ import { openSignInModal } from '../../redux/ui/ui.actions'
 import { connect } from 'react-redux'
 import { useOnKeyDownEnter } from '../../helpers/func'
 import axios from 'axios'
-import Toast from 'light-toast'
+import { NotificationManager } from 'react-notifications'
+import HashLoader from 'react-spinners/HashLoader'
 
 const ContactSection = ({ currentUser, openSignInModal }) => {
   const [message, setMessage] = useState({})
@@ -35,12 +36,13 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
     if (!message.body) return setMessageIsInvalid(true)
 
     setIsSendingMessage(true)
-    Toast.loading('Sending message...')
+
     await axios.post('/api/messages', message)
 
     setTimeout(() => {
       setIsSendingMessage(false)
-      Toast.success('Message sent.', 2000)
+
+      NotificationManager.success('Message sent.', 'Success')
     }, 2000)
 
     setMessage({ ...message, body: '' })
@@ -98,8 +100,14 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
               isSendingMessage ? 'secondary' : 'primary'
             } contact-section__form__send-btn btn-xl`}
             onClick={e => handleSendMessage(e)}
+            disabled={isSendingMessage}
           >
             {isSendingMessage ? 'Sending...' : 'Send'}
+            <span
+              className={`btn-spinner${isSendingMessage ? ' is-sending' : ''}`}
+            >
+              <HashLoader sizeUnit={'px'} size={16} color={'#CC0066'} />
+            </span>
           </button>
         ) : (
           <p className='contact-section__form__requiremsg'>

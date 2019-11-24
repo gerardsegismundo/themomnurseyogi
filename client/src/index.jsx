@@ -5,6 +5,7 @@ import App from './App'
 // CSS Files
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
+import 'react-notifications/lib/notifications.css'
 import './sass/main.scss'
 
 import { Provider } from 'react-redux'
