@@ -11,7 +11,7 @@ const NavbarMedium = ({ isSticky, enableSticky, disableSticky }) => {
     <nav
       className={`sticky-top ${
         isSticky ? 'b-shadow ' : ''
-      }nav-md d-none d-md-flex justify-content-around`}
+      }nav--md d-none d-md-flex justify-content-around`}
     >
       <NavLink exact to='/'>
         home

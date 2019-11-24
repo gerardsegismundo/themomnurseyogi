@@ -20,7 +20,7 @@ const NavbarSmall = ({
   return (
     !smallSearchbarIsOpen && (
       <nav
-        className={`nav d-flex d-md-none mb-4 mt-4${
+        className={`nav--sm d-flex d-md-none mb-4 mt-4${
           isSticky ? ' sticky-top b-shadow' : ''
         }`}
         ref={smallNavbarRef}
@@ -29,15 +29,18 @@ const NavbarSmall = ({
           type='checkbox'
           checked={navIsOpen}
           onChange={() => setNavIsOpen(!navIsOpen)}
-          className='nav__checkbox'
-          id='nav__toggle'
+          className='nav--sm__checkbox'
+          id='nav--sm__toggle'
         />
 
-        <label htmlFor='nav__toggle' className='nav__btn mx-auto d-flex'>
-          <span className='nav__icon' />
+        <label
+          htmlFor='nav--sm__toggle'
+          className='nav--sm__btn mx-auto d-flex'
+        >
+          <span className='nav--sm__icon' />
         </label>
 
-        <div className='nav__links'>
+        <div className='nav--sm__links'>
           <NavbarLinks setNavIsOpen={setNavIsOpen} />
         </div>
       </nav>
@@ -50,7 +53,6 @@ const mapStateToProps = ({ ui }) => ({
   smallSearchbarIsOpen: ui.smallSearchbarIsOpen
 })
 
-export default connect(
-  mapStateToProps,
-  { enableSticky, disableSticky }
-)(NavbarSmall)
+export default connect(mapStateToProps, { enableSticky, disableSticky })(
+  NavbarSmall
+)

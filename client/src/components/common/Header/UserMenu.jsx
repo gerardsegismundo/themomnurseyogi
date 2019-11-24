@@ -18,14 +18,14 @@ const UserMenu = ({ userMenuIsOpen, currentUser, closeUserMenu }) => {
   return currentUser && userMenuIsOpen ? (
     <div ref={userMenu} className='user-menu d-none d-md-block container'>
       <ul className='user-menu__list'>
-        <li className='user-menu__list--item row'>
+        <li className='user-menu__list--item d-flex'>
           <img
-            className='user-menu__avatar col-3'
+            className='user-menu__avatar mr-4'
             src={auth.currentUser.photoURL}
             alt='user'
           />
 
-          <figcaption className='user-menu__caption col-9'>
+          <figcaption className='user-menu__caption'>
             <p className='user-menu__caption--displayname'>
               {auth.currentUser.displayName}
             </p>
@@ -48,7 +48,4 @@ const mapStateToProps = ({ user, ui }) => ({
   userMenuIsOpen: ui.userMenuIsOpen
 })
 
-export default connect(
-  mapStateToProps,
-  { closeUserMenu }
-)(UserMenu)
+export default connect(mapStateToProps, { closeUserMenu })(UserMenu)
