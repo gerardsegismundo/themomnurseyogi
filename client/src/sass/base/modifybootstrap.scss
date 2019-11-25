@@ -104,3 +104,13 @@ textarea.form-control:focus {
 button:focus {
   outline: 5px auto $elegant-color-dark;
 }
+
+// react-notifications modifier
+.notification {
+  border-radius: 0px;
+  opacity: 0.7;
+}
+
+.notification-success {
+  background-color: #cc0066;
+}

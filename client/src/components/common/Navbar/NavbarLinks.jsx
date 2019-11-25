@@ -54,7 +54,7 @@ const NavbarLinks = ({
 
       <span onClick={onSign}>{currentUser ? 'signout' : 'signin'}</span>
 
-      <SocialLinks classNames='nav__social-links d-flex d-md-none' />
+      <SocialLinks classNames='nav--sm__social-links d-flex d-md-none' />
     </>
   )
 }
@@ -63,7 +63,8 @@ const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 })
 
-export default connect(
-  mapStateToProps,
-  { openSignInModal, toggleSmallSearchbar, disableSticky }
-)(NavbarLinks)
+export default connect(mapStateToProps, {
+  openSignInModal,
+  toggleSmallSearchbar,
+  disableSticky
+})(NavbarLinks)
