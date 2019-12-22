@@ -37,15 +37,20 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
 
     setIsSendingMessage(true)
 
-    await axios.post('/api/messages', message)
+    let response
+
+    try {
+      response = await axios.post('/api/messages', message)
+    } catch (err) {
+      NotificationManager.error('Message sending failed.', 'Error!', 5000)
+    }
 
     setTimeout(() => {
+      if (response)
+        NotificationManager.success('Message sent.', 'Success', 5000)
       setIsSendingMessage(false)
-
-      NotificationManager.success('Message sent.', 'Success')
+      setMessage({ ...message, body: '' })
     }, 2000)
-
-    setMessage({ ...message, body: '' })
   }
 
   useOnKeyDownEnter('textarea-message', handleSendMessage)

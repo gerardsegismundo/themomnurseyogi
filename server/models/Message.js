@@ -1,14 +1,24 @@
 const { model, Schema } = require('mongoose')
 
 const MessageSchema = new Schema({
-  displayName: {
-    type: String
+  name: {
+    type: String,
+    required: true
   },
   email: {
     type: String
   },
-  body: {
-    type: String
+  title: {
+    type: String,
+    required: true
+  },
+  text: {
+    type: String,
+    required: true
+  },
+  unread: {
+    type: Boolean,
+    required: true
   },
   date: {
     type: Date,

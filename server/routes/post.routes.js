@@ -13,23 +13,4 @@ router.get('/', async (req, res) => {
   res.json(posts)
 })
 
-// @route POST /
-// @desc  Add post
-router.post('/', async (req, res) => {
-  const { title, imgURL, body, hashtags } = req.body
-
-  const date = new Date()
-
-  const newPost = new Post({
-    title,
-    imgURL,
-    body,
-    hashtags,
-    date
-  })
-
-  await newPost.save()
-  res.json(newPost)
-})
-
 module.exports = router

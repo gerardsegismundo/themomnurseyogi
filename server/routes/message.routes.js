@@ -2,20 +2,35 @@ const express = require('express')
 const router = express.Router()
 const { model } = require('mongoose')
 const Message = model('message')
+const validateMessage = require('../validations/validateMessage')
+const arrangeMessage = require('../utils/arrangeMessage')
 
 // @route  POST
 // @desc   Send client's message to admin.
 router.post('/', async (req, res) => {
-  const { displayName, email, body } = req.body
+  // Joi validation
+  const { error } = validateMessage(req.body)
+  if (error) {
+    const msg = arrangeMessage(error.details[0].message)
+
+    return res
+      .status(400)
+      .json({ error: { keys: [error.details[0].context.key], msg } })
+  }
+
+  const { name, email, title, text } = req.body
 
   const newMessage = new Message({
-    displayName,
+    name,
     email,
-    body
+    title,
+    text,
+    unread: true
   })
 
-  await newMessage.save()
-  res.send('Message sent.')
+  const message = await newMessage.save()
+
+  res.json(message)
 })
 
 module.exports = router

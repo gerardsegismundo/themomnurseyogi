@@ -14,13 +14,13 @@ router.get('/:id', async (req, res) => {
 // @route POST /
 // @desc add comment
 router.post('/', async (req, res) => {
-  const { postId, uid, displayName, photoURL, comment } = req.body
+  const { postId, uid, name, avatar, comment } = req.body
 
   const newComment = new Comment({
     postId,
     uid,
-    displayName,
-    photoURL,
+    name,
+    avatar,
     comment
   })
 
