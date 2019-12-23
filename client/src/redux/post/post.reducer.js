@@ -4,17 +4,21 @@ import {
   SEARCH_POST,
   FILTER_POSTS,
   CLEAR_SEARCH,
-  CHANGE_OTHER_POSTS
+  CHANGE_OTHER_POSTS,
+  UPDATE_LIKES,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
+  POST_ERROR
 } from './post.types'
 
 const initialState = {
   post: null,
-  posts: null,
-  searchResult: null,
-  recentPosts: null,
-  randomPosts: null,
-  otherRandomPosts: null,
-  loading: false
+  posts: [],
+  searchResult: [],
+  recentPosts: [],
+  randomPosts: [],
+  otherRandomPosts: [],
+  error: {}
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -22,14 +26,14 @@ export default (state = initialState, { type, payload }) => {
     case GET_POST:
       return {
         ...state,
-        loading: false,
+
         post: payload
       }
 
     case GET_POSTS: {
       return {
         ...state,
-        loading: false,
+
         posts: payload
       }
     }
@@ -54,15 +58,46 @@ export default (state = initialState, { type, payload }) => {
     case SEARCH_POST:
       return {
         ...state,
-        loading: false,
+
         searchResult: payload
       }
 
     case CLEAR_SEARCH:
       return {
         ...state,
-        loading: false,
+
         searchResult: null
+      }
+
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post._id === payload.id ? { ...post, likes: payload.likes } : post
+        )
+      }
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload }
+      }
+
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            comment => comment._id !== payload
+          )
+        }
+      }
+
+    case POST_ERROR:
+      return {
+        ...state,
+        error: payload
       }
 
     default:

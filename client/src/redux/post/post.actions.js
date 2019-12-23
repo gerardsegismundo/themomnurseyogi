@@ -7,7 +7,11 @@ import {
   SEARCH_POST,
   CLEAR_SEARCH,
   FILTER_POSTS,
-  CHANGE_OTHER_POSTS
+  CHANGE_OTHER_POSTS,
+  UPDATE_LIKES,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
+  POST_ERROR
 } from './post.types'
 
 const Posts = (() => {
@@ -131,4 +135,87 @@ export const clearSearch = () => async dispatch => {
   dispatch({
     type: CLEAR_SEARCH
   })
+}
+
+export const addComment = (postId, formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.post(
+      `/api/posts/comment/${postId}`,
+      formData,
+      config
+    )
+
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+    const { error } = err.response.data
+
+    dispatch({
+      type: POST_ERROR,
+      payload: error
+    })
+  }
+}
+
+// Like post
+export const likePost = (id, user_id) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/like/${id}/${user_id}`)
+
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { id, user_id, likes: res.data }
+    })
+  } catch (err) {
+    const { error } = err.response.data
+
+    dispatch({
+      type: POST_ERROR,
+      payload: error
+    })
+  }
+}
+
+// Unlike post
+export const unlikePost = (id, user_id) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/unlike/${id}/${user_id}`)
+
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { id, user_id, likes: res.data }
+    })
+  } catch (err) {
+    const { error } = err.response.data
+
+    dispatch({
+      type: POST_ERROR,
+      payload: error
+    })
+  }
+}
+
+export const removeComment = (id, comment_id, user_id) => async dispatch => {
+  try {
+    await axios.delete(`/api/posts/comment/${id}/${comment_id}/${user_id}`)
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: comment_id
+    })
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
 }
