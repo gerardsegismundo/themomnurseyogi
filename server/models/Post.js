@@ -6,21 +6,12 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  text: {
-    type: String,
-    required: true
-  },
+
   hashtags: Array,
-  avatar: {
-    type: String,
-    required: true
-  },
+
   likes: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-      }
+      user: {}
     }
   ],
   comments: [

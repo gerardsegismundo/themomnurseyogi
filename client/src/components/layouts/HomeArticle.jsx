@@ -15,8 +15,8 @@ const HomeArticle = ({ recentPosts }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  recentPosts: state.posts.recentPosts
+const mapStateToProps = ({ posts }) => ({
+  recentPosts: posts.recentPosts
 })
 
 export default connect(mapStateToProps)(HomeArticle)

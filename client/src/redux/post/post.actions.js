@@ -178,6 +178,7 @@ export const likePost = (id, user_id) => async dispatch => {
   } catch (err) {
     const { error } = err.response.data
 
+    console.error(error)
     dispatch({
       type: POST_ERROR,
       payload: error

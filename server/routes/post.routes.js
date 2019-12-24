@@ -18,9 +18,10 @@ router.get('/', async (req, res) => {
 // @route    PUT api/posts/like/:id/:user_id
 // @desc     Like a post
 router.put('/like/:id/:user_id', async (req, res) => {
-  const { id, user_id } = req.body
+  const { id, user_id } = req.params
   const post = await Post.findById(id)
 
+  console.log(post)
   const isLiked = (() =>
     post.likes.filter(like => like.user.toString() === user_id).length > 0)()
 
