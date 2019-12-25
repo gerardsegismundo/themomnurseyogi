@@ -5,9 +5,9 @@ const { model } = require('mongoose')
 const Post = model('post')
 
 const validateComment = require('../validations/validateComment')
+
 // @route    GET api/posts
 // @desc     Get all posts
-// @access   Public
 router.get('/', async (req, res) => {
   const posts = await Post.find().sort({ date: -1 })
   if (!posts) return res.status(400).send('Failed loading posts')
@@ -21,13 +21,12 @@ router.put('/like/:id/:user_id', async (req, res) => {
   const { id, user_id } = req.params
   const post = await Post.findById(id)
 
-  console.log(post)
   const isLiked = (() =>
-    post.likes.filter(like => like.user.toString() === user_id).length > 0)()
+    post.likes.filter(({ user }) => user.toString() === user_id).length > 0)()
 
   // Check if the post has already been liked
   if (isLiked)
-    return res.status(400).json({ error: { msg: 'Post already liked' } })
+    return res.status(400).json({ error: { msg: 'Post already liked.' } })
 
   post.likes.unshift({ user: user_id })
 
@@ -43,12 +42,15 @@ router.put('/unlike/:id/:user_id', async (req, res) => {
   const post = await Post.findById(id)
 
   const isLiked = (() =>
-    post.likes.filter(like => like.user.toString() === user_id).length > 0)()
+    post.likes.filter(({ user }) => user === user_id).length > 0)()
 
   // Check if the post has already been liked
-  if (isLiked)
-    return res.status(400).json({ msg: 'Post has not yet been liked' })
+  if (!isLiked)
+    return res
+      .status(400)
+      .json({ error: { msg: 'Post has not yet been liked.' } })
 
+  console.log(isLiked)
   // Get remove index
   const removeIndex = post.likes
     .map(like => like.user.toString())

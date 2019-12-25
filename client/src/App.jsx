@@ -27,7 +27,9 @@ const App = ({ setCurrentUser, filterPosts }) => {
   useEffect(() => {
     setCurrentUser()
     filterPosts()
-  })
+
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <Router>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 import {
@@ -9,7 +9,7 @@ import {
 } from '../../helpers/func'
 
 import { connect } from 'react-redux'
-import { likePost } from '../../redux/post/post.actions'
+import { likePost, unlikePost } from '../../redux/post/post.actions'
 
 const RecentPost = ({
   title,
@@ -21,28 +21,52 @@ const RecentPost = ({
   comments,
   likes,
   currentUser,
-  likePost
+  likePost,
+  unlikePost
 }) => {
+  const [isLiked, setIsLiked] = useState(null)
+  const [likeCount, setLikeCount] = useState(null)
+
+  const loadLikes = () => {
+    const likeIds = likes.map(like => like.user)
+    if (likeIds.includes(currentUser.id)) return setIsLiked(true)
+    setIsLiked(false)
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      loadLikes()
+      setLikeCount(likes.length)
+    }
+
+    // if (currentUser) return loadLikes()
+    // eslint-disable-next-line
+  }, [currentUser])
+
   const handleOnLike = () => {
     if (!currentUser) return console.log('You must be logged in')
 
     likePost(_id, currentUser.id)
+    setIsLiked(true)
+    setLikeCount(likeCount + 1)
   }
 
   const handleOnUnlike = () => {
     if (!currentUser) return console.log('You must be logged in')
 
-    console.log('Unlike post!')
+    unlikePost(_id, currentUser.id)
+    setIsLiked(false)
+    setLikeCount(likeCount - 1)
   }
 
-  const isLiked = (() => {
-    if (currentUser) {
-      const likeIds = likes.map(like => like.user)
-      if (likeIds.includes(currentUser.id)) return true
-    }
+  // const isLiked = (() => {
+  //   if (currentUser) {
+  //     const likeIds = likes.map(like => like.user)
+  //     if (likeIds.includes(currentUser.id)) return true
+  //   }
 
-    return false
-  })()
+  //   return false
+  // })()
 
   return (
     <Fade cascade>
@@ -75,7 +99,7 @@ const RecentPost = ({
               onClick={isLiked ? handleOnUnlike : handleOnLike}
             >
               <i className={`fa fa-heart${isLiked ? '' : '-o'}`}></i>
-              {likes.length}&nbsp;{likes.length < 2 ? 'like' : 'likes'}
+              {likeCount}&nbsp;{likeCount < 2 ? 'like' : 'likes'}
             </span>
             <span className='recent-post__icons--comments'>
               <i className='fa fa-comment-o'></i>
@@ -92,4 +116,4 @@ const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 })
 
-export default connect(mapStateToProps, { likePost })(RecentPost)
+export default connect(mapStateToProps, { likePost, unlikePost })(RecentPost)

@@ -191,6 +191,7 @@ export const unlikePost = (id, user_id) => async dispatch => {
   try {
     const res = await axios.put(`/api/posts/unlike/${id}/${user_id}`)
 
+    console.log(res)
     dispatch({
       type: UPDATE_LIKES,
       payload: { id, user_id, likes: res.data }
@@ -198,6 +199,7 @@ export const unlikePost = (id, user_id) => async dispatch => {
   } catch (err) {
     const { error } = err.response.data
 
+    console.log(error)
     dispatch({
       type: POST_ERROR,
       payload: error
