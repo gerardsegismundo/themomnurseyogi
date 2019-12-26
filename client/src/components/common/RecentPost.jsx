@@ -27,12 +27,13 @@ const RecentPost = ({
   unlikePost,
   openSignInModal
 }) => {
-  const [isLiked, setIsLiked] = useState(null)
-  const [likeCount, setLikeCount] = useState(null)
+  const [isLiked, setIsLiked] = useState()
+  const [likeCount, setLikeCount] = useState()
 
   const loadLikes = () => {
     if (!currentUser) return
     const likeIds = likes.map(like => like.user)
+
     if (likeIds.includes(currentUser.id)) return setIsLiked(true)
     setIsLiked(false)
   }
@@ -42,7 +43,7 @@ const RecentPost = ({
     setLikeCount(likes.length)
 
     // eslint-disable-next-line
-  }, [currentUser, loadLikes])
+  }, [currentUser])
 
   const handleOnLike = () => {
     if (!currentUser) {
@@ -71,6 +72,7 @@ const RecentPost = ({
       <div className='recent-post p-1'>
         <div className='text-center'>
           <p className='recent-post__date'>{formatDate(date)}</p>
+          {'isLiked ' + isLiked}
           <h2 className='recent-post__title'>{title}</h2>
           {hashtags && (
             <ul className='recent-post__hash-tags d-flex justify-content-center px-5'>
@@ -97,11 +99,11 @@ const RecentPost = ({
               onClick={isLiked ? handleOnUnlike : handleOnLike}
             >
               <i className={`fa fa-heart${isLiked ? '' : '-o'}`} />
-              {likeCount}&nbsp;{likeCount < 2 ? 'like' : 'likes'}
+              {likeCount} like{likeCount < 2 ? '' : 's'}
             </span>
             <span className='recent-post__icons--comments'>
               <i className='fa fa-comment-o' />
-              {comments.length} {comments.length < 2 ? 'comment' : 'comments'}
+              {comments.length} comment{comments.length < 2 ? '' : 's'}
             </span>
           </div>
         </div>

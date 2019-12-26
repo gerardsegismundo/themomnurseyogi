@@ -1,5 +1,21 @@
 .footer {
   margin-top: 5rem;
+  background: linear-gradient(
+    50deg,
+    rgba(52, 58, 64, 1) 23%,
+    rgba(63, 65, 68, 1) 61%,
+    rgba(74, 76, 77, 1) 79%
+  );
+
+  @include respond(md) {
+    background: linear-gradient(
+      50deg,
+      rgba(52, 58, 64, 1) 23%,
+      rgba(87, 88, 89, 1) 61%,
+      rgba(74, 76, 77, 1) 79%
+    );
+  }
+
   &__copyright,
   &__links {
     color: #b8b8b8;

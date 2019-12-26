@@ -19,6 +19,11 @@ label {
   background-image: none;
 }
 
+img,
+figure {
+  border-radius: 1.5px;
+}
+
 .invalid-feedback {
   color: #b02a37;
 }
@@ -29,20 +34,40 @@ textarea.form-control:focus {
   box-shadow: 0 0 0 0.1rem rgba(34, 34, 34, 0.2);
 }
 
-.btn {
-  border-radius: 0.1rem;
+button {
+  border-radius: 1.5px;
+  border: 0;
 }
 
 .btn-primary {
   color: #fff;
   font-weight: 400;
-  background-color: $elegant-color-dark;
-  border: 1px solid $elegant-color-dark;
+
+  background-image: linear-gradient(
+    to right,
+    #151515,
+    #3f3f3f,
+    #939393,
+    #7e7e7e,
+    #696969
+  );
+  border-color: transparent;
+  // background-image: linear-gradient(
+  //   to right,
+
+  //   #2a2a2a,
+  //   #545454,
+  //   #3f3f3f
+  // );
+  background-size: 300% 100%;
+
+  transition: all 0.4s ease-in-out;
 
   &:hover {
-    color: $elegant-color-dark;
-    background-color: #fff;
-    border: 1px solid $elegant-color-dark;
+    border-color: transparent;
+    background-position: 98% 0;
+    transition: all 0.4s ease-in-out;
+    outline: none;
   }
 
   &:focus,
