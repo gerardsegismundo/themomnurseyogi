@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { CloseIcon } from './SvgIcons'
 import { useOutsideAndEscapeClick, useConfirmOnEnter } from '../../helpers/func'
 import { closeDeleteModal } from '../../redux/ui/ui.actions'
-import { deleteComment } from '../../redux/comment/comment.action'
+import { deleteComment } from '../../redux/post/post.actions'
 
 const DeleteModal = ({
   deleteModalIsOpen,
@@ -50,7 +50,6 @@ const mapStateToProps = ({ ui: { deleteModalIsOpen, deleteModalId } }) => ({
   deleteModalIsOpen
 })
 
-export default connect(
-  mapStateToProps,
-  { closeDeleteModal, deleteComment }
-)(DeleteModal)
+export default connect(mapStateToProps, { closeDeleteModal, deleteComment })(
+  DeleteModal
+)

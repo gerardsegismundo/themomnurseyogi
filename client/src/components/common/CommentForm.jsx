@@ -3,28 +3,22 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { useOnKeyDownEnter } from '../../helpers/func'
 import { openSignInModal } from '../../redux/ui/ui.actions'
-import { addComment } from '../../redux/comment/comment.action'
+import { addComment } from '../../redux/post/post.actions'
 
-const CommentForm = ({
-  currentUser,
-  post: { _id: postId },
-  openSignInModal,
-  addComment
-}) => {
+const CommentForm = ({ currentUser, postId, openSignInModal, addComment }) => {
   const [newComment, setNewComment] = useState('')
 
   const handleAddComment = e => {
     e.preventDefault()
 
-    const payload = {
-      postId,
-      uid: currentUser.id,
-      displayName: currentUser.displayName,
-      photoURL: currentUser.photoURL,
-      comment: newComment
+    const formData = {
+      user: currentUser.id,
+      name: currentUser.displayName,
+      avatar: currentUser.photoURL,
+      text: newComment
     }
 
-    addComment(payload)
+    addComment(postId, formData)
     setNewComment('')
   }
 
@@ -70,12 +64,11 @@ const CommentForm = ({
   )
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser,
-  post: state.posts.post
+const mapStateToProps = ({ user, posts }) => ({
+  currentUser: user.currentUser,
+  postId: posts.post._id
 })
 
-export default connect(
-  mapStateToProps,
-  { openSignInModal, addComment }
-)(CommentForm)
+export default connect(mapStateToProps, { openSignInModal, addComment })(
+  CommentForm
+)

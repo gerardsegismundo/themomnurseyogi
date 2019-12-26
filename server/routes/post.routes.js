@@ -5,6 +5,7 @@ const { model } = require('mongoose')
 const Post = model('post')
 
 const validateComment = require('../validations/validateComment')
+const arrangeMessage = require('../utils/arrangeMessage')
 
 // @route    GET api/posts
 // @desc     Get all posts
@@ -66,11 +67,12 @@ router.put('/unlike/:id/:user_id', async (req, res) => {
 // @route    POST api/posts/comment/:id
 // @desc     Comment on a post
 router.post('/comment/:id', async (req, res) => {
+  console.log('heyo!')
   // Joi validation
   const { error } = validateComment(req.body)
   if (error) {
     const msg = arrangeMessage(error.details[0].message)
-
+    console.log(error)
     return res
       .status(400)
       .json({ error: { keys: [error.details[0].context.key], msg } })

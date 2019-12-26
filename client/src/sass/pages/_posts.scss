@@ -94,6 +94,20 @@
           }
         }
       }
+
+      &--icons {
+        margin-right: 3rem;
+        opacity: 0.5;
+        font-size: 1.5rem;
+        &--likes {
+          margin-right: 2rem;
+        }
+        span {
+          i {
+            // font-size: 2rem;
+          }
+        }
+      }
     }
   }
 }

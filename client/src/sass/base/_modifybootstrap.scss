@@ -51,6 +51,20 @@ textarea.form-control:focus {
   }
 }
 
+.btn-primary:focus,
+.btn-primary.focus {
+  color: #fff;
+  background-color: $elegant-color-dark;
+  border-color: $elegant-color-dark;
+  box-shadow: 0 0 0 0.2rem rgba(46, 46, 46, 0.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(46, 46, 46, 0.5);
+}
+
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {

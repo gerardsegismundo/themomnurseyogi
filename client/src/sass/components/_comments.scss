@@ -23,7 +23,9 @@
 
       &__right-col {
         width: 100%;
+        position: relative;
       }
+
       &__label {
         margin-bottom: 0.5rem;
       }
@@ -33,6 +35,8 @@
       }
 
       &__crud {
+        position: absolute;
+        width: 100%;
         line-height: 3rem;
         margin-top: 0.75rem;
         font-size: 1.5rem;

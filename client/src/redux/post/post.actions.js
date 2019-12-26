@@ -157,12 +157,15 @@ export const addComment = (postId, formData) => async dispatch => {
     })
   } catch (err) {
     console.log(err)
-    const { error } = err.response.data
 
-    dispatch({
-      type: POST_ERROR,
-      payload: error
-    })
+    // if (err.response.data) {
+    //   const { error } = err.response.data
+    //   console.log(error)
+    //   dispatch({
+    //     type: POST_ERROR,
+    //     payload: error
+    //   })
+    // }
   }
 }
 
@@ -207,7 +210,7 @@ export const unlikePost = (id, user_id) => async dispatch => {
   }
 }
 
-export const removeComment = (id, comment_id, user_id) => async dispatch => {
+export const deleteComment = (id, comment_id, user_id) => async dispatch => {
   try {
     await axios.delete(`/api/posts/comment/${id}/${comment_id}/${user_id}`)
 

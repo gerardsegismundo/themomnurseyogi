@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import {
   formatDate,
@@ -6,35 +6,27 @@ import {
   useOutsideAndEscapeClick
 } from '../../helpers/func'
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
-import { loadComments, updateComment } from '../../redux/comment/comment.action'
 
 import CommentForm from '../common/CommentForm'
 
 const Comments = ({
   currentUser,
-  post: { _id: postId },
   comments,
   openDeleteModal,
-  loadComments,
   updateComment
 }) => {
-  const [editedComment, setEditedComment] = useState({ comment: '', _id: '' })
+  const [editedComment, setEditedComment] = useState({ text: '', _id: '' })
   const [isEditingComment, setIsEditingComment] = useState(false)
   const editedCommentTextarea = useRef()
 
-  useEffect(() => {
-    loadComments(postId)
-    //eslint-disable-next-line
-  }, [postId])
-
-  const handleEditComment = ({ comment, _id }) => {
+  const handleEditComment = ({ text, _id }) => {
     setIsEditingComment(true)
-    setEditedComment({ comment, _id })
+    setEditedComment({ text, _id })
   }
 
   const exitEditComment = () => {
     setIsEditingComment(false)
-    setEditedComment({ comment: '', _id: '' })
+    setEditedComment({ text: '', _id: '' })
   }
 
   const saveEditComment = () => {
@@ -59,12 +51,12 @@ const Comments = ({
       <ul>
         {comments &&
           comments.map(item => {
-            const { _id, uid, displayName, photoURL, comment, date } = item
+            const { _id, user, name, avatar, text, date } = item
 
             return (
               <li className='comment d-flex' key={_id}>
                 <img
-                  src={photoURL}
+                  src={avatar}
                   alt='user'
                   className='comment__author-avatar'
                 />
@@ -73,20 +65,20 @@ const Comments = ({
                   {editedComment._id !== _id && (
                     <>
                       <h4 className='comment__label'>
-                        {displayName} &nbsp;&nbsp;|&nbsp;&nbsp;{' '}
-                        {formatDate(date)}
+                        {name} &nbsp;&nbsp;|&nbsp;&nbsp; {formatDate(date)}
                       </h4>
-                      <p className='comment__msg'>{comment}</p>
+
+                      <p className='comment__msg'>{text}</p>
                     </>
                   )}
 
-                  {currentUser && uid === currentUser.id && (
+                  {currentUser && user === currentUser.id && (
                     <div className='comment__crud'>
                       {!isEditingComment || editedComment._id !== _id ? (
                         <>
                           <span
                             className='hidden'
-                            onClick={() => handleEditComment({ comment, _id })}
+                            onClick={() => handleEditComment({ text, _id })}
                           >
                             edit
                           </span>
@@ -103,13 +95,13 @@ const Comments = ({
                             onChange={e => {
                               setEditedComment({
                                 _id,
-                                comment: e.target.value
+                                text: e.target.value
                               })
                             }}
                             ref={editedCommentTextarea}
                             id='edited-comment'
                             name='edited-comment'
-                            value={editedComment.comment}
+                            value={editedComment.text}
                             className='form-control'
                             placeholder='Write a comment...'
                             required
@@ -132,19 +124,12 @@ const Comments = ({
   )
 }
 
-const mapStateToProps = ({
-  user: { currentUser },
-  posts: { post },
-  comments: { comments }
-}) => ({
-  currentUser,
-  post,
-  comments
+const mapStateToProps = ({ user, posts }) => ({
+  currentUser: user.currentUser,
+  comments: posts.post.comments
 })
 
 export default connect(mapStateToProps, {
   openSignInModal,
-  loadComments,
-  openDeleteModal,
-  updateComment
+  openDeleteModal
 })(Comments)

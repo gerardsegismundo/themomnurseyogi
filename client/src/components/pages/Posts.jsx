@@ -17,7 +17,7 @@ const Posts = ({ getPosts, posts }) => {
       <h2 className='posts__page-title'># Posts</h2>
 
       {posts &&
-        posts.map(({ _id, title, body, hashtags, imgURL }) => {
+        posts.map(({ _id, title, body, hashtags, imgURL, comments, likes }) => {
           return (
             <Fade cascade key={_id}>
               <div className='post row'>
@@ -37,12 +37,24 @@ const Posts = ({ getPosts, posts }) => {
                   <p className='post__content-col--hashtags'>
                     {renderHashtags(hashtags)}
                   </p>
-                  <Link
-                    to={getPostLink(title, _id)}
-                    className='post__content-col--read-more'
-                  >
-                    <p>Read more</p>
-                  </Link>
+
+                  <div className='d-flex align-items-center'>
+                    <Link
+                      to={getPostLink(title, _id)}
+                      className='post__content-col--read-more'
+                    >
+                      <p>Read more</p>
+                    </Link>
+
+                    <p className='post__content-col--icons ml-auto'>
+                      <span className='post__content-col--icons--likes'>
+                        <i className='fa fa-heart-o' /> {likes.length}
+                      </span>
+                      <span>
+                        <i className='fa fa-comment-o' /> {comments.length}
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </Fade>
