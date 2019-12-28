@@ -7,9 +7,12 @@ import {
 } from '../../helpers/func'
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
 
+import { updateComment } from '../../redux/post/post.actions'
+
 import CommentForm from '../common/CommentForm'
 
 const Comments = ({
+  postId,
   currentUser,
   comments,
   openDeleteModal,
@@ -30,7 +33,15 @@ const Comments = ({
   }
 
   const saveEditComment = () => {
-    updateComment(editedComment)
+    const params = {
+      post_id: postId,
+      comment_id: editedComment._id,
+      user_id: currentUser.id
+    }
+
+    const { text } = editedComment
+
+    updateComment(text, params)
     exitEditComment()
   }
 
@@ -130,6 +141,7 @@ const mapStateToProps = ({ user, posts }) => ({
 })
 
 export default connect(mapStateToProps, {
+  updateComment,
   openSignInModal,
   openDeleteModal
 })(Comments)

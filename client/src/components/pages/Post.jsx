@@ -7,8 +7,9 @@ import Spinner from '../layouts/Spinner'
 import { renderHashtags, formatDate, getPostId } from '../../helpers/func'
 
 const Post = ({ location, getPost, post }) => {
+  const postId = getPostId(location.pathname)
+
   useEffect(() => {
-    const postId = getPostId(location.pathname)
     getPost(postId)
     // eslint-disable-next-line
   }, [])
@@ -41,7 +42,7 @@ const Post = ({ location, getPost, post }) => {
         </p>
       </center>
 
-      <Comments />
+      <Comments postId={postId} />
     </div>
   )
 }

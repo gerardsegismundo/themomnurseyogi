@@ -8,6 +8,7 @@ import {
   UPDATE_LIKES,
   ADD_COMMENT,
   REMOVE_COMMENT,
+  UPDATE_COMMENT,
   POST_ERROR
 } from './post.types'
 
@@ -26,7 +27,6 @@ export default (state = initialState, { type, payload }) => {
     case GET_POST:
       return {
         ...state,
-
         post: payload
       }
 
@@ -78,9 +78,19 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case ADD_COMMENT:
+      //   const {comments} = state.post
+      // const commentIndex = comments.findIndex(comment => comment._id === payload._id)
+      // console.log('index: ', commentIndex);
+      //   console.log(payload)
+      //   console.log(state.post.comments)
+      console.log(state.post.comments)
+      console.log(payload)
       return {
         ...state,
-        post: { ...state.post, comments: payload }
+        post: {
+          ...state.post,
+          comments: [...state.post.comments, payload]
+        }
       }
 
     case REMOVE_COMMENT:
@@ -93,6 +103,25 @@ export default (state = initialState, { type, payload }) => {
           )
         }
       }
+
+    case UPDATE_COMMENT:
+      console.log(payload)
+      // const { postId, comment } = payload
+      console.log(state.post.comments)
+
+      // const index = state.post.comments(comment => )
+      // return {
+      //   ...state,
+
+      //   post: {
+      //     ...state.post,
+      //     comments: [
+      //       ...state.post.comments,
+      //       state.post.comments[co]
+      //     ]
+      //   }
+      // }
+      return { ...state }
 
     case POST_ERROR:
       return {

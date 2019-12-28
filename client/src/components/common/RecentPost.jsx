@@ -72,7 +72,7 @@ const RecentPost = ({
       <div className='recent-post p-1'>
         <div className='text-center'>
           <p className='recent-post__date'>{formatDate(date)}</p>
-          {'isLiked ' + isLiked}
+
           <h2 className='recent-post__title'>{title}</h2>
           {hashtags && (
             <ul className='recent-post__hash-tags d-flex justify-content-center px-5'>

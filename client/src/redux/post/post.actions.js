@@ -11,6 +11,7 @@ import {
   UPDATE_LIKES,
   ADD_COMMENT,
   REMOVE_COMMENT,
+  UPDATE_COMMENT,
   POST_ERROR
 } from './post.types'
 
@@ -158,14 +159,45 @@ export const addComment = (postId, formData) => async dispatch => {
   } catch (err) {
     console.log(err)
 
-    // if (err.response.data) {
-    //   const { error } = err.response.data
-    //   console.log(error)
-    //   dispatch({
-    //     type: POST_ERROR,
-    //     payload: error
-    //   })
-    // }
+    const { error } = err.response.data
+    console.log(error)
+    dispatch({
+      type: POST_ERROR,
+      payload: error
+    })
+  }
+}
+
+export const deleteComment = (id, comment_id, user_id) => async dispatch => {
+  try {
+    await axios.delete(`/api/posts/comment/${id}/${comment_id}/${user_id}`)
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: comment_id
+    })
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
+  }
+}
+
+export const updateComment = (text, params) => async dispatch => {
+  const { post_id, comment_id, user_id } = params
+  try {
+    const res = await axios.put(
+      `/api/posts/comment/${post_id}/${comment_id}/${user_id}`,
+      { text }
+    )
+
+    dispatch({
+      type: UPDATE_COMMENT,
+      payload: { postId: post_id, comment: res.data }
+    })
+  } catch (err) {
+    console.log(err)
   }
 }
 
@@ -205,22 +237,6 @@ export const unlikePost = (id, user_id) => async dispatch => {
     dispatch({
       type: POST_ERROR,
       payload: error
-    })
-  }
-}
-
-export const deleteComment = (id, comment_id, user_id) => async dispatch => {
-  try {
-    await axios.delete(`/api/posts/comment/${id}/${comment_id}/${user_id}`)
-
-    dispatch({
-      type: REMOVE_COMMENT,
-      payload: comment_id
-    })
-  } catch (err) {
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }

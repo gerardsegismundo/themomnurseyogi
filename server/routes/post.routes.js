@@ -67,7 +67,6 @@ router.put('/unlike/:id/:user_id', async (req, res) => {
 // @route    POST api/posts/comment/:id
 // @desc     Comment on a post
 router.post('/comment/:id', async (req, res) => {
-  console.log('heyo!')
   // Joi validation
   const { error } = validateComment(req.body)
   if (error) {
@@ -89,11 +88,48 @@ router.post('/comment/:id', async (req, res) => {
     user
   }
 
-  post.comments.unshift(newComment)
+  post.comments.push(newComment)
 
   await post.save()
 
-  res.json(post.comments)
+  const recentComment = post.comments[post.comments.length - 1]
+
+  res.json(recentComment)
+})
+
+// @route    PUT api/posts/comment/:id
+// @desc     Comment on a post
+router.put('/comment/:post_id/:comment_id/:user_id', async (req, res) => {
+  const { text } = req.body
+
+  if (!text)
+    return res.status(404).json({ error: { msg: 'Comment is required.' } })
+
+  const { post_id, comment_id, user_id } = req.params
+
+  const post = await Post.findById(post_id)
+
+  const comment = post.comments.find(comment => comment.id === comment_id)
+
+  // If comment don't exists
+  if (!comment)
+    return res.status(404).json({ error: { msg: 'Comment does not exists.' } })
+
+  // Checks user
+  if (comment.user.toString() !== user_id) {
+    return res.status(401).json({ error: { msg: 'User not authorized.' } })
+  }
+
+  // Get update index
+  const updateIndex = post.comments
+    .map(comment => comment.id)
+    .indexOf(comment_id)
+
+  post.comments[updateIndex].text = text
+
+  await post.save()
+
+  res.json(post.comments[updateIndex])
 })
 
 // @route    DELETE api/posts/comment/:id/:comment_id/:user_id
@@ -102,14 +138,14 @@ router.delete('/comment/:id/:comment_id/:user_id', async (req, res) => {
   const { id, comment_id, user_id } = req.params
 
   const post = await Post.findById(id)
-  const comment = post.comments.find(comment => ccomment.id === comment_id)
+  const comment = post.comments.find(comment => comment.id === comment_id)
 
-  // If comment exists
+  // If comment don't exists
   if (!comment)
     return res.status(404).json({ error: { msg: 'Comment does not exists.' } })
 
   // Checks user
-  if (comment.user.toString !== user_id)
+  if (comment.user.toString() !== user_id)
     return res.status(401).json({ error: { msg: 'User not authorized.' } })
 
   // Get remove index
