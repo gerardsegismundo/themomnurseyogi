@@ -78,13 +78,6 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case ADD_COMMENT:
-      //   const {comments} = state.post
-      // const commentIndex = comments.findIndex(comment => comment._id === payload._id)
-      // console.log('index: ', commentIndex);
-      //   console.log(payload)
-      //   console.log(state.post.comments)
-      console.log(state.post.comments)
-      console.log(payload)
       return {
         ...state,
         post: {
@@ -94,6 +87,8 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case REMOVE_COMMENT:
+      console.log(payload)
+      console.log(state.post.comments)
       return {
         ...state,
         post: {

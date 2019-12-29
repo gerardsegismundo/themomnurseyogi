@@ -49,9 +49,9 @@ export const closeSignInModal = () => dispatch => {
   dispatch({ type: CLOSE_SIGNIN_MODAL })
 }
 
-export const openDeleteModal = id => dispatch => {
+export const openDeleteModal = params => dispatch => {
   hideScrollBar()
-  dispatch({ type: OPEN_DELETE_MODAL, payload: id })
+  dispatch({ type: OPEN_DELETE_MODAL, payload: params })
 }
 
 export const closeDeleteModal = () => dispatch => {

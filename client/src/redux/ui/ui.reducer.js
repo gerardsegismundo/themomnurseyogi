@@ -17,7 +17,7 @@ const initialState = {
   userMenuIsOpen: false,
   signInModalIsOpen: false,
   deleteModalIsOpen: false,
-  deleteModalId: '',
+  params: {},
   isSticky: false,
   smallSearchbarIsOpen: false
 }
@@ -53,7 +53,7 @@ const uiReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         deleteModalIsOpen: true,
-        deleteModalId: payload
+        params: payload
       }
     case CLOSE_DELETE_MODAL:
       return {

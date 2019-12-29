@@ -134,10 +134,10 @@ router.put('/comment/:post_id/:comment_id/:user_id', async (req, res) => {
 
 // @route    DELETE api/posts/comment/:id/:comment_id/:user_id
 // @desc     Delete comment
-router.delete('/comment/:id/:comment_id/:user_id', async (req, res) => {
-  const { id, comment_id, user_id } = req.params
+router.delete('/comment/:post_id/:comment_id/:user_id', async (req, res) => {
+  const { post_id, comment_id, user_id } = req.params
 
-  const post = await Post.findById(id)
+  const post = await Post.findById(post_id)
   const comment = post.comments.find(comment => comment.id === comment_id)
 
   // If comment don't exists

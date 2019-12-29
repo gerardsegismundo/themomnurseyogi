@@ -22,6 +22,15 @@ const Comments = ({
   const [isEditingComment, setIsEditingComment] = useState(false)
   const editedCommentTextarea = useRef()
 
+  const handleDeleteComment = commentId => {
+    const params = {
+      post_id: postId,
+      comment_id: commentId,
+      user_id: currentUser.id
+    }
+    openDeleteModal(params)
+  }
+
   const handleEditComment = ({ text, _id }) => {
     setIsEditingComment(true)
     setEditedComment({ text, _id })
@@ -95,7 +104,7 @@ const Comments = ({
                           </span>
                           <span
                             className='hidden'
-                            onClick={() => openDeleteModal(_id)}
+                            onClick={() => handleDeleteComment(_id)}
                           >
                             delete
                           </span>

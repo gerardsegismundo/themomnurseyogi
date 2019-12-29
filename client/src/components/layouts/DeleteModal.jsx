@@ -8,12 +8,13 @@ import { deleteComment } from '../../redux/post/post.actions'
 const DeleteModal = ({
   deleteModalIsOpen,
   closeDeleteModal,
-  deleteModalId,
+  params,
   deleteComment
 }) => {
   const handleDelete = () => {
     closeDeleteModal()
-    deleteComment(deleteModalId)
+    console.log(params)
+    deleteComment(params)
   }
 
   const deleteModalRef = useRef()
@@ -45,8 +46,8 @@ const DeleteModal = ({
   )
 }
 
-const mapStateToProps = ({ ui: { deleteModalIsOpen, deleteModalId } }) => ({
-  deleteModalId,
+const mapStateToProps = ({ ui: { deleteModalIsOpen, params } }) => ({
+  params,
   deleteModalIsOpen
 })
 
