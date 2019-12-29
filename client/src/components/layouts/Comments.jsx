@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
   formatDate,
   useOnKeyDownEnter,
-  useOutsideAndEscapeClick
+  useEscapeClick
 } from '../../helpers/func'
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
 
@@ -55,11 +55,7 @@ const Comments = ({
   }
 
   useOnKeyDownEnter('edited-comment', saveEditComment)
-  useOutsideAndEscapeClick(
-    editedCommentTextarea,
-    isEditingComment,
-    exitEditComment
-  )
+  useEscapeClick(isEditingComment, exitEditComment)
 
   return (
     <div className='comments'>

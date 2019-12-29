@@ -87,8 +87,6 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case REMOVE_COMMENT:
-      console.log(payload)
-      console.log(state.post.comments)
       return {
         ...state,
         post: {

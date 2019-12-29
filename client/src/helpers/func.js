@@ -45,7 +45,7 @@ const useOutsideClick = (ref, callback) => {
   })
 }
 
-const useOutsideAndEscapeClick = (ref, condition, callback) => {
+const useEscapeClick = (condition, callback) => {
   const onKeyDown = e => condition && e.key === 'Escape' && callback()
 
   useEffect(() => {
@@ -55,7 +55,10 @@ const useOutsideAndEscapeClick = (ref, condition, callback) => {
 
     // eslint-disable-next-line
   }, [condition])
+}
 
+const useOutsideAndEscapeClick = (ref, condition, callback) => {
+  useEscapeClick(condition, callback)
   useOutsideClick(ref, () => (condition ? callback() : null))
 }
 
@@ -90,8 +93,9 @@ export {
   getPostId,
   getPostLink,
   renderHashtags,
-  useOutsideClick,
   sliceParagraph,
+  useOutsideClick,
+  useEscapeClick,
   useOutsideAndEscapeClick,
   useOnKeyDownEnter,
   useConfirmOnEnter

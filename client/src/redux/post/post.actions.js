@@ -177,11 +177,11 @@ export const deleteComment = params => async dispatch => {
       payload: comment_id
     })
   } catch (err) {
-    console.log(err)
-    // dispatch({
-    //   type: POST_ERROR,
-    //   payload: { msg: err.response.statusText, status: err.response.status }
-    // })
+    console.error(err)
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    })
   }
 }
 
@@ -198,7 +198,7 @@ export const updateComment = (text, params) => async dispatch => {
       payload: { postId: post_id, comment: res.data }
     })
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
