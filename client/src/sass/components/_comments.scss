@@ -1,6 +1,9 @@
 .comments {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin: auto;
-  margin-top: 7rem;
+  padding-top: 3.5rem;
+  margin-top: 3.5rem;
+  max-width: 80rem;
 
   &__heading {
     p {
@@ -76,8 +79,9 @@
   }
 
   &__reply {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     &--heading {
-      margin-top: 8rem;
+      margin-top: 3.5rem;
       margin-bottom: 5rem;
     }
 
