@@ -195,7 +195,7 @@ export const updateComment = (text, params) => async dispatch => {
 
     dispatch({
       type: UPDATE_COMMENT,
-      payload: { postId: post_id, comment: res.data }
+      payload: res.data
     })
   } catch (err) {
     console.error(err)

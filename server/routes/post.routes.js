@@ -65,7 +65,7 @@ router.put('/unlike/:id/:user_id', async (req, res) => {
 })
 
 // @route    POST api/posts/comment/:id
-// @desc     Comment on a post
+// @desc     Add comment
 router.post('/comment/:id', async (req, res) => {
   // Joi validation
   const { error } = validateComment(req.body)
@@ -98,12 +98,13 @@ router.post('/comment/:id', async (req, res) => {
 })
 
 // @route    PUT api/posts/comment/:id
-// @desc     Comment on a post
+// @desc     Update comment
 router.put('/comment/:post_id/:comment_id/:user_id', async (req, res) => {
   const { text } = req.body
 
-  if (!text)
+  if (!text) {
     return res.status(404).json({ error: { msg: 'Comment is required.' } })
+  }
 
   const { post_id, comment_id, user_id } = req.params
 
@@ -112,8 +113,9 @@ router.put('/comment/:post_id/:comment_id/:user_id', async (req, res) => {
   const comment = post.comments.find(comment => comment.id === comment_id)
 
   // If comment don't exists
-  if (!comment)
+  if (!comment) {
     return res.status(404).json({ error: { msg: 'Comment does not exists.' } })
+  }
 
   // Checks user
   if (comment.user.toString() !== user_id) {

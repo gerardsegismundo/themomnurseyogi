@@ -13,7 +13,6 @@ const DeleteModal = ({
 }) => {
   const handleDelete = () => {
     closeDeleteModal()
-    console.log(params)
     deleteComment(params)
   }
 

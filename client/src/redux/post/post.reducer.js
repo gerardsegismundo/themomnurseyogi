@@ -58,14 +58,12 @@ export default (state = initialState, { type, payload }) => {
     case SEARCH_POST:
       return {
         ...state,
-
         searchResult: payload
       }
 
     case CLEAR_SEARCH:
       return {
         ...state,
-
         searchResult: null
       }
 
@@ -98,23 +96,18 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case UPDATE_COMMENT:
-      console.log(payload)
-      // const { postId, comment } = payload
-      console.log(state.post.comments)
+      const index = state.post.comments.findIndex(
+        comment => comment._id === payload._id
+      )
 
-      // const index = state.post.comments(comment => )
-      // return {
-      //   ...state,
-
-      //   post: {
-      //     ...state.post,
-      //     comments: [
-      //       ...state.post.comments,
-      //       state.post.comments[co]
-      //     ]
-      //   }
-      // }
-      return { ...state }
+      return {
+        ...state,
+        ...(state.post.comments[index].text = payload.text),
+        post: {
+          ...state.post,
+          comments: [...state.post.comments]
+        }
+      }
 
     case POST_ERROR:
       return {
