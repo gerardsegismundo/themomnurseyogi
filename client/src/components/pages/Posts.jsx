@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getPosts } from '../../redux/post/post.actions'
 import { renderHashtags, getPostLink, sliceParagraph } from '../../helpers/func'
 import Fade from 'react-reveal/Fade'
+import Pagination from '../layouts/Pagination'
 
 const Posts = ({ getPosts, posts }) => {
   useEffect(() => {
@@ -16,7 +17,7 @@ const Posts = ({ getPosts, posts }) => {
     <div className='container posts'>
       <h2 className='posts__page-title'># Posts</h2>
 
-      {posts &&
+      {/* {posts &&
         posts.map(({ _id, title, body, hashtags, imgURL, comments, likes }) => {
           return (
             <Fade cascade key={_id}>
@@ -59,7 +60,9 @@ const Posts = ({ getPosts, posts }) => {
               </div>
             </Fade>
           )
-        })}
+        })} */}
+
+      <Pagination />
     </div>
   )
 }

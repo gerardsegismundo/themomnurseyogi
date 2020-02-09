@@ -19,7 +19,11 @@ const initialState = {
   recentPosts: [],
   randomPosts: [],
   otherRandomPosts: [],
-  error: {}
+  error: {},
+  pagination: {
+    activeIndex: 1,
+    paginationCount: 6
+  }
 }
 
 export default (state = initialState, { type, payload }) => {
