@@ -12,7 +12,11 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_COMMENT,
-  POST_ERROR
+  POST_ERROR,
+  GET_PAGE_ITEMS,
+  CHANGE_INDEX,
+  PREV_INDEX,
+  NEXT_INDEX
 } from './post.types'
 
 const Posts = (() => {
@@ -34,6 +38,12 @@ const Posts = (() => {
 
   const getPosts = () => async dispatch => {
     return postsCache || (await getPostsCache(dispatch))
+  }
+
+  const getPageItems = () => dispatch => {
+    dispatch({
+      type: GET_PAGE_ITEMS
+    })
   }
 
   const getPost = id => async dispatch => {
@@ -118,6 +128,7 @@ const Posts = (() => {
   return {
     getPost,
     getPosts,
+    getPageItems,
     filterPosts,
     searchPost,
     changeOtherPosts
@@ -127,6 +138,7 @@ const Posts = (() => {
 export const {
   getPost,
   getPosts,
+  getPageItems,
   searchPost,
   filterPosts,
   changeOtherPosts
@@ -240,4 +252,28 @@ export const unlikePost = (id, user_id) => async dispatch => {
       payload: error
     })
   }
+}
+
+// Pagination
+
+// Change pagination index
+
+export const changeIndex = index => dispatch => {
+  console.log('action changeIndex')
+  dispatch({
+    type: CHANGE_INDEX,
+    payload: index
+  })
+}
+
+export const nextIndex = () => dispatch => {
+  dispatch({
+    type: NEXT_INDEX
+  })
+}
+
+export const prevIndex = () => dispatch => {
+  dispatch({
+    type: PREV_INDEX
+  })
 }

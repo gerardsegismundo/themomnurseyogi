@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getPosts } from '../../redux/post/post.actions'
-import { renderHashtags, getPostLink, sliceParagraph } from '../../helpers/func'
-import Fade from 'react-reveal/Fade'
+import { getPosts, getPageItems } from '../../redux/post/post.actions'
+// import { renderHashtags, getPostLink, sliceParagraph } from '../../helpers/func'
+// import Fade from 'react-reveal/Fade'
 import Pagination from '../layouts/Pagination'
 
-const Posts = ({ getPosts, posts }) => {
+const Posts = ({ getPosts, getPageItems, posts, pageItems }) => {
   useEffect(() => {
     if (!posts) getPosts()
+    if (!pageItems) getPageItems()
 
     // eslint-disable-next-line
   }, [])
@@ -71,4 +72,4 @@ const mapStateToProps = state => ({
   posts: state.posts.posts
 })
 
-export default connect(mapStateToProps, { getPosts })(Posts)
+export default connect(mapStateToProps, { getPosts, getPageItems })(Posts)

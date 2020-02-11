@@ -9,8 +9,19 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_COMMENT,
-  POST_ERROR
+  POST_ERROR,
+  GET_PAGE_ITEMS,
+  CHANGE_INDEX,
+  PREV_INDEX,
+  NEXT_INDEX
 } from './post.types'
+
+// const getActiveItems = () => {
+//   for (index == activeIndex - 1;  index <= activeIndex - 1 + numberOfItems; index++) {
+//     pageItems.push(posts[index])
+//   }
+
+// }
 
 const initialState = {
   post: null,
@@ -22,7 +33,21 @@ const initialState = {
   error: {},
   pagination: {
     activeIndex: 1,
-    paginationCount: 6
+    paginationCount: 6,
+    numberOfItems: 4,
+    // posts
+    /*
+    starts at 
+    +4
+
+    index 
+
+    for (index == activeIndex - 1,  index <= activeIndex - 1 + numberOfItems, index++) {
+      pageItems.push(posts[index])
+    }
+
+    */
+    pageItems: null
   }
 }
 
@@ -118,6 +143,43 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload
       }
+
+    case GET_PAGE_ITEMS: {
+      return { ...state }
+    }
+
+    case CHANGE_INDEX:
+      return {
+        ...state,
+        pagination: {
+          paginationCount: state.pagination.paginationCount,
+          activeIndex: payload
+        }
+      }
+
+    case NEXT_INDEX: {
+      const { activeIndex, paginationCount } = state.pagination
+
+      return {
+        ...state,
+        pagination: {
+          paginationCount,
+          activeIndex: activeIndex + 1
+        }
+      }
+    }
+
+    case PREV_INDEX: {
+      const { activeIndex, paginationCount } = state.pagination
+
+      return {
+        ...state,
+        pagination: {
+          paginationCount,
+          activeIndex: activeIndex - 1
+        }
+      }
+    }
 
     default:
       return state
