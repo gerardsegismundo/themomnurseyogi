@@ -3,6 +3,13 @@
   justify-content: center;
   font-weight: 500;
   vertical-align: middle;
+  opacity: 0.8;
+  margin-bottom: 15rem;
+  transition: opacity ease-in-out 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
 
   &__left,
   &__right {
@@ -10,9 +17,15 @@
     white-space: nowrap;
     cursor: pointer;
     opacity: 0.7;
+    transition: all ease-in-out 0.3s;
+
     &:hover {
       opacity: 1;
-      transition: opacity ease-in-out 0.3s;
+    }
+
+    &.hidden {
+      opacity: 0;
+      cursor: context-menu;
     }
   }
 

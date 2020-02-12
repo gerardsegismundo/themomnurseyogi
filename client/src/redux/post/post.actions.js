@@ -13,7 +13,6 @@ import {
   REMOVE_COMMENT,
   UPDATE_COMMENT,
   POST_ERROR,
-  GET_PAGE_ITEMS,
   CHANGE_INDEX,
   PREV_INDEX,
   NEXT_INDEX
@@ -38,12 +37,6 @@ const Posts = (() => {
 
   const getPosts = () => async dispatch => {
     return postsCache || (await getPostsCache(dispatch))
-  }
-
-  const getPageItems = () => dispatch => {
-    dispatch({
-      type: GET_PAGE_ITEMS
-    })
   }
 
   const getPost = id => async dispatch => {
@@ -128,7 +121,6 @@ const Posts = (() => {
   return {
     getPost,
     getPosts,
-    getPageItems,
     filterPosts,
     searchPost,
     changeOtherPosts
@@ -138,7 +130,6 @@ const Posts = (() => {
 export const {
   getPost,
   getPosts,
-  getPageItems,
   searchPost,
   filterPosts,
   changeOtherPosts

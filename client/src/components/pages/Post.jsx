@@ -20,7 +20,7 @@ const Post = ({
 }) => {
   useEffect(() => {
     getPost(postId)
-    loadLikes()
+    post && loadLikes()
     post && setLikeCount(post.likes.length)
 
     // eslint-disable-next-line

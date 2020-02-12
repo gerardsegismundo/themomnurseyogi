@@ -7,7 +7,8 @@ import {
 } from '../../redux/post/post.actions'
 
 const Pagination = ({
-  pagination: { activeIndex, paginationCount },
+  pagination: { activeIndex, paginationCount, numberOfItems },
+
   changeIndex,
   prevIndex,
   nextIndex
@@ -32,7 +33,10 @@ const Pagination = ({
 
   return (
     <div className='pagination'>
-      <span className='pagination__left' onClick={prevIndexHandler}>
+      <span
+        className={`pagination__left${activeIndex === 1 ? ' hidden' : ''}`}
+        onClick={prevIndexHandler}
+      >
         <i className='pagination__left--icon fa fa-long-arrow-left' />
         PREV
       </span>
@@ -49,7 +53,12 @@ const Pagination = ({
         </span>
       ))}
 
-      <span className='pagination__right' onClick={nextIndexHandler}>
+      <span
+        className={`pagination__right${
+          paginationCount === activeIndex ? ' hidden' : ''
+        }`}
+        onClick={nextIndexHandler}
+      >
         NEXT
         <i className='pagination__right--icon fa fa-long-arrow-right' />
       </span>
@@ -61,6 +70,8 @@ const mapStateToProps = ({ posts }) => ({
   pagination: posts.pagination
 })
 
-export default connect(mapStateToProps, { changeIndex, prevIndex, nextIndex })(
-  Pagination
-)
+export default connect(mapStateToProps, {
+  changeIndex,
+  prevIndex,
+  nextIndex
+})(Pagination)

@@ -10,18 +10,10 @@ import {
   REMOVE_COMMENT,
   UPDATE_COMMENT,
   POST_ERROR,
-  GET_PAGE_ITEMS,
   CHANGE_INDEX,
   PREV_INDEX,
   NEXT_INDEX
 } from './post.types'
-
-// const getActiveItems = () => {
-//   for (index == activeIndex - 1;  index <= activeIndex - 1 + numberOfItems; index++) {
-//     pageItems.push(posts[index])
-//   }
-
-// }
 
 const initialState = {
   post: null,
@@ -33,20 +25,8 @@ const initialState = {
   error: {},
   pagination: {
     activeIndex: 1,
-    paginationCount: 6,
+    paginationCount: 3,
     numberOfItems: 4,
-    // posts
-    /*
-    starts at 
-    +4
-
-    index 
-
-    for (index == activeIndex - 1,  index <= activeIndex - 1 + numberOfItems, index++) {
-      pageItems.push(posts[index])
-    }
-
-    */
     pageItems: null
   }
 }
@@ -60,10 +40,19 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case GET_POSTS: {
+      const { activeIndex, numberOfItems } = state.pagination
+
+      let endIndex = activeIndex * numberOfItems
+      let startIndex = endIndex - numberOfItems
+
       return {
         ...state,
 
-        posts: payload
+        posts: payload,
+        pagination: {
+          ...state.pagination,
+          pageItems: payload.slice(startIndex, endIndex)
+        }
       }
     }
 
@@ -144,38 +133,49 @@ export default (state = initialState, { type, payload }) => {
         error: payload
       }
 
-    case GET_PAGE_ITEMS: {
-      return { ...state }
-    }
-
     case CHANGE_INDEX:
+      const { numberOfItems } = state.pagination
+
+      let endIndex = payload * numberOfItems
+      let startIndex = endIndex - numberOfItems
+
       return {
         ...state,
         pagination: {
-          paginationCount: state.pagination.paginationCount,
+          ...state.pagination,
+
+          pageItems: state.posts.slice(startIndex, endIndex),
           activeIndex: payload
         }
       }
 
     case NEXT_INDEX: {
-      const { activeIndex, paginationCount } = state.pagination
+      const { activeIndex, numberOfItems } = state.pagination
+
+      let endIndex = (activeIndex + 1) * numberOfItems
+      let startIndex = endIndex - numberOfItems
 
       return {
         ...state,
         pagination: {
-          paginationCount,
+          ...state.pagination,
+          pageItems: state.posts.slice(startIndex, endIndex),
           activeIndex: activeIndex + 1
         }
       }
     }
 
     case PREV_INDEX: {
-      const { activeIndex, paginationCount } = state.pagination
+      const { activeIndex, numberOfItems } = state.pagination
+
+      let endIndex = (activeIndex - 1) * numberOfItems
+      let startIndex = endIndex - numberOfItems
 
       return {
         ...state,
         pagination: {
-          paginationCount,
+          ...state.pagination,
+          pageItems: state.posts.slice(startIndex, endIndex),
           activeIndex: activeIndex - 1
         }
       }
