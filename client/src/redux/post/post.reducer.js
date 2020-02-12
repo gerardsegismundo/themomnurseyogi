@@ -25,8 +25,8 @@ const initialState = {
   error: {},
   pagination: {
     activeIndex: 1,
-    paginationCount: 3,
-    numberOfItems: 4,
+    paginationCount: '',
+    numberOfItems: 5,
     pageItems: null
   }
 }
@@ -47,11 +47,11 @@ export default (state = initialState, { type, payload }) => {
 
       return {
         ...state,
-
         posts: payload,
         pagination: {
           ...state.pagination,
-          pageItems: payload.slice(startIndex, endIndex)
+          pageItems: payload.slice(startIndex, endIndex),
+          paginationCount: Math.ceil(payload.length / numberOfItems)
         }
       }
     }
