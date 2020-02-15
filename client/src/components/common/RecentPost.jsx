@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 import {
   getPostLink,
@@ -87,11 +86,11 @@ const RecentPost = ({
         />
         <p className='recent-post__body'>{sliceParagraph(body)}</p>
         <div className='d-flex'>
-          <Link to={getPostLink(title, _id)}>
+          <a href={getPostLink(title, _id)}>
             <button className='recent-post__read-more btn-primary btn-xl align-content-center mb-2'>
               Read more
             </button>
-          </Link>
+          </a>
 
           <div className='recent-post__icons'>
             <span

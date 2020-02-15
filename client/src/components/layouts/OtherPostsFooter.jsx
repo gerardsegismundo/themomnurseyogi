@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
-import { Link } from 'react-router-dom'
 import { changeOtherPosts } from '../../redux/post/post.actions'
 
 const OtherPostsFooter = ({ randomPosts, changeOtherPosts }) => {
@@ -11,34 +10,34 @@ const OtherPostsFooter = ({ randomPosts, changeOtherPosts }) => {
         {randomPosts &&
           randomPosts.map(({ _id, title, imgURL, hashtags, date }) => (
             <div className='post col-sm-12 col-md-6 col-xl-3 d-flex' key={_id}>
-              <Link
+              <a
                 onClick={() => changeOtherPosts(_id)}
-                to={getPostLink(title, _id)}
+                href={getPostLink(title, _id)}
                 className='post__img-container'
               >
                 <figure
                   className='post__img-container__img'
                   style={{ backgroundImage: `url(${imgURL})` }}
                 />{' '}
-              </Link>
+              </a>
               <div className='post__labels'>
                 <p className='post__labels--date'>{formatDate(date)}</p>
-                <Link
-                  to={getPostLink(title, _id)}
+                <a
+                  href={getPostLink(title, _id)}
                   onClick={() => changeOtherPosts(_id)}
                 >
                   <h4 className='post__labels--title'>{title}</h4>
-                </Link>
+                </a>
                 <p className='post__labels--hashtags'>
                   {renderHashtags(hashtags, 3)}
                 </p>
-                <Link
+                <a
                   onClick={() => changeOtherPosts(_id)}
-                  to={getPostLink(title, _id)}
+                  href={getPostLink(title, _id)}
                   className='post__labels--read-more'
                 >
                   Read more
-                </Link>
+                </a>
               </div>
             </div>
           ))}

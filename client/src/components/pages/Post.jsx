@@ -18,24 +18,25 @@ const Post = ({
   likePost,
   unlikePost
 }) => {
+  const [isLiked, setIsLiked] = useState()
+  const [likeCount, setLikeCount] = useState()
+
+  const loadLikes = async () => {
+    if (!currentUser) return
+    const likeIds = post.likes.map(like => like.user)
+
+    if (likeIds.includes(currentUser.id)) setIsLiked(true)
+    else setIsLiked(false)
+  }
+
   useEffect(() => {
     getPost(postId)
+
     post && loadLikes()
     post && setLikeCount(post.likes.length)
 
     // eslint-disable-next-line
-  }, [currentUser])
-
-  const [isLiked, setIsLiked] = useState()
-  const [likeCount, setLikeCount] = useState()
-
-  const loadLikes = () => {
-    if (!currentUser) return
-    const likeIds = likes.map(like => like.user)
-
-    if (likeIds.includes(currentUser.id)) return setIsLiked(true)
-    setIsLiked(false)
-  }
+  }, [currentUser, setIsLiked])
 
   const handleOnLike = () => {
     if (!currentUser) {
@@ -68,7 +69,7 @@ const Post = ({
     )
   }
 
-  const { imgURL, date, hashtags, title, body, likes } = post
+  const { imgURL, date, hashtags, title, body } = post
 
   return (
     <div className='post container'>

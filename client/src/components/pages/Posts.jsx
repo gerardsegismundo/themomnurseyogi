@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPosts } from '../../redux/post/post.actions'
 import { renderHashtags, getPostLink, sliceParagraph } from '../../helpers/func'
@@ -25,15 +24,15 @@ const Posts = ({ getPosts, posts, pageItems }) => {
                 <Fade cascade key={_id}>
                   <div className='post row'>
                     <div className='post__img-col cl-sm-12 col-md-4 col-lg-3'>
-                      <Link to={getPostLink(title, _id)}>
+                      <a href={getPostLink(title, _id)}>
                         <figure style={{ backgroundImage: `url(${imgURL})` }} />
-                      </Link>
+                      </a>
                     </div>
 
                     <div className='post__content-col col-md-8 col-lg-9'>
-                      <Link to={getPostLink(title, _id)}>
+                      <a href={getPostLink(title, _id)}>
                         <h2 className='post__content-col--title'>{title}</h2>
-                      </Link>
+                      </a>
                       <p className='post__content-col--body'>
                         {sliceParagraph(body)}
                       </p>
@@ -42,12 +41,12 @@ const Posts = ({ getPosts, posts, pageItems }) => {
                       </p>
 
                       <div className='d-flex align-items-center'>
-                        <Link
-                          to={getPostLink(title, _id)}
+                        <a
+                          href={getPostLink(title, _id)}
                           className='post__content-col--read-more'
                         >
                           <p>Read more</p>
-                        </Link>
+                        </a>
 
                         <p className='post__content-col--icons ml-auto'>
                           <span className='post__content-col--icons--likes'>
