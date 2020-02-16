@@ -1,8 +1,8 @@
 .comments {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin: auto;
-  padding-top: 3.5rem;
-  margin-top: 3.5rem;
+  padding-top: 5rem;
+  // margin-top: 3.5rem;
   max-width: 80rem;
 
   &__heading {
@@ -79,7 +79,9 @@
   }
 
   &__reply {
+    padding-top: 2rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+
     &--heading {
       margin-top: 3.5rem;
       margin-bottom: 5rem;
@@ -88,7 +90,6 @@
     &--form {
       margin: auto;
       margin-bottom: 13rem;
-      // margin-bottom: 20rem;
 
       @include respond(xl) {
         margin-bottom: calc(13rem + 4vw);
