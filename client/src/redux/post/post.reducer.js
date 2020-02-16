@@ -5,7 +5,9 @@ import {
   FILTER_POSTS,
   CLEAR_SEARCH,
   CHANGE_OTHER_POSTS,
+  // LIKE_POST,
   UPDATE_LIKES,
+  // UNLIKE_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_COMMENT,
@@ -86,11 +88,19 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case UPDATE_LIKES:
+      const { post, posts } = state
+      const { isLiked } = payload
+
       return {
         ...state,
-        posts: state.posts.map(post =>
+        posts: posts.map(post =>
           post._id === payload.id ? { ...post, likes: payload.likes } : post
-        )
+        ),
+        post: {
+          ...post,
+          isLiked: !post.isLiked,
+          likeCount: isLiked ? post.likeCount + 1 : post.likeCount - 1
+        }
       }
 
     case ADD_COMMENT:

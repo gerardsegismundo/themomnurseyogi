@@ -1,13 +1,14 @@
 import React from 'react'
 import Fade from 'react-reveal/Fade'
+import { Link } from 'react-router-dom'
 import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
 
 const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => (
   <Fade cascade>
     <section className={`other-posts${classes ? ' ' + classes : ''}`}>
       {title && _id && (
-        <a
-          href={getPostLink(title, _id)}
+        <Link
+          to={getPostLink(title, _id)}
           className='other-posts__title fw-600 '
         >
           <div className='d-block'>
@@ -22,7 +23,7 @@ const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => (
               {renderHashtags(hashtags, 3)}
             </p>
           </div>
-        </a>
+        </Link>
       )}
     </section>
   </Fade>

@@ -39,9 +39,24 @@ const Posts = (() => {
     return postsCache || (await getPostsCache(dispatch))
   }
 
-  const getPost = id => async dispatch => {
+  const getPost = (postId, userId) => async dispatch => {
     const posts = postsCache || (await getPostsCache(dispatch))
-    const post = posts.find(post => post._id === id)
+
+    let post = posts.find(post => post._id === postId)
+
+    const isLiked = (() => {
+      // gets users who liked the post
+      const likeIds = post.likes.map(like => like.user)
+
+      return likeIds.includes(userId) ? true : false
+    })()
+
+    // add likeCount and isLiked to post items
+    post = {
+      ...post,
+      likeCount: post.likes.length,
+      isLiked
+    }
 
     dispatch({
       type: GET_POST,
@@ -212,7 +227,7 @@ export const likePost = (id, user_id) => async dispatch => {
 
     dispatch({
       type: UPDATE_LIKES,
-      payload: { id, user_id, likes: res.data }
+      payload: { id, user_id, likes: res.data, isLiked: true }
     })
   } catch (err) {
     const { error } = err.response.data
@@ -232,7 +247,7 @@ export const unlikePost = (id, user_id) => async dispatch => {
 
     dispatch({
       type: UPDATE_LIKES,
-      payload: { id, user_id, likes: res.data }
+      payload: { id, user_id, likes: res.data, isLiked: false }
     })
   } catch (err) {
     const { error } = err.response.data

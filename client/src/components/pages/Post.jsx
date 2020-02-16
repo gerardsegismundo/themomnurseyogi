@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getPost } from '../../redux/post/post.actions'
 import Comments from '../layouts/Comments'
@@ -18,25 +18,20 @@ const Post = ({
   likePost,
   unlikePost
 }) => {
-  const [isLiked, setIsLiked] = useState()
-  const [likeCount, setLikeCount] = useState()
-
-  const loadLikes = async () => {
-    if (!currentUser) return
-    const likeIds = post.likes.map(like => like.user)
-
-    if (likeIds.includes(currentUser.id)) setIsLiked(true)
-    else setIsLiked(false)
-  }
+  const postId = getPostId(location.pathname)
 
   useEffect(() => {
-    getPost(postId)
-
-    post && loadLikes()
-    post && setLikeCount(post.likes.length)
-
+    currentUser && getPost(postId, currentUser.id)
     // eslint-disable-next-line
-  }, [currentUser, setIsLiked])
+  }, [currentUser])
+
+  if (!post) {
+    return (
+      <div className='post--spinner'>
+        <Spinner msg={'Loading post... '} />
+      </div>
+    )
+  }
 
   const handleOnLike = () => {
     if (!currentUser) {
@@ -50,26 +45,17 @@ const Post = ({
     }
 
     likePost(post._id, currentUser.id)
-    setIsLiked(true)
-    setLikeCount(likeCount + 1)
+
+    // setLikeCount(likeCount + 1)
   }
 
   const handleOnUnlike = () => {
     unlikePost(post._id, currentUser.id)
-    setIsLiked(false)
-    setLikeCount(likeCount - 1)
-  }
-  const postId = getPostId(location.pathname)
 
-  if (!post) {
-    return (
-      <div className='post--spinner'>
-        <Spinner msg={'Loading post... '} />
-      </div>
-    )
+    // setLikeCount(likeCount - 1)
   }
 
-  const { imgURL, date, hashtags, title, body } = post
+  const { imgURL, date, hashtags, title, body, isLiked, likeCount } = post
 
   return (
     <div className='post container'>
