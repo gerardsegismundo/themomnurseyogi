@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
+import { getPostLink, renderHashtags } from '../../helpers/func'
 import { changeOtherPosts } from '../../redux/post/post.actions'
 
 const OtherPostsFooter = ({ randomPosts, changeOtherPosts }) => {
@@ -22,7 +22,7 @@ const OtherPostsFooter = ({ randomPosts, changeOtherPosts }) => {
                 />{' '}
               </Link>
               <div className='post__labels'>
-                <p className='post__labels--date'>{formatDate(date)}</p>
+                <p className='post__labels--date'>{date}</p>
                 <Link
                   to={getPostLink(title, _id)}
                   onClick={() => changeOtherPosts(_id)}

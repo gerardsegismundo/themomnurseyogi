@@ -1,13 +1,6 @@
 import React, { useEffect } from 'react'
 import uuid from 'react-uuid'
 
-const formatDate = date =>
-  new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-
 const sliceParagraph = body => body.slice(0, 200) + '...'
 
 const getPostId = locationPath =>
@@ -89,7 +82,6 @@ const useOnKeyDownEnter = (activeElementId, callback) => {
 }
 
 export {
-  formatDate,
   getPostId,
   getPostLink,
   renderHashtags,

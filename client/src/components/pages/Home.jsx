@@ -1,5 +1,5 @@
 import React from 'react'
-import Article from '../layouts/HomeArticle'
+import RecentPosts from '../layouts/RecentPosts'
 import Aside from '../layouts/Aside'
 
 const Home = () => (
@@ -7,7 +7,7 @@ const Home = () => (
     <figure className='cover-image' />
     <div className='container'>
       <div className='row'>
-        <Article />
+        <RecentPosts />
         <Aside subscribeSectionClass='aside-home' />
       </div>
     </div>

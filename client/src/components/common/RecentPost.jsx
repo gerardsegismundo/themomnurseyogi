@@ -71,7 +71,7 @@ const RecentPost = ({
     <Fade cascade>
       <div className='recent-post p-1'>
         <div className='text-center'>
-          <p className='recent-post__date'>{formatDate(date)}</p>
+          <p className='recent-post__date'>{date}</p>
 
           <h2 className='recent-post__title'>{title}</h2>
           {hashtags && (

@@ -1,7 +1,7 @@
 import React from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
-import { getPostLink, renderHashtags, formatDate } from '../../helpers/func'
+import { getPostLink, renderHashtags } from '../../helpers/func'
 
 const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => (
   <Fade cascade>
@@ -17,7 +17,7 @@ const OtherPosts = ({ classes, title, hashtags, date, _id, imgURL }) => (
               className='other-posts__img img-fluid '
               alt='profile'
             />
-            <p className='other-posts__date'>{formatDate(date)}</p>
+            <p className='other-posts__date'>{date}</p>
             <h4>{title}</h4>
             <p className='other-posts__hashtags'>
               {renderHashtags(hashtags, 3)}

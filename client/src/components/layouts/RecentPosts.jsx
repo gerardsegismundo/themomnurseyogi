@@ -3,7 +3,7 @@ import RecentPost from '../common/RecentPost'
 
 import { connect } from 'react-redux'
 
-const HomeArticle = ({ recentPosts }) => {
+const RecentPosts = ({ recentPosts }) => {
   return (
     <article className='col-sm-12 col-lg-8 col-xl-7 order-3 order-lg-1 mr-xl-5'>
       <hr className='d-block my-5 d-lg-none wide' />
@@ -19,4 +19,4 @@ const mapStateToProps = ({ posts }) => ({
   recentPosts: posts.recentPosts
 })
 
-export default connect(mapStateToProps)(HomeArticle)
+export default connect(mapStateToProps)(RecentPosts)

@@ -17,6 +17,8 @@ import {
   NEXT_INDEX
 } from './post.types'
 
+// import { formatDate } from '../../helpers/func'
+
 const initialState = {
   post: null,
   posts: [],
@@ -49,6 +51,7 @@ export default (state = initialState, { type, payload }) => {
 
       return {
         ...state,
+        // posts: { ...payload, date: formatDate(payload.date) },
         posts: payload,
         pagination: {
           ...state.pagination,

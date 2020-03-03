@@ -4,7 +4,7 @@ import { getPost } from '../../redux/post/post.actions'
 import Comments from '../layouts/Comments'
 import Spinner from '../layouts/Spinner'
 
-import { renderHashtags, formatDate, getPostId } from '../../helpers/func'
+import { renderHashtags, getPostId } from '../../helpers/func'
 import { likePost, unlikePost } from '../../redux/post/post.actions'
 
 import { NotificationManager } from 'react-notifications'
@@ -60,7 +60,7 @@ const Post = ({
   return (
     <div className='post container'>
       <h3 className='post__story'># Story</h3>
-      <p className='post__date text-grey fw-600'>{formatDate(date)}</p>
+      <p className='post__date text-grey fw-600'>{date}</p>
       <h1 className='post__title'>{title}</h1>
       <ul className='post__hashtags text-grey fw-600'>
         {renderHashtags(hashtags)}

@@ -18,13 +18,27 @@ import {
   NEXT_INDEX
 } from './post.types'
 
+// import { formatDate } from '../../helpers/func'
+
+const formatDate = date =>
+  new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+
 const Posts = (() => {
   let postsCache = null
 
   const getPostsCache = async dispatch => {
     if (!postsCache) {
       const res = await axios.get('/api/posts')
-      postsCache = res.data
+
+      // formats date property of each post
+      postsCache = res.data.map(data => ({
+        ...data,
+        date: formatDate(data.date)
+      }))
 
       dispatch({
         type: GET_POSTS,
