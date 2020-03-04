@@ -83,13 +83,6 @@ const Comment = props => {
             ) : (
               <>
                 <textarea
-                  // onChange={
-                  //   setEditedComment({
-                  //     _id,
-                  //     text: e.target.value
-                  //   })
-                  // }}
-
                   onChange={setEditedCommentHandler}
                   ref={editedCommentTextarea}
                   id='edited-comment'

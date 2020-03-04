@@ -1,7 +1,7 @@
 import React from 'react'
 import adsImage from '../../assets/ads.jpg'
 import Subscribe from '../common/Subscribe'
-import OtherPost from '../common/OtherPosts'
+import AsideOtherPosts from '../common/AsideOtherPosts'
 import { connect } from 'react-redux'
 
 const Aside = ({
@@ -28,7 +28,7 @@ const Aside = ({
         <>
           {otherRandomPosts &&
             otherRandomPosts.map(props => (
-              <OtherPost
+              <AsideOtherPosts
                 key={props._id}
                 classes='d-none d-lg-flex justify-content-center'
                 {...props}
@@ -50,7 +50,4 @@ const mapStateToProps = ({ posts }) => ({
   otherRandomPosts: posts.otherRandomPosts
 })
 
-export default connect(
-  mapStateToProps,
-  {}
-)(Aside)
+export default connect(mapStateToProps, {})(Aside)
