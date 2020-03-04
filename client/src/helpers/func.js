@@ -3,6 +3,13 @@ import uuid from 'react-uuid'
 
 const sliceParagraph = body => body.slice(0, 200) + '...'
 
+const formatDate = date =>
+  new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+
 const getPostId = locationPath =>
   locationPath
     .split('/')[2]
@@ -82,6 +89,7 @@ const useOnKeyDownEnter = (activeElementId, callback) => {
 }
 
 export {
+  formatDate,
   getPostId,
   getPostLink,
   renderHashtags,

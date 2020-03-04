@@ -18,14 +18,7 @@ import {
   NEXT_INDEX
 } from './post.types'
 
-// import { formatDate } from '../../helpers/func'
-
-const formatDate = date =>
-  new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+import { formatDate } from '../../helpers/func'
 
 const Posts = (() => {
   let postsCache = null

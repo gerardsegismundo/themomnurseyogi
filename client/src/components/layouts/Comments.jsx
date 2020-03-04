@@ -1,59 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { useOnKeyDownEnter, useEscapeClick } from '../../helpers/func'
-import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
 
-import { updateComment } from '../../redux/post/post.actions'
+import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
 
 import CommentForm from '../common/CommentForm'
 import Comment from './Comment'
 
-const Comments = ({
-  postId,
-  currentUser,
-  comments,
-  openDeleteModal,
-  updateComment
-}) => {
-  const [editedComment, setEditedComment] = useState({ text: '', _id: '' })
-  const [isEditingComment, setIsEditingComment] = useState(false)
-  const editedCommentTextarea = useRef()
-
-  const handleDeleteComment = commentId => {
-    const params = {
-      post_id: postId,
-      comment_id: commentId,
-      user_id: currentUser.id
-    }
-    openDeleteModal(params)
-  }
-
-  const handleEditComment = ({ text, _id }) => {
-    setIsEditingComment(true)
-    setEditedComment({ text, _id })
-  }
-
-  const exitEditComment = () => {
-    setIsEditingComment(false)
-    setEditedComment({ text: '', _id: '' })
-  }
-
-  const saveEditComment = () => {
-    const params = {
-      post_id: postId,
-      comment_id: editedComment._id,
-      user_id: currentUser.id
-    }
-
-    const { text } = editedComment
-
-    updateComment(text, params)
-    exitEditComment()
-  }
-
-  useOnKeyDownEnter('edited-comment', saveEditComment)
-  useEscapeClick(isEditingComment, exitEditComment)
-
+const Comments = ({ comments, postId }) => {
   return (
     <div
       className={`comments${
@@ -71,7 +24,9 @@ const Comments = ({
 
           <ul>
             {comments &&
-              comments.map(props => <Comment {...props} key={props._id} />)}
+              comments.map(props => (
+                <Comment {...props} postId={postId} key={props._id} />
+              ))}
           </ul>
         </>
       ) : (
@@ -89,7 +44,6 @@ const mapStateToProps = ({ user, posts }) => ({
 })
 
 export default connect(mapStateToProps, {
-  updateComment,
   openSignInModal,
   openDeleteModal
 })(Comments)
