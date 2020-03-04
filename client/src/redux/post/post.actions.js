@@ -98,16 +98,16 @@ const Posts = (() => {
     })
   }
 
-  const changeOtherPosts = id => async dispatch => {
+  const rearrangePosts = id => async dispatch => {
     if (!postsCache) await getPostsCache(dispatch)
 
     const others = postsCache.filter(({ _id }) => _id !== id)
 
-    const newOtherPosts = _.sampleSize(others, 4)
+    const rearrangedPosts = _.sampleSize(others, 4)
 
     dispatch({
       type: CHANGE_OTHER_POSTS,
-      payload: newOtherPosts
+      payload: rearrangedPosts
     })
   }
 
@@ -145,7 +145,7 @@ const Posts = (() => {
     getPosts,
     filterPosts,
     searchPost,
-    changeOtherPosts
+    rearrangePosts
   }
 })()
 
@@ -154,7 +154,7 @@ export const {
   getPosts,
   searchPost,
   filterPosts,
-  changeOtherPosts
+  rearrangePosts
 } = Posts
 
 export const clearSearch = () => async dispatch => {
