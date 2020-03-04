@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
 
 import CommentForm from '../common/CommentForm'
-import Comment from './Comment'
+import Comment from '../common/Comment'
 
 const Comments = ({ comments, postId }) => {
   return (

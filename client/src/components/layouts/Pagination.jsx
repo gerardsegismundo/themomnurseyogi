@@ -7,7 +7,7 @@ import {
 } from '../../redux/post/post.actions'
 
 const Pagination = ({
-  pagination: { activeIndex, paginationCount, numberOfItems },
+  pagination: { activeIndex, paginationCount },
 
   changeIndex,
   prevIndex,

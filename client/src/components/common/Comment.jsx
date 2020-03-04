@@ -9,8 +9,6 @@ const Comment = props => {
   const { _id, user, name, avatar, text, date } = props
   const { postId, currentUser, openDeleteModal, updateComment } = props
 
-  console.log(props)
-
   const [editedComment, setEditedComment] = useState({ text: '', _id: '' })
 
   const setEditedCommentHandler = e => {
