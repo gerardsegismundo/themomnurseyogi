@@ -5,11 +5,8 @@ import { withRouter } from 'react-router-dom'
 
 const PaginationItem = props => {
   const { _id, title, body, hashtags, imgURL, comments, likes, history } = props
-  const postLink = getPostLink(title, _id)
 
-  const goToPost = () => {
-    history.push(postLink)
-  }
+  const goToPost = () => history.push(getPostLink(title, _id))
 
   return (
     <Fade cascade key={_id}>

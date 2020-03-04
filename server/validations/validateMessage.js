@@ -9,7 +9,7 @@ const validateMessage = req => {
       .required()
       .email(),
     title: Joi.string().required(),
-    text: Joi.string().required()
+    body: Joi.string().required()
   }
 
   return Joi.validate(req, schema)

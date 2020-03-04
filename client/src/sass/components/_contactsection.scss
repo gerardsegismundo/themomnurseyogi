@@ -1,0 +1,63 @@
+.contact-section {
+  &__title {
+    margin: 3rem 0 4rem 0;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 5rem;
+    text-align-last: center;
+  }
+
+  &__body {
+    @include standard-font;
+  }
+
+  &__social-links {
+    display: block;
+    margin: 3.5rem 1vw 2rem 1vw;
+
+    i {
+      margin-right: 5vw;
+      color: $light-font;
+      font-size: 2rem;
+
+      &:hover {
+        @include light-to-dark;
+      }
+    }
+  }
+
+  &__form {
+    margin: 3.5rem 1vw 2rem 1vw;
+    input {
+      margin-bottom: 1rem;
+    }
+
+    .invalid-feedback--title {
+      transform: translateY(-0.5rem);
+    }
+
+    &__send-btn {
+      margin-top: 5rem;
+      display: flex;
+      align-items: center;
+      transition: all ease-in-out 0.3s;
+
+      .btn-spinner {
+        position: absolute;
+        transform: scale(0) translateX(10rem);
+
+        opacity: 0;
+
+        &.is-sending {
+          transform: scale(1) translateX(10rem);
+          opacity: 0.7;
+        }
+      }
+    }
+
+    &__requiremsg {
+      margin-top: 2.5rem;
+      margin-bottom: 5rem;
+      @include standard-font;
+    }
+  }
+}

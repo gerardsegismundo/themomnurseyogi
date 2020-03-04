@@ -15,7 +15,7 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
 
   useEffect(() => {
     setMessage({
-      displayName: currentUser && auth.currentUser.displayName,
+      name: currentUser && auth.currentUser.displayName,
       email: currentUser && auth.currentUser.email,
       ...message.body
     })
@@ -27,13 +27,14 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
     if (messageIsInvalid && e.target.value.length > 0) {
       setMessageIsInvalid(false)
     }
-    setMessage({ ...message, body: e.target.value })
+
+    setMessage({ ...message, [e.target.name]: e.target.value })
   }
 
   const handleSendMessage = async e => {
     e.preventDefault()
 
-    if (!message.body) return setMessageIsInvalid(true)
+    if (!message.body || !message.title) return setMessageIsInvalid(true)
 
     setIsSendingMessage(true)
 
@@ -49,7 +50,7 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
       if (response)
         NotificationManager.success('Message sent.', 'Success', 5000)
       setIsSendingMessage(false)
-      setMessage({ ...message, body: '' })
+      setMessage({ ...message, body: '', title: '' })
     }, 2000)
   }
 
@@ -83,19 +84,37 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
           disabled
         />
 
+        <input
+          type='text'
+          name='title'
+          className={`form-control ${messageIsInvalid &&
+            !message.title &&
+            'is-invalid'}`}
+          disabled={!currentUser || isSendingMessage}
+          onChange={handleOnChange}
+          placeholder='Title'
+        />
+        {!message.title && messageIsInvalid && (
+          <div className='invalid-feedback invalid-feedback--title'>
+            Please provide a title.
+          </div>
+        )}
+
         <textarea
-          name='message'
+          name='body'
           id='textarea-message'
-          onChange={e => handleOnChange(e)}
+          onChange={handleOnChange}
           value={message.body}
-          className={`form-control ${messageIsInvalid && 'is-invalid'}`}
+          className={`form-control ${messageIsInvalid &&
+            !message.body &&
+            'is-invalid'}`}
           placeholder='Message'
           cols='30'
           rows='10'
           disabled={!currentUser || isSendingMessage}
           required
         ></textarea>
-        {messageIsInvalid && (
+        {!message.body && messageIsInvalid && (
           <div className='invalid-feedback'>Please provide a message.</div>
         )}
 
@@ -111,7 +130,7 @@ const ContactSection = ({ currentUser, openSignInModal }) => {
             <span
               className={`btn-spinner${isSendingMessage ? ' is-sending' : ''}`}
             >
-              <HashLoader sizeUnit={'px'} size={16} color={'#CC0066'} />
+              <HashLoader sizeUnit={'px'} size={16} color={'#144'} />
             </span>
           </button>
         ) : (

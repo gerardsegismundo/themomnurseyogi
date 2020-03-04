@@ -12,7 +12,7 @@ const MessageSchema = new Schema({
     type: String,
     required: true
   },
-  text: {
+  body: {
     type: String,
     required: true
   },
