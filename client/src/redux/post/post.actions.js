@@ -237,13 +237,14 @@ export const likePost = (id, user_id) => async dispatch => {
       payload: { id, user_id, likes: res.data, isLiked: true }
     })
   } catch (err) {
-    const { error } = err.response.data
+    console.log(err)
+    // const { error } = err.response.data
 
-    console.error(error)
-    dispatch({
-      type: POST_ERROR,
-      payload: error
-    })
+    // console.error(error)
+    // dispatch({
+    //   type: POST_ERROR,
+    //   payload: error
+    // })
   }
 }
 
@@ -257,13 +258,15 @@ export const unlikePost = (id, user_id) => async dispatch => {
       payload: { id, user_id, likes: res.data, isLiked: false }
     })
   } catch (err) {
-    const { error } = err.response.data
+    console.log(err)
+    // console.log(err);
+    // const { error } = err.response.data
 
-    console.log(error)
-    dispatch({
-      type: POST_ERROR,
-      payload: error
-    })
+    // console.log(error)
+    // dispatch({
+    //   type: POST_ERROR,
+    //   payload: error
+    // })
   }
 }
 

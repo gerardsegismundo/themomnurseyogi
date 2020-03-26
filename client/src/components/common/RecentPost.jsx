@@ -70,9 +70,11 @@ const RecentPost = ({
 
           <h2 className='recent-post__title'>{title}</h2>
           {hashtags && (
-            <ul className='recent-post__hash-tags d-flex justify-content-center px-5'>
-              {renderHashtags(hashtags)}
-            </ul>
+            <p className='recent-post__hash-tags d-flex justify-content-center px-5'>
+              {hashtags.map(hashtag => {
+                return hashtag + ' '
+              })}
+            </p>
           )}
         </div>
         <img
@@ -84,7 +86,7 @@ const RecentPost = ({
         <div className='d-flex'>
           <Link
             to={getPostLink(title, _id)}
-            className='btn-primary btn-xl align-content-center mb-2'
+            className='recent-post__read-more btn-primary btn-xl align-content-center mb-2'
           >
             Read more
           </Link>
@@ -95,11 +97,17 @@ const RecentPost = ({
               onClick={isLiked ? handleOnUnlike : handleOnLike}
             >
               <i className={`fa fa-heart${isLiked ? '' : '-o'}`} />
-              {likeCount} like{likeCount < 2 ? '' : 's'}
+              {likeCount}
+              <span className='d-none d-sm-inline'>
+                &nbsp;like{likeCount < 2 ? '' : 's'}
+              </span>
             </span>
             <span className='recent-post__icons--comments'>
               <i className='fa fa-comment-o' />
-              {comments.length} comment{comments.length < 2 ? '' : 's'}
+              {comments.length}
+              <span className='d-none d-sm-inline'>
+                &nbsp;comment{comments.length < 2 ? '' : 's'}
+              </span>
             </span>
           </div>
         </div>

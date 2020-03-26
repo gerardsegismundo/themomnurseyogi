@@ -1,5 +1,5 @@
-article {
-  .recent-posts {
+.recent-posts {
+  &--heading {
     margin: 3rem 0 4rem 0;
     font-family: $google-font;
     font-size: 5rem;
@@ -27,9 +27,7 @@ article {
     }
 
     &__hash-tags {
-      span {
-        margin: 0 1rem;
-      }
+      word-spacing: 2rem;
     }
 
     &__img {
@@ -59,11 +57,16 @@ article {
       text-align: justify;
     }
 
+    &__read-more {
+      width: 40%;
+    }
+
     &__icons {
       margin-left: auto;
       display: flex;
       align-items: center;
       font-size: 1.4rem;
+      white-space: nowrap;
 
       &--likes {
         margin-right: 2rem;
