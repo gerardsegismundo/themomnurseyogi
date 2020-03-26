@@ -5,9 +5,7 @@ import {
   FILTER_POSTS,
   CLEAR_SEARCH,
   CHANGE_OTHER_POSTS,
-  // LIKE_POST,
   UPDATE_LIKES,
-  // UNLIKE_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_COMMENT,
@@ -16,8 +14,6 @@ import {
   PREV_INDEX,
   NEXT_INDEX
 } from './post.types'
-
-// import { formatDate } from '../../helpers/func'
 
 const initialState = {
   post: null,
@@ -91,6 +87,7 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case UPDATE_LIKES:
+      console.log(payload)
       const { post, posts } = state
       const { isLiked } = payload
 

@@ -12,7 +12,19 @@
 
   &__social-links {
     display: block;
-    margin: 3.5rem 1vw 2rem 1vw;
+
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 4rem auto 2.5rem auto;
+    width: 80%;
+
+    @include respond(sm) {
+      margin: 3.5rem 1vw 2rem 1vw;
+      display: block;
+      text-align: left;
+      width: 100%;
+    }
 
     i {
       margin-right: 5vw;
@@ -40,6 +52,13 @@
       display: flex;
       align-items: center;
       transition: all ease-in-out 0.3s;
+      justify-content: center;
+      // max-width: 20rem;
+      width: 100%;
+
+      @include respond(sm) {
+        width: 20rem;
+      }
 
       .btn-spinner {
         position: absolute;

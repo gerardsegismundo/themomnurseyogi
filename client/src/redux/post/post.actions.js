@@ -229,8 +229,11 @@ export const updateComment = (text, params) => async dispatch => {
 
 // Like post
 export const likePost = (id, user_id) => async dispatch => {
+  console.log(id)
   try {
     const res = await axios.put(`/api/posts/like/${id}/${user_id}`)
+
+    console.log(res.data)
 
     dispatch({
       type: UPDATE_LIKES,
@@ -238,13 +241,6 @@ export const likePost = (id, user_id) => async dispatch => {
     })
   } catch (err) {
     console.log(err)
-    // const { error } = err.response.data
-
-    // console.error(error)
-    // dispatch({
-    //   type: POST_ERROR,
-    //   payload: error
-    // })
   }
 }
 
@@ -259,14 +255,6 @@ export const unlikePost = (id, user_id) => async dispatch => {
     })
   } catch (err) {
     console.log(err)
-    // console.log(err);
-    // const { error } = err.response.data
-
-    // console.log(error)
-    // dispatch({
-    //   type: POST_ERROR,
-    //   payload: error
-    // })
   }
 }
 
@@ -275,7 +263,6 @@ export const unlikePost = (id, user_id) => async dispatch => {
 // Change pagination index
 
 export const changeIndex = index => dispatch => {
-  console.log('action changeIndex')
   dispatch({
     type: CHANGE_INDEX,
     payload: index
