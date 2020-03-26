@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { CloseIcon } from './SvgIcons'
-import { useOutsideAndEscapeClick, useConfirmOnEnter } from '../../helpers/func'
+import { useOutsideAndEscapeClick, useConfirmOnEnter } from '../../utils/hooks'
 import { closeDeleteModal } from '../../redux/ui/ui.actions'
 import { deleteComment } from '../../redux/post/post.actions'
 

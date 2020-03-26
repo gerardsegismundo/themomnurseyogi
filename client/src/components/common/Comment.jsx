@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { updateComment } from '../../redux/post/post.actions'
 import { openDeleteModal } from '../../redux/ui/ui.actions'
 
-import { useOnKeyDownEnter, useEscapeClick } from '../../helpers/func'
+import { useOnKeyDownEnter, useEscapeClick } from '../../utils/hooks'
 
 const Comment = props => {
   const { _id, user, name, avatar, text, date } = props

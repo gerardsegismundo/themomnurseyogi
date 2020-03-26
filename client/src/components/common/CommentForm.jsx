@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
-import { useOnKeyDownEnter } from '../../helpers/func'
+import { useOnKeyDownEnter } from '../../utils/hooks'
 import { openSignInModal } from '../../redux/ui/ui.actions'
 import { addComment } from '../../redux/post/post.actions'
 

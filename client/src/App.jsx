@@ -2,26 +2,25 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
-
 import { filterPosts } from './redux/post/post.actions'
+import { NotificationContainer } from 'react-notifications'
+import ScrollToTopController from './ScrollToTopController'
 
+// Layouts
 import Header from './components/layouts/Header'
 import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
+import SignInModal from './components/layouts/SignInModal'
+import DeleteModal from './components/layouts/DeleteModal'
+import OtherPostsFooter from './components/layouts/OtherPostsFooter'
+import SmallSearchbar from './components/layouts/SmallSearchbar'
+
+// Pages
 import Home from './components/pages/Home'
 import Posts from './components/pages/Posts'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
 import Post from './components/pages/Post'
-
-import { NotificationContainer } from 'react-notifications'
-
-import SignInModal from './components/layouts/SignInModal'
-import DeleteModal from './components/layouts/DeleteModal'
-
-import OtherPostsFooter from './components/layouts/OtherPostsFooter'
-import SmallSearchbar from './components/layouts/SmallSearchbar'
-import ScrollToTopController from './ScrollToTopController'
 
 const App = ({ setCurrentUser, filterPosts }) => {
   useEffect(() => {

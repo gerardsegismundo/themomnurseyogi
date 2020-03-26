@@ -1,6 +1,5 @@
 import React from 'react'
 import RecentPost from '../common/RecentPost'
-
 import { connect } from 'react-redux'
 
 const RecentPosts = ({ recentPosts }) => {

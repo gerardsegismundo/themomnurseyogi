@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { getPostLink, renderHashtags } from '../../helpers/func'
+import { getPostLink, renderHashtags } from '../../utils/helpers'
 import { rearrangePosts } from '../../redux/post/post.actions'
 
 const OtherPostFooter = props => {

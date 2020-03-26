@@ -4,7 +4,7 @@ import SearchResults from '../../common/Header/SearchResults'
 
 import { connect } from 'react-redux'
 import { searchPost, clearSearch } from '../../../redux/post/post.actions'
-import { useOutsideAndEscapeClick } from '../../../helpers/func'
+import { useOutsideAndEscapeClick } from '../../../utils/hooks'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsActive] = useState(false)
@@ -75,7 +75,4 @@ const mapStateToProps = ({ posts: { searchResult } }) => ({
   searchResult
 })
 
-export default connect(
-  mapStateToProps,
-  { clearSearch, searchPost }
-)(Searchbar)
+export default connect(mapStateToProps, { clearSearch, searchPost })(Searchbar)

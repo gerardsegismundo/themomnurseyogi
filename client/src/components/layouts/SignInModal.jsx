@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
 import { FacebookIcon, GoogleIcon, CloseIcon } from './SvgIcons'
 import { connect } from 'react-redux'
-import { useOutsideAndEscapeClick } from '../../helpers/func'
-
+import { useOutsideAndEscapeClick } from '../../utils/hooks'
 import { closeSignInModal } from '../.../../../redux/ui/ui.actions'
 
 import {

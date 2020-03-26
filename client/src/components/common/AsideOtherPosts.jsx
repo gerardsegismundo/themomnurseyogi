@@ -1,7 +1,7 @@
 import React from 'react'
 import Fade from 'react-reveal/Fade'
 import { withRouter } from 'react-router-dom'
-import { getPostLink, renderHashtags } from '../../helpers/func'
+import { getPostLink, renderHashtags } from '../../utils/helpers'
 
 const OtherPosts = props => {
   const { classes, title, hashtags, date, _id, imgURL, history } = props

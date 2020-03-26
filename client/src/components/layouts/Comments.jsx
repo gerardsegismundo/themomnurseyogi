@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { openSignInModal, openDeleteModal } from '../../redux/ui/ui.actions'
-
 import CommentForm from '../common/CommentForm'
 import Comment from '../common/Comment'
 

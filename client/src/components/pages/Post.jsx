@@ -4,7 +4,7 @@ import { getPost } from '../../redux/post/post.actions'
 import Comments from '../layouts/Comments'
 import Spinner from '../layouts/Spinner'
 
-import { renderHashtags, getPostId } from '../../helpers/func'
+import { renderHashtags, getPostId } from '../../utils/helpers'
 import { likePost, unlikePost } from '../../redux/post/post.actions'
 
 import { NotificationManager } from 'react-notifications'

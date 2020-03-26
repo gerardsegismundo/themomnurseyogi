@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
-import { getPostLink, sliceParagraph } from '../../helpers/func'
+import { getPostLink, sliceParagraph } from '../../utils/helpers'
 
 import { connect } from 'react-redux'
 import { likePost, unlikePost } from '../../redux/post/post.actions'

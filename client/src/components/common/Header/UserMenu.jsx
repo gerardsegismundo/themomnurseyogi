@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { auth } from '../../../firebase/firebase.utils'
-import { useOutsideAndEscapeClick } from '../../../helpers/func'
+import { useOutsideAndEscapeClick } from '../../../utils/hooks'
 import { closeUserMenu } from '../../../redux/ui/ui.actions'
 
 const UserMenu = ({ userMenuIsOpen, currentUser, closeUserMenu }) => {

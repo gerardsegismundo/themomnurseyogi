@@ -45,7 +45,8 @@ const mapStateToProps = ({ user, ui }) => ({
   userMenuIsOpen: ui.userMenuIsOpen
 })
 
-export default connect(
-  mapStateToProps,
-  { openSignInModal, openUserMenu, closeUserMenu }
-)(ButtonGroup)
+export default connect(mapStateToProps, {
+  openSignInModal,
+  openUserMenu,
+  closeUserMenu
+})(ButtonGroup)

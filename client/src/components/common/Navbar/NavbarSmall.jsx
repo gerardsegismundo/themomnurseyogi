@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useOutsideClick } from '../../../helpers/func'
+import { useOutsideClick } from '../../../utils/hooks'
 import NavbarLinks from './NavbarLinks'
 import { connect } from 'react-redux'
 import { enableSticky, disableSticky } from '../../../redux/ui/ui.actions'

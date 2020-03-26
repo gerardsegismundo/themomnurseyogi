@@ -1,5 +1,9 @@
 import React from 'react'
-import { renderHashtags, getPostLink, sliceParagraph } from '../../helpers/func'
+import {
+  renderHashtags,
+  getPostLink,
+  sliceParagraph
+} from '../../utils/helpers'
 import Fade from 'react-reveal/Fade'
 import { withRouter } from 'react-router-dom'
 

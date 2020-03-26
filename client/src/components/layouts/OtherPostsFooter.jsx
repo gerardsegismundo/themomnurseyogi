@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import OtherPostFooter from '../common/OtherPostFooter'
 
-const OtherPostsFooter = ({ randomPosts, changeOtherPosts }) => {
+const OtherPostsFooter = ({ randomPosts }) => {
   return (
     <div className='other-posts-footer container-fluid'>
       <div className='row'>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
+import { formatDate } from '../../utils/helpers'
 
 import {
   GET_POST,
@@ -17,8 +18,6 @@ import {
   PREV_INDEX,
   NEXT_INDEX
 } from './post.types'
-
-import { formatDate } from '../../helpers/func'
 
 const Posts = (() => {
   let postsCache = null
