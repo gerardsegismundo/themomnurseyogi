@@ -8,7 +8,6 @@ import {
 
 const Pagination = ({
   pagination: { activeIndex, paginationCount },
-
   changeIndex,
   prevIndex,
   nextIndex
@@ -43,11 +42,15 @@ const Pagination = ({
 
       {paginationItems.map(index => (
         <span
+          id={`pagination${index}`}
           className={`pagination--items${
             index === activeIndex ? ' active' : ''
           }`}
           key={'page' + index}
-          onClick={() => changeIndex(index)}
+          onClick={() => {
+            changeIndex(index)
+            window.location.href = `#pagination${index}`
+          }}
         >
           {index}
         </span>

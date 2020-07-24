@@ -1,5 +1,6 @@
 .pagination {
   display: flex;
+  align-items: center;
   justify-content: center;
   font-weight: 500;
   vertical-align: middle;
@@ -44,9 +45,11 @@
     width: 3rem;
     height: 3rem;
     opacity: 0.7;
+    padding: 10px;
+    border-radius: 100%;
 
-    margin: 0 1rem;
-    border-radius: 50px;
+    display: grid;
+    align-content: center;
 
     transition: background-color ease-in 0.3s;
 

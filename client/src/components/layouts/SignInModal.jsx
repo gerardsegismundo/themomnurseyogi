@@ -39,28 +39,24 @@ const SignInModal = ({ signInModalIsOpen, closeSignInModal }) => {
             onClick={closeSignInModal}
           />
 
-          <div className='signin-modal__content--section p-5'>
-            <h1 className='signin-modal__content--section--title'>
-              #themomnurseyogi.
-            </h1>
+          <div className='wrapper'>
+            <h1 className='title'>#themomnurseyogi.</h1>
 
-            <center>
-              <button
-                onClick={signInWithGoogleHandler}
-                className='signin-modal__content--section--btn-1 d-block align-self-center align-content-center'
-              >
-                <GoogleIcon className='d-flex align-items-center' />
-                &nbsp;&nbsp;Sign in with Google
-              </button>
+            <button
+              onClick={signInWithGoogleHandler}
+              className='google-signin-btn'
+            >
+              <GoogleIcon />
+              &nbsp;&nbsp;Sign in with Google
+            </button>
 
-              <button
-                onClick={signInWithFacebookHandler}
-                className='signin-modal__content--section--btn-2 d-block'
-              >
-                <FacebookIcon className='d-flex align-items-center' />
-                &nbsp;&nbsp;Sign in with Facebook
-              </button>
-            </center>
+            <button
+              onClick={signInWithFacebookHandler}
+              className='fb-signin-btn'
+            >
+              <FacebookIcon />
+              &nbsp;&nbsp;Sign in with Facebook
+            </button>
           </div>
         </div>
       </div>

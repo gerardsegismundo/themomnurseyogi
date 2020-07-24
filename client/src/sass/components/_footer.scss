@@ -23,6 +23,8 @@
   }
 
   &__copyright {
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
     display: flex;
 

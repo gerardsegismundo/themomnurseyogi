@@ -21,7 +21,8 @@ const Post = ({
   const postId = getPostId(location.pathname)
 
   useEffect(() => {
-    currentUser && getPost(postId, currentUser.id)
+    getPost(postId, currentUser ? currentUser.id : null)
+
     // eslint-disable-next-line
   }, [currentUser])
 

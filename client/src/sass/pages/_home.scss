@@ -1,13 +1,16 @@
 .home-page {
   margin-top: 3rem;
-  .cover-image {
-    background-image: url('../../assets/cover.jpg');
-    background-size: cover;
-    position: relative;
-    background-position: top;
-    background-repeat: no-repeat;
 
+  .cover-image {
+    background-image: url('../../assets/bg.jpg');
+    // background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: center 80%;
+
+    background-repeat: no-repeat;
     height: 40rem;
+
     @include respond(sm) {
       height: 45rem;
     }
@@ -19,7 +22,7 @@
       height: 55rem;
     }
     @include respond(xl) {
-      height: 60rem;
+      // height: 40rem;
     }
   }
 }

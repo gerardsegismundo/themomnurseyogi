@@ -54,8 +54,11 @@
       }
     }
 
-    &--section {
-      &--title {
+    .wrapper {
+      display: grid;
+      justify-items: center;
+
+      .title {
         font-size: 3.5rem;
         @include respond(lg) {
           font-size: 4.5rem;
@@ -64,28 +67,24 @@
         margin-bottom: 3rem;
       }
 
-      &--msg-1 {
-        color: rgba(46, 46, 46, 0.75);
-        margin-bottom: 2rem;
-        font-size: 1.75rem;
-        font-family: 'Open Sans Condensed', 'Lucida Grande',
-          'Lucida Sans Unicode', 'Lucida Sans', Geneva, Arial, sans-serif;
-      }
+      button {
+        &.google-signin-btn,
+        &.fb-signin-btn {
+          background-color: transparent;
+          padding: 0.5rem calc(1.5rem + 5px) 0.5rem 1.5rem;
+          display: flex;
+          align-items: center;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          transition: border 0.3s;
+          border-radius: 2px;
+          font-size: 1.25rem;
+          margin-bottom: 1.2rem;
 
-      &--btn-1,
-      &--btn-2 {
-        background-color: transparent;
-        padding: 0.5rem 1.5rem;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        transition: border 0.3s;
-        border-radius: 2px;
-        font-size: 1.25rem;
-        margin-bottom: 1.2rem;
-        vertical-align: middle;
-        width: max-content;
+          width: max-content;
 
-        &:hover {
-          border: 1px solid rgba(0, 0, 0, 0.65);
+          &:hover {
+            border: 1px solid rgba(0, 0, 0, 0.65);
+          }
         }
       }
     }
