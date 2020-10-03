@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideAndEscapeClick } from '../../../utils/hooks'
 
+import debounce from '../../../utils/debounce'
+
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsActive] = useState(false)
   const searchGroupRef = useRef()
@@ -14,26 +16,27 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   // Close searchbar on outsideClick and esc
   useOutsideAndEscapeClick(searchGroupRef, searchbarIsActive, () => {
     setSearchbarIsActive(false)
-    onClearSearch()
+    handleClearSearch()
   })
 
-  const onClearSearch = () => {
+  const handleClearSearch = () => {
     searchInputRef.current.blur()
     searchInputRef.current.value = ''
     clearSearch()
   }
 
-  const toggleSearchIcon = () => {
+  const handleToggle = () => {
     setSearchbarIsActive(!searchbarIsActive)
     document.activeElement.blur()
 
     if (!searchbarIsActive) return searchInputRef.current.focus()
-    onClearSearch()
+    handleClearSearch()
   }
 
-  const onChange = async () => {
+  const handleOnChange = async () => {
     const text = searchInputRef.current.value
-    searchPost(text)
+    console.log('tae')
+    debounce(searchPost(text), 50000)
   }
 
   return (
@@ -41,7 +44,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
       <div ref={searchGroupRef}>
         <button
           className='btn btn-lg btn-txt btn--search'
-          onClick={toggleSearchIcon}
+          onClick={handleToggle}
         >
           <i className='fa fa-search' aria-hidden='true' />
         </button>
@@ -52,7 +55,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
             searchbarIsActive ? 'is-active' : ''
           }`}
           placeholder='Search blog'
-          onChange={onChange}
+          onChange={handleOnChange}
           ref={searchInputRef}
         />
       </div>
@@ -60,7 +63,10 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
       {searchResult && searchResult.length > 0 && (
         <div className='search-post__results ml-5'>
           <div className='search-post__results--arrow' />
-          <ul className='search-post__results--lists' onClick={onClearSearch}>
+          <ul
+            className='search-post__results--lists'
+            onClick={handleClearSearch}
+          >
             {searchResult.map(({ _id, title }) => (
               <SearchResults key={_id} title={title} id={_id} />
             ))}

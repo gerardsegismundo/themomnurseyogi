@@ -6,16 +6,21 @@ import { searchPost, clearSearch } from '../../redux/post/post.actions'
 
 import SearchResults from '../common/Header/SearchResults'
 
-const SmallSearchbar = ({
-  toggleSmallSearchbar,
-  smallSearchbarIsOpen,
-  enableSticky,
-  searchPost,
-  clearSearch,
-  searchResult
-}) => {
-  // Focus on input on render
+import debounce from '../../utils/debounce'
+
+const SmallSearchbar = props => {
+  const {
+    toggleSmallSearchbar,
+    smallSearchbarIsOpen,
+    enableSticky,
+    searchPost,
+    clearSearch,
+    searchResult
+  } = props
+
   const searchInputRef = useRef()
+
+  // Focus on input on render
   useEffect(() => {
     if (smallSearchbarIsOpen) searchInputRef.current.focus()
   }, [smallSearchbarIsOpen])
@@ -28,13 +33,14 @@ const SmallSearchbar = ({
 
   const closeSmallSearchBar = () => {
     if (window.pageYOffset >= 220) enableSticky()
+
     toggleSmallSearchbar(smallSearchbarIsOpen)
     onClearSearch()
   }
 
-  const onChange = async => {
+  const handleOnChange = async => {
     const text = searchInputRef.current.value
-    searchPost(text)
+    debounce(searchPost(text), 3000)
   }
 
   return (
@@ -59,7 +65,7 @@ const SmallSearchbar = ({
             type='search'
             className='searchbar-sm__input form-control'
             placeholder='Search blog'
-            onChange={onChange}
+            onChange={handleOnChange}
           />
         </div>
 

@@ -32,13 +32,13 @@ const Pagination = ({
 
   return (
     <div className='pagination'>
-      <span
-        className={`pagination__left${activeIndex === 1 ? ' hidden' : ''}`}
+      <button
+        className={`prev-btn${activeIndex === 1 ? ' hidden' : ''}`}
         onClick={prevIndexHandler}
       >
         <i className='pagination__left--icon fa fa-long-arrow-left' />
         PREV
-      </span>
+      </button>
 
       {paginationItems.map(index => (
         <span
@@ -56,15 +56,15 @@ const Pagination = ({
         </span>
       ))}
 
-      <span
-        className={`pagination__right${
+      <button
+        className={`next-btn${
           paginationCount === activeIndex ? ' hidden' : ''
         }`}
         onClick={nextIndexHandler}
       >
         NEXT
         <i className='pagination__right--icon fa fa-long-arrow-right' />
-      </span>
+      </button>
     </div>
   )
 }

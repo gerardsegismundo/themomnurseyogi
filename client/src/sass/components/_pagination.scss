@@ -1,9 +1,13 @@
 .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-content: center;
+  place-items: center;
+  grid-auto-flow: column;
+  grid-template: 1fr / auto;
+  grid-gap: 10px;
+
+  width: 100%;
   font-weight: 500;
-  vertical-align: middle;
   opacity: 0.8;
   margin-bottom: 15rem;
   transition: opacity ease-in-out 0.3s;
@@ -12,13 +16,14 @@
     opacity: 1;
   }
 
-  &__left,
-  &__right {
+  .prev-btn,
+  .next-btn {
+    background-color: transparent;
     letter-spacing: 0.75em;
     white-space: nowrap;
     cursor: pointer;
     opacity: 0.7;
-    transition: all ease-in-out 0.3s;
+    transition: opacity ease-in-out 0.3s;
 
     &:hover {
       opacity: 1;
@@ -30,8 +35,8 @@
     }
   }
 
-  &__left {
-    margin-right: 6rem;
+  .prev-btn {
+    // margin-right: 6rem;
 
     &--icon {
       margin-right: 1.5rem;
@@ -68,8 +73,8 @@
     }
   }
 
-  &__right {
-    margin-left: 6rem;
+  .next-btn {
+    // margin-left: 6rem;
 
     &--icon {
       margin-left: 1.5rem;
