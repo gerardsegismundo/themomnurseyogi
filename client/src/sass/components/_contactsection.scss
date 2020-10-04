@@ -40,8 +40,10 @@
 
 .contact-form {
   margin: 3.5rem 1vw 2rem 1vw;
-  input {
-    margin-bottom: 1rem;
+
+  input[name='title'],
+  textarea#textarea-message {
+    margin-top: 1rem;
   }
 
   .send-btn {

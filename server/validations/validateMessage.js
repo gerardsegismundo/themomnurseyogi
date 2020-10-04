@@ -7,11 +7,11 @@ const schema = Joi.object({
     .required()
     .email(),
   title: Joi.string().required(),
-  body: Joi.string().required()
+  message: Joi.string().required()
 })
 
-const validateMessage = req => {
-  return schema.validate({ ...req })
+const validateMessage = args => {
+  return schema.validate(args, { abortEarly: false })
 }
 
 module.exports = validateMessage

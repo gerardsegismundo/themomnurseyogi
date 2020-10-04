@@ -3,7 +3,7 @@ const router = express.Router()
 const nodemailer = require('nodemailer')
 
 const validateMessage = require('../validations/validateMessage')
-const formatErrMsg = require('../utils/formatErrMsg')
+const getErrorDetails = require('../utils/getErrorDetails')
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -19,19 +19,18 @@ router.post('/', async (req, res) => {
   const { error } = validateMessage(req.body)
 
   if (error) {
-    // const msg = formatErrMsg(error.details[0].message)
-    console.log(error)
-    return res.status(400)
-    // .json({ error: { keys: [error.details[0].context.key], msg } })
+    const errorDetails = getErrorDetails(error)
+
+    return res.json({ success: false, errorDetails })
   }
 
-  const { title, email, body } = req.body
+  const { title, email, message } = req.body
 
   let mailOptions = {
     from: process.env.EMAIL_SECONDARY,
     to: process.env.EMAIL_PRIMARY,
     subject: `${title} - ${email} (themomnurseyogi)`,
-    text: body
+    text: message
   }
 
   transporter.sendMail(mailOptions, (err, data) => {
@@ -39,7 +38,7 @@ router.post('/', async (req, res) => {
       console.log(err)
       return res.status(400).json({ error: err })
     }
-    console.log(data)
+
     res.status(200).json({ data })
   })
 })

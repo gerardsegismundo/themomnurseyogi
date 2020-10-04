@@ -8,7 +8,7 @@ require('../models/Post')
 
 // Routes
 const postRoute = require('../routes/post.routes')
-const messageRoute = require('../routes/message.routes')
+const emailRoute = require('../routes/email.routes')
 
 module.exports = app => {
   app.use(helmet())
@@ -16,5 +16,5 @@ module.exports = app => {
   app.use(express.json({ extended: false }))
 
   app.use('/api/posts', postRoute)
-  app.use('/api/messages', messageRoute)
+  app.use('/api/email', emailRoute)
 }

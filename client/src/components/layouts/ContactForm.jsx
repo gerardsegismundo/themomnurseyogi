@@ -2,46 +2,59 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { NotificationManager } from 'react-notifications'
-import HashLoader from 'react-spinners/HashLoader'
 
-const ContactSection = ({ currentUser }) => {
-  const [message, setMessage] = useState({
+const ContactForm = ({ currentUser }) => {
+  const [form, setForm] = useState({
+    // title: 'testing',
+    // email: 'testing@gmail.com',
+    // body: 'testing message.'
+    message: '',
     title: '',
-    email: '',
-    body: ''
+    email: ''
   })
 
-  const [isSendingMessage, setIsSendingMessage] = useState(false)
-  const [messageIsInvalid, setMessageIsInvalid] = useState(false)
+  // eslint-disable-next-line
+  const [errors, setErrors] = useState({
+    message: '',
+    title: '',
+    email: ''
+  })
+
+  const [isSending, setIsSending] = useState(false)
 
   const handleOnChange = e => {
-    if (messageIsInvalid && e.target.value.length > 0) {
-      setMessageIsInvalid(false)
-    }
+    errors[e.target.name] && setErrors({ ...errors, [e.target.name]: '' })
 
-    setMessage({ ...message, [e.target.name]: e.target.value })
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const handleOnSubmit = async e => {
     e.preventDefault()
 
-    setIsSendingMessage(true)
+    setIsSending(true)
 
     let response
 
     try {
-      response = await axios.post('/api/messages', message)
-      console.log(response)
+      response = await axios.post('/api/email', form)
     } catch (err) {
       NotificationManager.error('Message sending failed.', 'Error!', 5000)
     }
 
-    setTimeout(() => {
-      if (response)
-        NotificationManager.success('Message sent.', 'Success', 5000)
-      setIsSendingMessage(false)
-      // setMessage({ ...message, body: '', title: '', email: '' })
-    }, 2000)
+    if (!response.data.success) {
+      let temp = {}
+
+      response.data.errorDetails.map(({ key, message }) => {
+        temp = { ...temp, [key]: message }
+      })
+
+      setErrors({ ...errors, ...temp })
+      console.log(temp)
+    }
+
+    if (response) NotificationManager.success('Message sent.', 'Success', 5000)
+    setIsSending(false)
+    setForm({ ...form, message: '', title: '', email: '' })
   }
 
   return (
@@ -49,54 +62,51 @@ const ContactSection = ({ currentUser }) => {
       <input
         type='text'
         name='email'
-        className={`form-control ${messageIsInvalid &&
-          !message.email &&
-          'is-invalid'}`}
+        className={`form-control ${errors.email && 'is-invalid'}`}
         placeholder='Email'
-        value={message.email}
+        value={form.email}
         onChange={handleOnChange}
-        disabled={isSendingMessage}
+        disabled={isSending}
         /* required */
       />
+
+      {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
 
       <input
         type='text'
         name='title'
-        className={`form-control ${messageIsInvalid &&
-          !message.title &&
-          'is-invalid'}`}
-        value={message.title}
-        disabled={isSendingMessage}
+        className={`form-control ${errors.title && 'is-invalid'}`}
+        value={form.title}
+        disabled={isSending}
         onChange={handleOnChange}
         placeholder='Title'
         /* required */
       />
 
+      {errors.title && <div className='invalid-feedback'>{errors.title}</div>}
+
       <textarea
-        name='body'
+        name='message'
         id='textarea-message'
         onChange={handleOnChange}
-        value={message.body}
-        className={`form-control ${messageIsInvalid &&
-          !message.body &&
-          'is-invalid'}`}
+        value={form.message}
+        className={`form-control ${errors.message && 'is-invalid'}`}
         placeholder='Message'
         cols='30'
         rows='10'
-        disabled={isSendingMessage}
+        disabled={isSending}
         /* required */
       ></textarea>
 
+      {errors.message && (
+        <div className='invalid-feedback'>{errors.message}</div>
+      )}
+
       <button
-        className={`btn-${
-          isSendingMessage ? 'secondary' : 'primary'
-        } send-btn btn-xl`}
-        disabled={isSendingMessage}
+        className={`btn-${isSending ? 'secondary' : 'primary'} send-btn btn-xl`}
+        disabled={isSending}
       >
-        {isSendingMessage ? 'Sending...' : 'Send'}
-        <span className={`btn-spinner${isSendingMessage ? ' is-sending' : ''}`}>
-          <HashLoader sizeUnit={'px'} size={16} color={'#144'} />
-        </span>
+        {isSending ? 'Sending...' : 'Send'}
       </button>
     </form>
   )
@@ -106,4 +116,4 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(mapStateToProps)(ContactSection)
+export default connect(mapStateToProps)(ContactForm)
