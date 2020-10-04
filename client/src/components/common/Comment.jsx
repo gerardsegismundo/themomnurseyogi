@@ -5,18 +5,20 @@ import { openDeleteModal } from '../../redux/ui/ui.actions'
 
 import { useOnKeyDownEnter, useEscapeClick } from '../../utils/hooks'
 
+import { formatDate } from '../../utils/helpers'
+
 const Comment = props => {
   const { _id, user, name, avatar, text, date } = props
   const { postId, currentUser, openDeleteModal, updateComment } = props
 
-  const [editedComment, setEditedComment] = useState({ text: '', _id: '' })
+  const [commentEdit, setCommentEdit] = useState({ text: '', _id: '' })
 
-  const setEditedCommentHandler = e => {
-    setEditedComment({ text: e.target.value, _id })
+  const handleOnChange = e => {
+    setCommentEdit({ text: e.target.value, _id })
   }
 
   const [isEditingComment, setIsEditingComment] = useState(false)
-  const editedCommentTextarea = useRef()
+  const textAreaRef = useRef()
 
   const handleDeleteComment = () => {
     const params = {
@@ -30,37 +32,37 @@ const Comment = props => {
 
   const handleEditComment = () => {
     setIsEditingComment(true)
-    setEditedComment({ text, _id })
+    setCommentEdit({ text, _id })
   }
 
-  const exitEditComment = () => {
+  const handleCancel = () => {
     setIsEditingComment(false)
-    setEditedComment({ text: '', _id: '' })
+    setCommentEdit({ text: '', _id: '' })
   }
 
-  const saveEditComment = () => {
+  const handleSave = () => {
     const params = {
       post_id: postId,
-      comment_id: editedComment._id,
+      comment_id: commentEdit._id,
       user_id: currentUser.id
     }
 
-    updateComment(editedComment.text, params)
-    exitEditComment()
+    updateComment(commentEdit.text, params)
+    handleCancel()
   }
 
-  useOnKeyDownEnter('edited-comment', saveEditComment)
-  useEscapeClick(isEditingComment, exitEditComment)
+  useOnKeyDownEnter('comment-edit', handleSave)
+  useEscapeClick(isEditingComment, handleCancel)
 
   return (
     <li className='comment d-flex' key={_id}>
       <img src={avatar} alt='user' className='comment__author-avatar' />
 
       <div className='comment__right-col'>
-        {editedComment._id !== _id && (
+        {commentEdit._id !== _id && (
           <>
             <h4 className='comment__label'>
-              {name} &nbsp;&nbsp;|&nbsp;&nbsp; {date}
+              {name} &nbsp;&nbsp;|&nbsp;&nbsp; {formatDate(date)}
             </h4>
 
             <p className='comment__msg'>{text}</p>
@@ -69,7 +71,7 @@ const Comment = props => {
 
         {currentUser && user === currentUser.id && (
           <div className='comment__crud'>
-            {!isEditingComment || editedComment._id !== _id ? (
+            {!isEditingComment || commentEdit._id !== _id ? (
               <>
                 <span className='hidden' onClick={handleEditComment}>
                   edit
@@ -81,18 +83,18 @@ const Comment = props => {
             ) : (
               <>
                 <textarea
-                  onChange={setEditedCommentHandler}
-                  ref={editedCommentTextarea}
-                  id='edited-comment'
-                  name='edited-comment'
-                  value={editedComment.text}
+                  onChange={handleOnChange}
+                  ref={textAreaRef}
+                  id='comment-edit'
+                  name='comment-edit'
+                  value={commentEdit.text}
                   className='form-control'
                   placeholder='Write a comment...'
                   required
                 ></textarea>
 
-                <span onClick={exitEditComment}>cancel</span>
-                <span onClick={saveEditComment}>save</span>
+                <span onClick={handleCancel}>cancel</span>
+                <span onClick={handleSave}>save</span>
               </>
             )}
           </div>

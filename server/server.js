@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const path = require('path')
 
-require('./config/db')()
+require('./config/config')
+require('./config/db')
 require('./config/routes')(app)
-// require('./config/productionAsset')(app)
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder

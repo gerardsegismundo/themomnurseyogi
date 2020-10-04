@@ -1,40 +1,47 @@
 const express = require('express')
 const router = express.Router()
-const { model } = require('mongoose')
-const Message = model('message')
+const nodemailer = require('nodemailer')
+
 const validateMessage = require('../validations/validateMessage')
-const arrangeMessage = require('../utils/arrangeMessage')
+const formatErrMsg = require('../utils/formatErrMsg')
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_PRIMARY,
+    pass: process.env.PASSWORD
+  }
+})
 
 // @route  POST
 // @desc   Send client's message to admin.
 router.post('/', async (req, res) => {
-  // Joi validation
   const { error } = validateMessage(req.body)
 
-  console.log('request', req.body)
-
   if (error) {
-    const msg = arrangeMessage(error.details[0].message)
-    console.log('msg', msg)
-    return res
-      .status(400)
-      .json({ error: { keys: [error.details[0].context.key], msg } })
+    // const msg = formatErrMsg(error.details[0].message)
+    console.log(error)
+    return res.status(400)
+    // .json({ error: { keys: [error.details[0].context.key], msg } })
   }
 
-  const { name, email, title, body } = req.body
+  const { title, email, body } = req.body
 
-  const newMessage = new Message({
-    name,
-    email,
-    title,
-    body,
+  let mailOptions = {
+    from: process.env.EMAIL_SECONDARY,
+    to: process.env.EMAIL_PRIMARY,
+    subject: `${title} - ${email} (themomnurseyogi)`,
+    text: body
+  }
 
-    unread: true
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      console.log(err)
+      return res.status(400).json({ error: err })
+    }
+    console.log(data)
+    res.status(200).json({ data })
   })
-
-  const message = await newMessage.save()
-  console.log('MESSAGE', message)
-  res.json(message)
 })
 
 module.exports = router

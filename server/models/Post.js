@@ -1,5 +1,4 @@
 const { model, Schema } = require('mongoose')
-const Joi = require('joi')
 
 const PostSchema = new Schema({
   title: {
@@ -39,22 +38,4 @@ const PostSchema = new Schema({
   }
 })
 
-const validatePost = post => {
-  const schema = {
-    title: Joi.string()
-      .min(3)
-      .max(50)
-      .required(),
-    avatar: Joi.string().uri({
-      scheme: [/https?/]
-    }),
-    text: Joi.string()
-      .min(3)
-      .required()
-  }
-
-  return Joi.validate(post, schema)
-}
-
 model('post', PostSchema)
-exports.validate = validatePost

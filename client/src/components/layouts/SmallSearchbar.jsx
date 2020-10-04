@@ -31,7 +31,7 @@ const SmallSearchbar = props => {
     clearSearch()
   }
 
-  const closeSmallSearchBar = () => {
+  const handleClose = () => {
     if (window.pageYOffset >= 220) enableSticky()
 
     toggleSmallSearchbar(smallSearchbarIsOpen)
@@ -50,7 +50,7 @@ const SmallSearchbar = props => {
           smallSearchbarIsOpen ? ' is-open ' : ''
         }d-flex flex-column d-md-none`}
       >
-        <CloseIcon onClick={closeSmallSearchBar} />
+        <CloseIcon onClick={handleClose} />
         <div
           className={`searchbar-sm${
             smallSearchbarIsOpen ? ' searchbar-sm--open' : ''
@@ -71,7 +71,7 @@ const SmallSearchbar = props => {
 
         {searchResult && searchResult.length > 0 && (
           <div className='search-results'>
-            <ul className='search-results__lists' onClick={closeSmallSearchBar}>
+            <ul className='search-results__lists' onClick={handleClose}>
               {searchResult.map(({ _id, title }) => (
                 <SearchResults key={_id} title={title} id={_id} />
               ))}

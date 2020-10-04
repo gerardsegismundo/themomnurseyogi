@@ -5,7 +5,6 @@ require('express-async-errors')
 
 // Models
 require('../models/Post')
-require('../models/Message')
 
 // Routes
 const postRoute = require('../routes/post.routes')

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { useOnKeyDownEnter } from '../../utils/hooks'
-// import axios from 'axios'
-// import { NotificationManager } from 'react-notifications'
+import axios from 'axios'
+import { NotificationManager } from 'react-notifications'
 import HashLoader from 'react-spinners/HashLoader'
 
 const ContactSection = ({ currentUser }) => {
@@ -12,7 +11,6 @@ const ContactSection = ({ currentUser }) => {
     body: ''
   })
 
-  // eslint-disable-next-line
   const [isSendingMessage, setIsSendingMessage] = useState(false)
   const [messageIsInvalid, setMessageIsInvalid] = useState(false)
 
@@ -24,13 +22,8 @@ const ContactSection = ({ currentUser }) => {
     setMessage({ ...message, [e.target.name]: e.target.value })
   }
 
-  const handleSendMessage = async e => {
+  const handleOnSubmit = async e => {
     e.preventDefault()
-
-    console.log(message)
-
-    /*     if (!message.body || !message.title || !message.email)
-      return setMessageIsInvalid(true)
 
     setIsSendingMessage(true)
 
@@ -38,6 +31,7 @@ const ContactSection = ({ currentUser }) => {
 
     try {
       response = await axios.post('/api/messages', message)
+      console.log(response)
     } catch (err) {
       NotificationManager.error('Message sending failed.', 'Error!', 5000)
     }
@@ -46,23 +40,23 @@ const ContactSection = ({ currentUser }) => {
       if (response)
         NotificationManager.success('Message sent.', 'Success', 5000)
       setIsSendingMessage(false)
-      setMessage({ ...message, body: '', title: '', email: '' })
-    }, 2000) */
+      // setMessage({ ...message, body: '', title: '', email: '' })
+    }, 2000)
   }
 
-  useOnKeyDownEnter('textarea-message', handleSendMessage)
-
   return (
-    <form className='contact-form'>
+    <form className='contact-form' onSubmit={handleOnSubmit}>
       <input
         type='text'
         name='email'
-        className='form-control'
+        className={`form-control ${messageIsInvalid &&
+          !message.email &&
+          'is-invalid'}`}
         placeholder='Email'
         value={message.email}
         onChange={handleOnChange}
         disabled={isSendingMessage}
-        required
+        /* required */
       />
 
       <input
@@ -75,14 +69,8 @@ const ContactSection = ({ currentUser }) => {
         disabled={isSendingMessage}
         onChange={handleOnChange}
         placeholder='Title'
-        required
+        /* required */
       />
-
-      {!message.title && messageIsInvalid && (
-        <div className='invalid-feedback invalid-feedback--title'>
-          Please provide a title.
-        </div>
-      )}
 
       <textarea
         name='body'
@@ -96,18 +84,13 @@ const ContactSection = ({ currentUser }) => {
         cols='30'
         rows='10'
         disabled={isSendingMessage}
-        required
+        /* required */
       ></textarea>
-
-      {!message.body && messageIsInvalid && (
-        <div className='invalid-feedback'>Please provide a message.</div>
-      )}
 
       <button
         className={`btn-${
           isSendingMessage ? 'secondary' : 'primary'
         } send-btn btn-xl`}
-        onClick={e => handleSendMessage(e)}
         disabled={isSendingMessage}
       >
         {isSendingMessage ? 'Sending...' : 'Send'}

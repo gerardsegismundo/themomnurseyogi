@@ -35,7 +35,7 @@ const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
 
   const handleOnChange = async () => {
     const text = searchInputRef.current.value
-    console.log('tae')
+
     debounce(searchPost(text), 50000)
   }
 
