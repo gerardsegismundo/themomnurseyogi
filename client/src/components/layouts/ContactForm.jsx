@@ -5,15 +5,11 @@ import { NotificationManager } from 'react-notifications'
 
 const ContactForm = ({ currentUser }) => {
   const [form, setForm] = useState({
-    // title: 'testing',
-    // email: 'testing@gmail.com',
-    // body: 'testing message.'
     message: '',
     title: '',
     email: ''
   })
 
-  // eslint-disable-next-line
   const [errors, setErrors] = useState({
     message: '',
     title: '',
