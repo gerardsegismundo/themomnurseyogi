@@ -18,11 +18,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "express-mongo-sanitize": "^2.0.0",
     "helmet": "^3.20.0",
     "joi": "^17.2.1",
     "mongoose": "^5.6.9",
     "nodemailer": "^6.4.13",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
