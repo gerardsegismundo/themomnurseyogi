@@ -1,10 +1,10 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { FIREBASE_API_KEY } from '../config/keys'
+// import { FIREBASE_API_KEY } from '../config/keys'
 
 const config = {
-  apiKey: FIREBASE_API_KEY,
+  apiKey: 'AIzaSyD1qbW2FGYncEl6PiJYuc5dtcoyjwPKChY',
   authDomain: 'tmny-59a35.firebaseapp.com',
   databaseURL: 'https://tmny-59a35.firebaseio.com',
   projectId: 'tmny-59a35',
