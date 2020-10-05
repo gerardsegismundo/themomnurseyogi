@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { getPostLink, renderHashtags } from '../../utils/helpers'
 import { rearrangePosts } from '../../redux/post/post.actions'
 
-const OtherPostFooter = props => {
+const FooterPosts = props => {
   const { _id, title, imgURL, hashtags, date, history, rearrangePosts } = props
 
   const handleRearrangePosts = () => {
@@ -38,4 +38,4 @@ const OtherPostFooter = props => {
   )
 }
 
-export default withRouter(connect(null, { rearrangePosts })(OtherPostFooter))
+export default withRouter(connect(null, { rearrangePosts })(FooterPosts))

@@ -40,12 +40,11 @@ const ContactForm = ({ currentUser }) => {
     if (!response.data.success) {
       let temp = {}
 
-      response.data.errorDetails.map(({ key, message }) => {
-        temp = { ...temp, [key]: message }
-      })
+      response.data.errorDetails.map(
+        ({ key, message }) => (temp = { ...temp, [key]: message })
+      )
 
       setErrors({ ...errors, ...temp })
-      console.log(temp)
     }
 
     if (response) NotificationManager.success('Message sent.', 'Success', 5000)

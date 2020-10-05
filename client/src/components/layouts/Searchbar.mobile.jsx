@@ -6,9 +6,9 @@ import { searchPost, clearSearch } from '../../redux/post/post.actions'
 
 import SearchResults from '../common/Header/SearchResults'
 
-import debounce from '../../utils/debounce'
+import debounce from '../../utils/helpers/debounce'
 
-const SmallSearchbar = props => {
+const Searchbar = props => {
   const {
     toggleSmallSearchbar,
     smallSearchbarIsOpen,
@@ -93,4 +93,4 @@ export default connect(mapStateToProps, {
   enableSticky,
   searchPost,
   clearSearch
-})(SmallSearchbar)
+})(Searchbar)

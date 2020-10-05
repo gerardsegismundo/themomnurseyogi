@@ -13,7 +13,7 @@ import Footer from './components/layouts/Footer'
 import SignInModal from './components/layouts/SignInModal'
 import DeleteModal from './components/layouts/DeleteModal'
 import OtherPostsFooter from './components/layouts/OtherPostsFooter'
-import SmallSearchbar from './components/layouts/SmallSearchbar'
+import SearchbarMobile from './components/layouts/Searchbar.mobile'
 
 // Pages
 import Home from './components/pages/Home'
@@ -33,7 +33,7 @@ const App = ({ setCurrentUser, filterPosts }) => {
   return (
     <Router>
       <ScrollToTopController />
-      <SmallSearchbar />
+      <SearchbarMobile />
       <DeleteModal />
       <SignInModal />
       <NotificationContainer />

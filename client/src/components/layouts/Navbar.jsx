@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import NavbarSmall from '../common/Navbar/NavbarSmall'
-import NavbarMedium from '../common/Navbar/NavbarMedium'
+import NavbarMobile from '../common/Navbar/Navbar.mobile'
+import NavbarTab from '../common/Navbar/Navbar.tab'
 
 const Navbar = () => {
   const [isScreenSmall, setIsScreenSmall] = useState()
@@ -15,7 +15,7 @@ const Navbar = () => {
     return () => smallScreenMediaQuery.removeListener(screenTest)
   }, [smallScreenMediaQuery])
 
-  return isScreenSmall ? <NavbarSmall /> : <NavbarMedium />
+  return isScreenSmall ? <NavbarMobile /> : <NavbarTab />
 }
 
 export default Navbar

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { searchPost, clearSearch } from '../../../redux/post/post.actions'
 import { useOutsideAndEscapeClick } from '../../../utils/hooks'
 
-import debounce from '../../../utils/debounce'
+import debounce from '../../../utils/helpers/debounce'
 
 const Searchbar = ({ searchResult, clearSearch, searchPost }) => {
   const [searchbarIsActive, setSearchbarIsActive] = useState(false)
